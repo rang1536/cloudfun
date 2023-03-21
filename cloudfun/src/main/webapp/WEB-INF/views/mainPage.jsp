@@ -97,7 +97,7 @@
 
 
 	<!-- Recent game section  -->
-	<section class="recent-game-section spad set-bg" data-setbg="img/recent-game-bg.png">
+	<section class="recent-game-section spad set-bg" data-setbg="">
 		<div class="container">
 			<div class="section-title">
 				<div class="cata new">new</div>
@@ -206,7 +206,7 @@
 
 
 	<!-- Review section -->
-	<section class="review-section spad set-bg" data-setbg="img/review-bg.png">
+	<section class="review-section spad set-bg" data-setbg="">
 		<div class="container">
 			<div class="section-title">
 				<div class="cata new">new</div>

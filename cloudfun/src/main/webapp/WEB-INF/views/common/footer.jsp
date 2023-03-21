@@ -7,9 +7,9 @@
 	<!-- Footer top section -->
 	<section class="footer-top-section">
 		<div class="container">
-			<div class="footer-top-bg">
+			<!-- <div class="footer-top-bg">
 				<img src="img/footer-top-bg.png" alt="">
-			</div>
+			</div> -->
 			<div class="row">
 				<div class="col-lg-4">
 					<div class="footer-logo text-white">
