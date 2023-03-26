@@ -35,25 +35,23 @@
 					
 						<input type="text" placeholder="Subject">
 						
+						<!-- 검색 input box & button -->
 						<div class="search-widget mb-4">
 							<input type="text" placeholder="Search">
 							<button><i class="fa fa-search"></i></button>
 						</div>
 						
+						<!-- 멀티 파일 업로드 -->
 						<div class="file-drop-area mb-4">
 						  <span class="file-message">Choose files or drag and drop files here</span>
 						  <input class="file-input" type="file" multiple="">
 						</div>
 						
-						
-											
-						
-						
 						            
 					</div>
 				</div>
 				
-				<!-- img preview  -->
+				<!-- img preview 업로드  -->
 				<div class="row mt-5">
 					<div class="col-lg-4">
 						<div class="file-preview-container" id="divImageMediaPreview">
