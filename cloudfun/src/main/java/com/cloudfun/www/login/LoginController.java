@@ -1,7 +1,13 @@
 package com.cloudfun.www.login;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,10 +16,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cloudfun.www.login.dao.LoginDao;
 import com.cloudfun.www.login.service.LoginService;
@@ -27,30 +35,23 @@ private static final Logger logger = LoggerFactory.getLogger(LoginController.cla
 	
 	
 	@Value("#{globals['google.client.id']}") 
-    private String googleClientId;
+	private String googleClientId;
 	@Value("#{globals['google.client.pw']}") 
-    private String googleClientPw;
+	private String googleClientPw;
 	@Value("#{globals['google.redirect.url']}") 
-    private String googleRedirectUrl;
+	private String googleRedirectUrl;
 	 
 	@Autowired
 	private LoginService loginService;
+
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value="/api/v1/oauth2/google2", method = RequestMethod.GET)
-	public String loginUrlGoogle(){
-		
-        String reqUrl = "https://accounts.google.com/o/oauth2/v2/auth?client_id=" + googleClientId
-                 + "&redirect_uri="+googleRedirectUrl+"&response_type=code&scope=email%20profile%20openid&access_type=offline";
-        return "redirect:"+ reqUrl;
-    }
-	
-	
+	// 사용자 구글 로그인후 redirect되는 controller 
 	@RequestMapping(value="/api/v1/oauth2/google", method = RequestMethod.GET)
-    public String loginGoogle(@RequestParam(value = "code") String authCode){
-        RestTemplate restTemplate = new RestTemplate();
+    public String loginGoogle(@RequestParam(value = "code") String authCode, HttpServletRequest request
+    		,  RedirectAttributes model ){
+        String returnUrl ="redirect:/";
+		RestTemplate restTemplate = new RestTemplate();
+		
         GoogleRequest googleOAuthRequestParam = GoogleRequest
                 .builder()
                 .clientId(googleClientId)
@@ -73,23 +74,67 @@ private static final Logger logger = LoggerFactory.getLogger(LoginController.cla
         
         // 기존 이메일이 있는경우 로그인처리 
         
-        Map<String, Object> a = new HashMap<>();
+        Map<String, String> a = new HashMap<>();
         a.put("email", email);
         a.put("name", name);
         
+        // 도메인에다라 타입구분.(글/그림/만화/음악/3D Model 5개)
+	     /*
+	      * 글 : text
+	      * 그림 : picture
+	      * 만화 : comic
+	      * 음악 : music
+	      * 3D Model : model
+	      * */ 
+        a.put("type", "text");
         
-        String join ;
-        int loginUserCnt= loginService.isLogin(a);
-        if(loginUserCnt > 0) {
-        	join = "Y";
+        HttpSession session = request.getSession();
+        
+        //int loginUserCnt= loginService.isLogin(a);
+        String memberId =  loginService.isLogin(a);
+        if(memberId !=null) {
+        	// 바로 로그인 ㄱㄱ
+        	// 세션정보추가.
+        	session.setAttribute("email", email);
+        	session.setAttribute("name", name);
+        	session.setAttribute("memberId", memberId);
         		
         }else{
-        	join = "N";
+        	//회원가입 화면으로 이동
+        	session.setAttribute("email", email);
+        	session.setAttribute("name", name);
         	
+            model.addFlashAttribute("email", email );
+            model.addFlashAttribute("name", name );
+
+        	returnUrl = "redirect:/join";
+        	// 회원가입 및 프로필입력 화면으로 이동.
         }
         
-        // 기존 이메일이 없는경우 회원가입 
-        
-        return "redirect:/";
+        return returnUrl;
     }
+	
+	
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	public String home(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		String email = (String)session.getAttribute("email");
+    	String name = (String)session.getAttribute("name");
+
+    	model.addAttribute("email", email);
+    	model.addAttribute("name", name);
+
+		//return "home";
+		return "member/join";
+	}
+	
+	
+	
+	
 }

@@ -86,7 +86,7 @@
 <script>
 	$(".file-drop-area").on('change', '.file-input', function() {
     
-		/*파일업로드  */
+		/*file upload  */
 	  var filesCount = $(this)[0].files.length;
 	  
 	  var textbox = $(this).prev();

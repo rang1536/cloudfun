@@ -10,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    
     <title>CloudFun(가제)</title>
     
     	<!-- Favicon -->   
@@ -37,6 +38,11 @@
     <script src="${path}/resources/js/jquery-3.2.1.min.js"></script>
     <script src="${path}/resources/js/jquery.marquee.min.js"></script>
     <script src="${path}/resources/js/owl.carousel.min.js"></script>
+    
+	<script src="${path}/resources/js/main.js"></script>
+	<script src="${path}/resources/js/bootstrap.min.js"></script>
+
+    
     
     <jsp:invoke fragment="script"/>
 </body>

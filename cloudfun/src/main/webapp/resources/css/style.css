@@ -1058,6 +1058,7 @@ ol {
 
 .comment-form input[type=text],
 .comment-form input[type=email],
+.comment-form input[type=password],
 .comment-form textarea {
 	width: 100%;
 	height: 41px;
@@ -1576,3 +1577,12 @@ ol {
 	height:300px;
 }
 
+
+/*----------------------
+  Join Section
+------------------------*/
+.join-page .container{
+	text-align:center;
+	width:350px;
+	
+}

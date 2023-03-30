@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" contentType="text/html;charset=UTF-8" %>
+<%@ page  language="java" contentType="text/html;charset=UTF-8" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 
 
 <!-- Page Preloder -->
@@ -14,9 +15,22 @@
 		<a class="site-logo" href="index.html">
 			<img src="img/logo.png" alt="">
 		</a>
-		<div class="user-panel">
-			<a href="#">Login</a>  /  <a href="#">Register</a>
-		</div>
+		
+		   <% if(session.getAttribute("memberId")!= null){ %>
+		    <div class="user-panel" onclick="logout();">
+				<a href="#">Logout</a>
+			</div>
+		   <%}else{%>
+		    <div class="user-panel" onclick="loginWithGoogle();">
+				<a href="#">Login</a>  /  <a href="#">Register</a>
+			</div>
+		    <%} %>
+		 
+		
+		
+		
+		
+		
 		<!-- responsive -->
 		<div class="nav-switch">
 			<i class="fa fa-bars"></i>

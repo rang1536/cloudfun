@@ -1,7 +1,8 @@
 
 var Utils = {};
+var preUrl = "/www";
 
-/** form 값을 json 형식으로 반환한다. */
+/** form to json return */
 Utils.getFormValue = function (formObj) {
     var arr = formObj.serializeArray();
     if (arr && arr.length > 0) {
@@ -15,13 +16,13 @@ Utils.getFormValue = function (formObj) {
     return null;
 }
 
-/** Form 초기화 */
+/** Form init */
 Utils.resetForm = function (formObj) {
     formObj.find('input:text, input:password, input:file, select, textarea').val('');
     formObj.find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
 }
 
-/** json 객체를 이용한 Form 값설정 */
+/** json to form*/
 Utils.setFormValue = function (formObj, jsonData) {
     Utils.getFormValue(formObj);
     $.each(jsonData, function (key, value) {
@@ -51,7 +52,7 @@ Utils.setFormValue = function (formObj, jsonData) {
     });
 }
 
-/** 서버데이터연계 : 비동기/ csrf 추가됨*/
+/**async / csrf add*/
 Utils.ajax = function (options, successcb, failcb) {
     var header = $("meta[name='_csrf_header']").attr("content")
     var token = $("meta[name='_csrf']").attr("content")
@@ -70,7 +71,7 @@ Utils.ajax = function (options, successcb, failcb) {
         error: function () {
             var jsonError = arguments[0].responseJSON;
             if (jsonError.status && jsonError.code && jsonError.message && jsonError.detailMessage) {
-                var msg = 'TODO 공통오류처리할것!\r\n';
+                var msg = 'TODO !\r\n';
                 msg += jsonError.status + '\r\n';
                 msg += jsonError.code + '\r\n';
                 msg += jsonError.message + '\r\n';
@@ -86,7 +87,7 @@ Utils.ajax = function (options, successcb, failcb) {
     });
 }
 
-/** 서버데이터연계 : 동기*/
+/**  async = false*/
 Utils.ajaxSync = function (options, successcb, failcb) {
 
 
@@ -109,7 +110,7 @@ Utils.ajaxSync = function (options, successcb, failcb) {
         error: function () {
             var jsonError = arguments[0].responseJSON;
             if (jsonError.status && jsonError.code && jsonError.message && jsonError.detailMessage) {
-                var msg = 'TODO 공통오류처리할것!\r\n';
+                var msg = 'TODO comm error msg!\r\n';
                 msg += jsonError.status + '\r\n';
                 msg += jsonError.code + '\r\n';
                 msg += jsonError.message + '\r\n';
@@ -151,3 +152,34 @@ Utils.getCookie = function (cname) {
 Utils.deleteCookie = function (cname) {
     Utils.setCookie(cname, "", -1);
 }
+
+
+
+
+
+
+/*********************************************************************************/
+/**google Login  *********************************************************************/
+/*********************************************************************************/
+//google Login
+function loginWithGoogle() {
+    $.ajax({
+        url: preUrl + '/api/v1/oauth2/google',
+        type: 'post',
+    }).done(function (res) {
+        location.href = res;
+    });
+}
+
+
+function logout(){
+	$.ajax({
+        url: preUrl + '/api/logout',
+        type: 'post',
+    }).done(function (res) {
+        location.href = preUrl + res;
+    });
+	
+	
+}
+

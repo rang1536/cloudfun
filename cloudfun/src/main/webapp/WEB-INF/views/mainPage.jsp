@@ -265,7 +265,3 @@
 	
 	
 </t:layout>
-
-<script src="${path}/resources/js/main.js"></script>
-<script src="${path}/resources/js/bootstrap.min.js"></script>
-
