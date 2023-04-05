@@ -1,0 +1,43 @@
+/**
+ * Tags.css, for the Bootstrap Tag Input project.  Licensed under the MIT license.  
+ *
+ * Project repo: https://github.com/More-Than-Solitaire/bootstrap-tag-input
+ * 
+ * Author @Cullub https://github.com/cullub
+ */
+
+.tags-input {
+    display: inline-flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    line-height: 2;
+    min-height: 2.3em;
+    padding-top: .05em;
+    padding-bottom: .05em;
+}
+
+
+
+.tags-input .tag {
+  font-size: 100%;
+    font-weight: normal;
+    transition: all 0.1s linear;
+    margin: 0.4em;
+    background: #21252924;
+    vertical-align: middle;
+}
+}
+
+.tags-input .main-input {
+    flex: 1 1 auto;
+    width: auto !important;
+}
+
+.tags-input i.close,
+.tags-input svg.close {
+    cursor: pointer;
+    margin-left: 0.2rem;
+    margin-right: -.3em;
+    margin-top: -.3em;
+    margin-bottom: -.2em;
+}

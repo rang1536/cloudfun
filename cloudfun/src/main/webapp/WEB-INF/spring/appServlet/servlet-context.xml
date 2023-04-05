@@ -31,6 +31,14 @@
 	<mvc:annotation-driven />
 
 	<mvc:resources location="/resources/" mapping="/resources/**" />
+	
+	
+	<!-- 정적 자원 매핑 -->
+	<mvc:resources  location="/resources/css/" mapping="/css/**" />
+	<mvc:resources  location="/resources/img/" mapping="/img/**"/>
+	<mvc:resources  location="/resources/icon-fonts/" mapping="/icon-fonts/**"/>
+	
+
 	<!-- <mvc:resources location="/resources/mask1/assets/" mapping="/assets/**"/>
 	<mvc:resources location="/resources/mask1/images/" mapping="/images/**"/>  -->
 

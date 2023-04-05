@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="login">
+	<select id="userCheck" resultType="map" parameterType="map">
+		SELECT MEMBER_ID
+		FROM MEMBER
+		WHERE 1=1
+		  AND EMAIL = #{email}
+	     <choose>
+		    <when test="type == 'text'">
+		      AND TYPE_01 = 'Y'
+		    </when>
+		    <when test="type == 'picture'">
+		      AND TYPE_02 = 'Y'
+		    </when>
+		    <when test="type == 'comic'">
+		      AND TYPE_03 = 'Y'
+		    </when>
+		    <when test="type == 'music'">
+		      AND TYPE_04 = 'Y'
+		    </when>
+		    <when test="type== 'model'" >
+		      AND TYPE_05 = 'Y'
+		    </when>
+		    <otherwise>
+		    </otherwise>  
+	  </choose>
+		   
+	</select>
+	
+	
+	<update id="mergeMember" parameterType="map">
+	
+		INSERT INTO MEMBER (
+		      MEMBER_ID
+		    , EMAIL
+		    , NAME
+	         <choose>
+			    <when test="type == 'text'">
+			      , TYPE_01
+			    </when>
+			    <when test="type == 'picture'">
+			      , TYPE_02
+			    </when>
+			    <when test="type == 'comic'">
+			      , TYPE_03
+			    </when>
+			    <when test="type == 'music'">
+			     , TYPE_04
+			    </when>
+			    <when test="type== 'model'" >
+			      , TYPE_05
+			    </when>
+			    <otherwise>
+			    </otherwise>  
+			  </choose>
+			 , REGIST_DT 
+			 , REGIST_ID
+			 , REGIST_IP
+			 , UPDATE_DT
+			 , UPDATE_ID
+			 , UPDATE_IP
+		) VALUES (
+			(SELECT LPAD((COUNT(1)+1),'11','0') FROM MEMBER a)
+			, #{email}
+			, #{name}
+			,'Y'
+			,SYSDATE()
+			,(SELECT LPAD((COUNT(1)+1),'11','0') FROM MEMBER b)
+			,'0.0.0.0'
+			,SYSDATE()
+			,(SELECT LPAD((COUNT(1)+1),'11','0') FROM MEMBER c)
+			,'0.0.0.0'
+		)
+		ON DUPLICATE KEY UPDATE
+		    TYPE_03 = 'Y'
+		    ,UPDATE_DT = SYSDATE()
+			, UPDATE_ID = MEMBER_ID
+			, UPDATE_IP = '0.0.0.0' 
+	
+	</update>
+	
+	
+	<insert id="insertMemberDetail"  parameterType="map">
+		
+		INSERT INTO MEMBER_DETAIL (
+				MEMBER_ID
+				, JOIN_TYPE
+				, PASSWORD
+				, BIRTH_DT
+				, REGIST_DT
+				, REGIST_ID
+				, REGIST_IP
+				, UPDATE_DT
+				, UPDATE_ID
+				, UPDATE_IP	
+				)
+		VALUES(
+			#{memberId}
+			,#{type}
+			, SHA2(#{password},256)
+			, #{birth}		
+			,SYSDATE()
+			,#{memberId}
+			,'0.0.0.0'
+			,SYSDATE()
+			,#{memberId}
+			,'0.0.0.0'
+		)
+	
+	
+	</insert>
+
+</mapper>

@@ -13,11 +13,14 @@ import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -35,18 +38,19 @@ import com.mortennobel.imagescaling.MultiStepRescaleOp;
 
 import net.coobird.thumbnailator.Thumbnails;
 
+@Component
 public class UtilFile {
 	/*
-	//다중파일업로드
+	//�떎以묓뙆�씪�뾽濡쒕뱶
 	public List<TbFile> multiUploadFile(List<MultipartFile> fileList){
 		List<TbFile> uploadFileList = new ArrayList<TbFile>();
-		//호스팅
+		//�샇�뒪�똿
 		String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
 
-		//로컬
+		//濡쒖뺄
 		//String rootPath = "C:\\git\\abnext\\abnext\\src\\main\\webapp\\resources\\files\\";
 
-		//회사 서버
+		//�쉶�궗 �꽌踰�
 		//String rootPath = "F:\\sh86\\resources\\files\\";
 
 		if (fileList.size() > 0){
@@ -59,24 +63,24 @@ public class UtilFile {
 	}
 	*/
 
-	//단일파일 업로드
+	//�떒�씪�뙆�씪 �뾽濡쒕뱶
 /*
 	public TbFile singleUploadFile(MultipartFile file){
-		//호스팅
+		//�샇�뒪�똿
 		//String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
 		//String rootPath = "http:///sh86.kr/resources/files/"+classNum+"/";
 
-		//호스팅
+		//�샇�뒪�똿
 		String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
 
-		//로컬
+		//濡쒖뺄
 		//String rootPath = "C:\\git\\abnext\\abnext\\src\\main\\webapp\\resources\\files\\";
 
 		return uploadFile(file, rootPath);
 
 	}*/
 
-	// 멀티파트 파일 > 파일 형식으로 변환 (안씀.)
+	// 硫��떚�뙆�듃 �뙆�씪 > �뙆�씪 �삎�떇�쑝濡� 蹂��솚 (�븞��.)
 	/*public File convert(MultipartFile multipartFile) throws IOException {
 	    File file= new File(multipartFile.getOriginalFilename());
 	    file.createNewFile();
@@ -87,28 +91,28 @@ public class UtilFile {
 	}
 	*/
 
-	//파일업로드 메소드 (DTO반환)
-	/*
-	public TbFile uploadFile(MultipartFile multipartFile, String rootPath) {
-		TbFile uploadFile = new TbFile();
-		uploadFile.setFilePath(rootPath);
-		uploadFile.setFileOriNm(multipartFile.getOriginalFilename().replace("-", ""));
-*/
-		/* 이미지 업로드용. 용량압축 및 jpg보정 로직 포함
+
+	public HashMap<String, String> uploadFile(MultipartFile multipartFile, String rootPath) {
+		HashMap<String, String> uploadFile = new HashMap<String, String>();
+
+	
+
+
+		/* �씠誘몄� �뾽濡쒕뱶�슜. �슜�웾�븬異� 諛� jpg蹂댁젙 濡쒖쭅 �룷�븿
 		byte[] imgBytes = null;
 		try {
 			imgBytes = multipartFile.getBytes();
 			BufferedInputStream bufferedIS = new BufferedInputStream(new ByteArrayInputStream(imgBytes));
 
-			 Thumbnails 사용시 이미지 색상이 변하는 문제가 생김.
+			 Thumbnails �궗�슜�떆 �씠誘몄� �깋�긽�씠 蹂��븯�뒗 臾몄젣媛� �깮源�.
 			 * BufferedImage bi = Thumbnails.of(file).scale(1).asBufferedImage();
 
 			int orientation = correctOrientation(bufferedIS);
 
-			BufferedInputStream bis = new BufferedInputStream(new ByteArrayInputStream(imgBytes)); //새로 생성해줘야 bufferedImage가 널이 아니다.
+			BufferedInputStream bis = new BufferedInputStream(new ByteArrayInputStream(imgBytes)); //�깉濡� �깮�꽦�빐以섏빞 bufferedImage媛� �꼸�씠 �븘�땲�떎.
 			BufferedImage bi = rotateImageForMobile(bis, orientation);
 
-			//분홍배경 색상 원색상으로 보정
+			//遺꾪솉諛곌꼍 �깋�긽 �썝�깋�긽�쑝濡� 蹂댁젙
 			int w = bi.getWidth();
 			int h = bi.getHeight();
 			BufferedImage biNew = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
@@ -129,25 +133,36 @@ public class UtilFile {
 			e.printStackTrace();
 		}*/
 
-/*
+
 		try {
-			String originalName = multipartFile.getOriginalFilename(); //원래 파일명
-	    	int index = originalName.lastIndexOf("."); //확장자 구분을 위한 (.)인덱스 찾기
-			String extension = "."+originalName.substring(index+1); //. 뒤의 확장자를 저장.일단안씀
+			String originalName = multipartFile.getOriginalFilename();
+			String fileExtension = originalName.substring(originalName.lastIndexOf("."),originalName.length());
 
-			// 현재 날짜/시간
+			// 
 			LocalDateTime now = LocalDateTime.now();
-			// 포맷팅
-			String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"));
+			//
+			//String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"));
+			String formatedNow = "";
+			String uuid = UUID.randomUUID().toString();
 
-	        String fileName = formatedNow; //DB에 저장될 파일명
+	        String fileName = formatedNow + uuid + fileExtension; //DB
 	        fileName = fileName.replace("-", "");
 	        String savePath = rootPath + fileName;
-	        File destFile = new File(savePath); //최종파일을 업로드 패쓰에 업로드
+	        File destFile = new File(savePath);
 	        multipartFile.transferTo(destFile);
-	        uploadFile.setFileOriNm(originalName);
+	        
+	    	uploadFile.put("rootPath", rootPath);
+			uploadFile.put("fileName", fileName);
+			uploadFile.put("originalName", originalName);
+			
+	      /*  uploadFile.setFileOriNm(originalName);
 	        uploadFile.setFilePath(rootPath);
-	        uploadFile.setFileNewNm(fileName);
+	        uploadFile.setFileNewNm(fileName);*/
+			
+			// 파일업로드 이력 저장.
+			
+			
+			
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -155,8 +170,8 @@ public class UtilFile {
 		}
 		return uploadFile;
 	}
-
-	//파일 삭제
+	/*
+	//�뙆�씪 �궘�젣
 	public boolean deleteImage(String path){
 		File destFile = new File(path);
 		boolean result = destFile.delete();
@@ -171,7 +186,7 @@ public class UtilFile {
 	    if(metadata != null) {
 	        // Get the current orientation of the image
             Directory directory = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
-            System.out.println("디렉토리 : "+directory);
+            System.out.println("�뵒�젆�넗由� : "+directory);
             if(directory != null) {
             	orientation = directory.getInt(ExifIFD0Directory.TAG_ORIENTATION);
                 System.out.println("orientation : "+orientation);
@@ -183,13 +198,13 @@ public class UtilFile {
 
 	public BufferedImage rotateImageForMobile(InputStream is,int orientation) throws IOException {
         BufferedImage bi = ImageIO. read(is);
-         if(orientation == 6){ //정위치
+         if(orientation == 6){ //�젙�쐞移�
                 return rotateImage(bi, 90);
-        } else if (orientation == 1){ //왼쪽으로 눞였을때
+        } else if (orientation == 1){ //�쇊履쎌쑝濡� �닞���쓣�븣
                 return bi;
-        } else if (orientation == 3){//오른쪽으로 눞였을때
+        } else if (orientation == 3){//�삤瑜몄そ�쑝濡� �닞���쓣�븣
                 return rotateImage(bi, 180);
-        } else if (orientation == 8){//180도
+        } else if (orientation == 8){//180�룄
                 return rotateImage(bi, 270);
         } else{
                 return bi;
