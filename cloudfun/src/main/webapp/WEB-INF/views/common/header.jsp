@@ -12,8 +12,9 @@
 <header class="header-section">
 	<div class="container">
 		<!-- logo -->
-		<a class="site-logo" href="index.html">
-			<img src="img/logo.png" alt="">
+		<a class="site-logo" href="${path}/">
+			site logo
+			
 		</a>
 		
 		   <% if(session.getAttribute("memberId")!= null){ %>
@@ -38,11 +39,12 @@
 		<!-- site menu -->
 		<nav class="main-menu">
 			<ul>
-				<li><a href="index.html">Home</a></li>
-				<li><a href="review.html">Games</a></li>
-				<li><a href="categories.html">Blog</a></li>
-				<li><a href="community.html">Forums</a></li>
-				<li><a href="contact.html">Contact</a></li>
+				<li><a href="${path}/">Home</a></li>
+				<li><a href="${path}/post/editText">editText</a></li>
+				<li><a href="${path}/component">component</a></li>
+				<li><a href="${path}/join">join</a></li>
+				<!-- <li><a href="community.html">Forums</a></li>
+				<li><a href="contact.html">Contact</a></li> -->
 			</ul>
 		</nav>
 	</div>

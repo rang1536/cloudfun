@@ -10,7 +10,7 @@
 		<div class="container">
 			
 			<!-- 1:1 -->
-			<form class="comment-form">
+			<form class="comment-form" onSubmit="return false;">
 				<div class="row">
 					<div class="col-lg-12 mb-lg-0">
 						<h4 class="comment-title">1:1 </h4>
@@ -44,8 +44,10 @@
 						<!-- 멀티 파일 업로드 -->
 						<div class="file-drop-area mb-4">
 						  <span class="file-message">Choose files or drag and drop files here</span>
-						  <input class="file-input" type="file" multiple="">
+						  <input class="file-input" name="uploadFile" type="file" multiple>
 						</div>
+						<button type="button" class="site-btn btn-sm" id="sendFile">file Send</button>
+						 <a href="<c:url value='/fileDownload/111'/> ">111 파일 다운로드</a><br>
 						
 						            
 					</div>
@@ -63,19 +65,41 @@
 							<span class="file-message">Choose Files or drag and drop files here</span>
 							<input type="file" class="file-input" id="inputPreview" accept=".jfif,.jpg,.jpeg,.png,.gif" multiple>
 						</div>
-					</div> 
+					</div>
+					
+					
+					<div class="col-lg-8">
+						<div class="form-check form-check-inline">
+						  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+						  <label class="form-check-label" for="inlineRadio1">1</label>
+						</div>
+						<div class="form-check form-check-inline">
+						  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+						  <label class="form-check-label" for="inlineRadio2">2</label>
+						</div>
+						<div class="form-check form-check-inline">
+						  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" disabled>
+						  <label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
+						</div>
+					</div>
+					
+					<div class="col-md-4">
+          
+			         		<div class="form-group">
+								<input type="text" class="form-control" name="country"/>
+							</div>
+			        </div>
+								
 				</div>
-				
-				
-				
-			
-				
 				
 				
 				
 			</form>
 			
+			
+			
 		</div>
+		
 		
 	</section>
    
@@ -83,9 +107,17 @@
 	
 </t:layout>
 
+
+<link rel="stylesheet" href='<c:url value="/css/amsify.suggestags.css"/>'>
+<script src="${path}/resources/js/jquery.amsify.suggestags.js"></script>
+
+
+
+
 <script>
+$(document).ready(function(){
 	$(".file-drop-area").on('change', '.file-input', function() {
-    
+	    
 		/*file upload  */
 	  var filesCount = $(this)[0].files.length;
 	  
@@ -137,6 +169,53 @@
 	
 	
 	});
+	
+	
+	// 파일업로드 이벤트 걸기.
+	$("#sendFile").on("click",function(e){
+		
+		var formData = new FormData();
+		var inputFile = $("input[name='uploadFile']");
+		var files = inputFile[0].files;
+		
+		console.log(files);
+		
+		
+		formData.append("test","1234");
+		
+		for(var i =0; i< files.length ; i++){
+			formData.append("uploadFile",files[i]);	
+		}
+		
+		 $.ajax({
+	    	  url: preUrl + '/api/post',
+	          data : formData,
+	          type: 'post',
+	          enctype: 'multipart/form-data',
+	          contentType: false,
+	          processData:false
+	          
+	    }).done(function (res) {
+	        if(res.error){
+	        	alert(error);
+	        	return ; 
+	        }else{
+	        	alert(res)
+	        }
+	    });
+		
+		
+	})
+	
+	
+	//tags
+	$('input[name="tags"]').amsifySuggestags();
+
+	
+	
+	
+})
+	
 	
 
 </script>

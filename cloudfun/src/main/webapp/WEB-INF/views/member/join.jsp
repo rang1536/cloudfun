@@ -40,7 +40,7 @@
 
 				<p class="text-center mb-0">By creating an account,</p>
 				<p class="text-center mb-2"> you are agreeing to 00's</p>
-				<a href=#>Terms of Service</a>
+				<a href="${path}/terms">Terms of Service</a>
 				
 				
 				
@@ -53,8 +53,9 @@
 	
 
 </t:layout>
-<link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<link rel="stylesheet" href='<c:url value="/css/jquery.datetimepicker.min.css"/>'>
+<script src="${path}/resources/js/jquery.datetimepicker.min.css"></script>
+
 <script>
 
 

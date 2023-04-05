@@ -183,3 +183,59 @@ function logout(){
 	
 }
 
+
+
+
+
+
+
+/*********************************************************************************/
+/**comma *********************************************************************/
+/*********************************************************************************/
+
+
+//char delete
+function removeChar(event) {
+  event = event || window.event;
+  var keyID = (event.which) ? event.which : event.keyCode;
+  if (keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39)
+      return;
+  else
+      //replace
+      event.target.value = event.target.value.replace(/[^-\.0-9]/g, "");
+}
+//add comma
+  function comma(obj) {
+      var regx = new RegExp(/(-?\d+)(\d{3})/);
+      var bExists = obj.indexOf(".", 0);//find index 0
+      var strArr = obj.split('.');
+      while (regx.test(strArr[0])) {//regx
+          //number add comma
+          strArr[0] = strArr[0].replace(regx, "$1,$2");
+      }
+      if (bExists > -1) {
+          //. not exist return 01
+          obj = strArr[0] + "." + strArr[1];
+      } else { //no '.' // 
+          obj = strArr[0];
+      }
+      return obj;
+  }
+//cancel comma
+function uncomma(str) {
+  str = "" + str.replace(/,/gi, ''); // delete comma 
+  str = str.replace(/(^\s*)|(\s*$)/g, ""); // trim() 
+  return (new Number(str));//str to number
+}
+//input box 콤마달기
+function inputNumberFormat(obj) {
+  obj.value = comma(obj.value);
+}
+
+
+//input box 콤마풀기 호출
+function uncomma_call(){
+  var input_value = document.getElementById('input1');
+  input_value.value = uncomma(input_value.value);
+}
+
