@@ -9,6 +9,7 @@
 <!-- Hero section -->
 	<section class="hero-section">
 		<div class="hero-slider owl-carousel">
+			<!-- <div class="hs-item " style="background : black;"> -->
 			<div class="hs-item set-bg" style="background : black;">
 				<div class="hs-text">
 					<div class="container">

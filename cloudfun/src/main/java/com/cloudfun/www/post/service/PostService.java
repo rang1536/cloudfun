@@ -15,6 +15,20 @@ public class PostService {
 	
 	@Autowired
 	private PostDao postDao;
+	
+	public void insertPost(Map<String, String> obj) {
+		
+		// post 등록
+ 		postDao.insertPost(obj);
+	}
+	
+	public String selectPostId(Map<String, String> obj) {
+		
+		// post 등록
+		return postDao.selectPostId(obj);
+	}
+	
+	
 	/*
 	public String isLogin(Map<String, String> obj) {
 		

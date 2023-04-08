@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
 public class PostDao {
 	@Autowired
 	private SqlSessionTemplate sql;
-/*
-	// param : email
+
+	/*// param : email
 	 public List<Map<String,String>> rceptList(Map<String,String> obj){
 		 
 		 List<Map<String, String>> result =  sql.selectList("login.userCheck", obj);
@@ -27,15 +27,29 @@ public class PostDao {
 		 return result;
 		 
 	 }
+	 */
+
+	
+	 // 포스트 신규 아이디를 얻는다.
+	 public String selectPostId(Map<String,String> obj) {
+		 
+		 String postId=  sql.selectOne("post.selectPostId");
+ 		 return postId;
+		 
+	 }
 	 
 	 // 상세정보(비밀번호 + 프로필)은 사이트마다 개별로 관리한다.
 	 // PARAM : memberId, type, password, birth
-	 public int insertMemberDetail(Map<String,String> obj) {
+	 public int insertPost(Map<String,String> obj) {
 		 
-		 int result =  sql.insert("login.insertMemberDetail", obj);
+		 int result =  sql.insert("post.insertPost", obj);
 		 return result;
 		 
-	 }*/
+	 }
+	 
+	
+	 
+
 	 
 	 
 	 

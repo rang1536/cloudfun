@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com">
+	
+	<insert id="insertFile"  parameterType="map" >
+		
+		INSERT INTO UPLOAD_FILE (
+					 FILE_ID    /*파일ID    */
+					, GROUP_ID   /*파일그룹ID  */
+					, POST_ID    /*포스트ID   */
+					, ROOT_PATH  /*파일경로    */
+					, FILE_NM    /*파일명     */
+					, FILE_DVCD  /*파일구분    */
+					, USE_YN     /*사용여부    */
+					, REGIST_DT  /*등록일시    */
+					, REGIST_ID  /*등록자     */
+					, REGIST_IP  /*등록IP    */
+					, UPDATE_DT  /*수정일시    */
+					, UPDATE_ID  /*수정자     */
+					, UPDATE_IP  /*수정IP    */ 
+				)
+				VALUES(
+					#{fileName}
+					,#{groupId}
+					,#{postId}
+					,#{rootPath}
+					,#{originalName}
+					,#{fileDvcd}
+					,IFNULL( #{useYn}, 'Y')
+					,SYSDATE()
+					,#{memberId}
+					,'0.0.0.0'
+					,SYSDATE()
+					,#{memberId}
+					,'0.0.0.0'
+				)
+	
+	
+	</insert>
+
+</mapper>

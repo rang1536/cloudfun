@@ -20,10 +20,14 @@ import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.cloudfun.www.com.dao.FileDao;
+import com.cloudfun.www.post.dao.PostDao;
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Directory;
@@ -40,6 +44,15 @@ import net.coobird.thumbnailator.Thumbnails;
 
 @Component
 public class UtilFile {
+	
+	
+	@Value("#{globals['upload.file.path']}") 
+    private String filePath;
+	
+	
+	@Autowired
+	private FileDao fileDao;
+	
 	/*
 	//�떎以묓뙆�씪�뾽濡쒕뱶
 	public List<TbFile> multiUploadFile(List<MultipartFile> fileList){
@@ -90,6 +103,63 @@ public class UtilFile {
 	    return file;
 	}
 	*/
+	
+	//param
+
+		
+	/** uploadFile.put("memberId", param.get("memberId"));
+	uploadFile.put("postId", param.get("postId"));
+	uploadFile.put("fileDvcd", param.get("fileDvcd"));
+	uploadFile.put("groupId", param.get("groupId"));
+	uploadFile.put("useYn", param.get("useYn"));
+	*/
+	
+	public HashMap<String, String> uploadFile(MultipartFile multipartFile, Map<String, String> param) {
+		HashMap<String, String> uploadFile = new HashMap<String, String>();
+		
+		String rootPath = filePath;
+		
+		try {
+			String originalName = multipartFile.getOriginalFilename();
+			String fileExtension = originalName.substring(originalName.lastIndexOf("."),originalName.length());
+
+			// 
+			LocalDateTime now = LocalDateTime.now();
+			//
+			//String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"));
+			String formatedNow = "";
+			String uuid = UUID.randomUUID().toString();
+
+	        String fileName = formatedNow + uuid + fileExtension; //DB
+	        fileName = fileName.replace("-", "");
+	        String savePath = rootPath + fileName;
+	        File destFile = new File(savePath);
+	        multipartFile.transferTo(destFile);
+	        
+	    	uploadFile.put("rootPath", rootPath);
+			uploadFile.put("fileName", fileName);
+			uploadFile.put("originalName", originalName);
+			
+			uploadFile.put("memberId", param.get("memberId"));
+			uploadFile.put("postId", param.get("postId"));
+			uploadFile.put("fileDvcd", param.get("fileDvcd"));
+			uploadFile.put("groupId", param.get("groupId"));
+			uploadFile.put("useYn", param.get("useYn"));
+			
+			
+			// 파일업로드 이력 저장.
+			fileDao.insertFile(uploadFile);
+			
+			
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return uploadFile;
+	}
+		
 
 
 	public HashMap<String, String> uploadFile(MultipartFile multipartFile, String rootPath) {

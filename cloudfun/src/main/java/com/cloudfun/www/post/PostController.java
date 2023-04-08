@@ -37,12 +37,31 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
 	@Autowired
 	private PostService postService;
 
+	/**
+	 * post 조회 페이지.
+	 */
+	@RequestMapping(value = "/post", method = RequestMethod.GET)
+	public String post(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		String email = (String)session.getAttribute("email");
+    	String name = (String)session.getAttribute("name");
+    	String memberId = (String)session.getAttribute("memberId");
+    	
+
+    	model.addAttribute("email", email);
+    	model.addAttribute("name", name);
+
+		//return "home";
+		return "post";
+	}
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/post/editText", method = RequestMethod.GET)
-	public String home(Model model, HttpServletRequest request) {
+	public String editText(Model model, HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
 		

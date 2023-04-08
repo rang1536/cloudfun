@@ -5,8 +5,7 @@
 
 <t:layout>
 	 <!-- Page info section -->
-	<%-- <section class="page-info-section set-bg" data-setbg="${path}/img/page-top-bg/background.jpg"> --%>
-	<section class="page-info-section set-bg" >
+	<section class="page-info-section" >
 	
 		<div class="pi-content">
 			<div class="container">
@@ -25,7 +24,7 @@
 	<!-- Page section -->
 	<section class="page-section single-blog-page spad">
 		<div class="container">
-			<form class="comment-form" onSubmit="return false;">
+			<form class="comment-form" id="postFrm" onSubmit="return false;">
 			
 				<!-- <div class="row mb-3" >
 					<div class="col-lg-6">
@@ -40,6 +39,24 @@
 					</div>
 					
 				</div> -->
+				
+				<div class="row mb-3" >
+					<div class="col-lg-1">
+						<p class="edit-title mb-0" >MAIN IMAGE</p>
+					</div>
+					<div class="col-lg-4">
+						<div class="file-preview-container" id="divImageMediaPreview">
+						</div>
+					</div>
+					<div class="col-lg-7">
+						<div class="file-drop-area mb-3 ">
+							<span class="file-message span-upload">Choose the main picture</span>
+							<input type="file" class="file-input" id="inputPreview" accept=".jfif,.jpg,.jpeg,.png,.gif" multiple>
+						</div>
+					</div>
+				</div>
+				
+				
 				<!-- upload file -->
 				<div class="row mb-1" >
 					<div class="col-lg-1">
@@ -54,6 +71,7 @@
 				</div>
 				
 				
+				
 				<!-- title contents -->
 				
 				<div class="row mb-3" >
@@ -62,7 +80,7 @@
 					</div>
 					
 					<div class="col-lg-11">
-						<input type="text" placeholder="TITLE">
+						<input type="text" name="title" placeholder="TITLE">
 					</div>
 				</div>
 				
@@ -74,7 +92,7 @@
 					</div>
 					
 					<div class="col-lg-11">
-						<textarea class="mb-0" placeholder="CONTENTS"></textarea>
+						<textarea class="mb-0" name="contents" placeholder="CONTENTS"></textarea>
 					</div>
 				</div>
 				
@@ -100,11 +118,11 @@
 					
 					<div class="col-lg-8">
 						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+						  <input class="form-check-input" type="radio" name="aiYn" id="inlineRadio1" value="Y">
 						  <label class="form-check-label" for="inlineRadio1">YES</label>
 						</div>
 						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+						  <input class="form-check-input" type="radio" name="aiYn" id="inlineRadio2" value="N">
 						  <label class="form-check-label" for="inlineRadio2">NO</label>
 						</div>
 					</div>
@@ -118,9 +136,9 @@
 						<p class="mb-0 edit-title">Sponsorship period</p>
 					</div>
 					<div class="col-lg-6   d-flex">
-								<input class="datetimepicker" name="fromDt" id="fromDt" type="text"  placeholder="start date" autocomplete="off">
+								<input class="datetimepicker" name="funStartDt" id="fromDt" type="text"  placeholder="start date" autocomplete="off">
 								<span class="ml-3 mr-3">~</span>
-								<input class="datetimepicker" name="toDt" id="toDt" type="text"  placeholder="end date" autocomplete="off">
+								<input class="datetimepicker" name="funEndDt" id="toDt" type="text"  placeholder="end date" autocomplete="off">
 					</div>
 				</div>
 				
@@ -130,7 +148,7 @@
 						<p class="mb-0 edit-title">target amount</p>
 					</div>
 					<div class="col-lg-4">
-						<input type="text" placeholder="target amount" id="tagetAmount" name ="tagetAmount">
+						<input type="text" placeholder="target amount" id="tagetAmount" name ="tgtAmt">
 					</div>
 				</div>
 				
@@ -139,7 +157,7 @@
 						<p class="mb-0 edit-title">Amount provided for viewing</p>
 					</div>
 					<div class="col-lg-4  ">
-						<input type="text" placeholder="Amount provided for viewing" id="viewingAmount" name ="viewingAmount">
+						<input type="text" placeholder="Amount provided for viewing" id="openAmt" name ="openAmt">
 					</div>
 				</div>
 				
@@ -151,15 +169,40 @@
 					
 					<div class="col-lg-8">
 						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="AnonymousYN" id="AnonymousYN1" value="Y">
+						  <input class="form-check-input" type="radio" name="anoFunYn" id="AnonymousYN1" value="Y">
 						  <label class="form-check-label" for="AnonymousYN1">YES</label>
 						</div>
 						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="AnonymousYN" id="AnonymousYN2" value="N">
+						  <input class="form-check-input" type="radio" name="anoFunYn" id="AnonymousYN2" value="N">
 						  <label class="form-check-label" for="AnonymousYN2">NO</label>
 						</div>
 					</div>
 				</div>
+				
+				<div class="row mb-3 " >
+						
+					<div class="col-lg-4 ">
+						<p class="mb-0 edit-title">Premium Mode(Open later)</p>
+						<p class="explain-text">   Provides high-definition/high-capacity file uploads</p>
+						<p class="explain-text">   Contents over 18 years of age or older</p>
+						<p class="explain-text">   Publish default page (unspecified majority)</p>
+					</div>
+					
+					<div class="col-lg-8">
+						<div class="form-check form-check-inline">
+						  <input class="form-check-input" type="radio" name="anoFunYn" id="AnonymousYN1" value="Y" disabled>
+						  <label class="form-check-label" for="AnonymousYN1">YES</label>
+						</div>
+						<div class="form-check form-check-inline">
+						  <input class="form-check-input" type="radio" name="anoFunYn" id="AnonymousYN2" value="N" disabled>
+						  <label class="form-check-label" for="AnonymousYN2">NO</label>
+						</div>
+					</div>
+					<div class="col-lg-12 ">
+						
+					</div>
+				</div>
+				
 				
 			</form>
 			<button class="site-btn btn-sm mt-3" id="save-btn">Save</button>
@@ -168,7 +211,9 @@
 	<!-- Page section end -->
 	
 	
+	
 </t:layout>
+
 
 <link rel="stylesheet" href='<c:url value="/css/amsify.suggestags.css"/>'>
 <link rel="stylesheet" href='<c:url value="/css/jquery.datetimepicker.min.css"/>'>
@@ -181,11 +226,11 @@
 <script>
 
 
-$(document).ready(function () {
+$(document).ready(function() {
 
-	$(".file-drop-area").on('change', '.file-input', function() {
+	 $(".file-drop-area").on('change', '.file-input', function() {
 	    
-		/*file upload  */
+	
 	  var filesCount = $(this)[0].files.length;
 	  
 	  var textbox = $(this).prev();
@@ -217,12 +262,85 @@ $(document).ready(function () {
 	$( "#tagetAmount" ).keydown(function(event ) {
 		inputNumberFormat(this)
 	});
+	 
+	
+	 // save btn
+	$("#save-btn").on("click",function(e){
+		var form = $('#postFrm');
 		
+		
+		var formData = new FormData();
+		
+		formData.append("jsonStr",JSON.stringify(Utils.getFormValue($("#postFrm"))));
+		
+		
+		var inputFile = $("input[name='uploadFile']");
+		var files = inputFile[0].files;
+		
+		for(var i =0; i< files.length ; i++){
+			formData.append("uploadFile",files[i]);	
+		} 
+		
+		 $.ajax({
+	    	  url: "${path}" + '/api/post/save',
+	          data : formData,
+	          type: 'post',
+	          enctype: 'multipart/form-data',
+	          contentType: false,
+	          processData:false
+	          
+	    }).done(function (res) {
+	        if(res.error){
+	        	alert(error);
+	        	return ; 
+	        }else{
+	        	alert(res)
+	        }
+	    });
+		
+		
+	}) 
 	
-});
+	
+	// main img preview
+	$(".file-drop-area").on('change', '#inputPreview', function() {
+
+		
+		var filesCount = $(this)[0].files.length;
+
+		var textbox = $(this).prev();
+
+		if (filesCount === 1) {
+		var fileName = $(this).val().split('\\').pop();
+			textbox.text(fileName);
+		} else {
+			textbox.text(filesCount + ' files selected');
+		}
+	
+		if (typeof (FileReader) != "undefined") {
+		    var dvPreview = $("#divImageMediaPreview");
+		    dvPreview.html("");            
+		    $($(this)[0].files).each(function () {
+		        var file = $(this);                
+		            var reader = new FileReader();
+		            reader.onload = function (e) {
+		                var img = $("<img />");
+		                img.attr("style", "width: 100%; height:100%; padding: 10px");
+		                img.attr("src", e.target.result);
+		                dvPreview.append(img);
+		            }
+		            reader.readAsDataURL(file[0]);                
+		    });
+		} else {
+		    alert("This browser does not support HTML5 FileReader.");
+		}
+	
+	
+	});
+	
+})
 
 
-	
 
 </script>
 

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="post">
+	
+	<select id="selectPostId" resultType="String" parameterType="map">
+		select CONCAT(DATE_FORMAT(SYSDATE(),'%Y%m%d%H%i%s'), COUNT(1) , IFNULL(#{memberId},999) ) FROM DUAL  
+	</select>
+	
+	
+	
+	<insert id="insertPost"  parameterType="map" >
+		
+		INSERT INTO POST (
+				POST_ID       
+				, TITLE         
+				, CONTENTS      
+				, TAGS          
+				, AI_YN         
+				, FUN_START_DT  
+				, FUN_END_DT    
+				, TGT_AMT       
+				, OPEN_AMT      
+				, ANO_FUN_YN    
+				, ADULT_YN      
+				, DOMAIN_TYPE   
+				, FILE_GROUP_ID 
+				, USE_YN        
+				, REGIST_DT     
+				, REGIST_ID     
+				, REGIST_IP     
+				, UPDATE_DT     
+				, UPDATE_ID     
+				, UPDATE_IP     
+				)
+		VALUES(
+			#{postId}
+			,#{title}
+			,#{contents}
+			,#{tags}
+			,#{aiYn}
+			,#{funStartDt}
+			,#{funEndDt}
+			,#{tgtAmt}
+			,#{openAmt}
+			,#{anoFunYn}
+			,#{adultYn}
+			,#{domainType}
+			,#{fileGroupId}
+			,#{useYn}
+			,SYSDATE()
+			,#{memberId}
+			,'0.0.0.0'
+			,SYSDATE()
+			,#{memberId}
+			,'0.0.0.0'
+		)
+	
+	
+	</insert>
+
+</mapper>

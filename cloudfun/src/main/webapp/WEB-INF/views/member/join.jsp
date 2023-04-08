@@ -54,7 +54,7 @@
 
 </t:layout>
 <link rel="stylesheet" href='<c:url value="/css/jquery.datetimepicker.min.css"/>'>
-<script src="${path}/resources/js/jquery.datetimepicker.min.css"></script>
+<script src="${path}/resources/js/jquery.datetimepicker.full.min.js"></script>
 
 <script>
 
@@ -101,7 +101,7 @@ function join() {
         }else{
         	if(res.url == "/"){
         		// 메인페이지로 이동.
-        		location.href = ${path};
+        		location.href = "${path}";
         	}	
         }
     });
