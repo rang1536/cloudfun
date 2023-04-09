@@ -26,8 +26,6 @@
 		<div class="container">
 			<form class="comment-form" id="postFrm" onSubmit="return false;">
 				
-				<jsp:include page="/WEB-INF/views/common/post.jsp"/>
-				
 				<!-- upload file -->
 				<div class="row mb-3" >
 					<div class="col-lg-1">
@@ -40,6 +38,10 @@
 						</div>
 					</div>
 				</div>
+				
+				
+				<jsp:include page="/WEB-INF/views/common/post.jsp"/>
+				
 				
 				
 				
@@ -166,7 +168,7 @@ $(document).ready(function() {
 	
 		if (typeof (FileReader) != "undefined") {
 		    var dvPreview = $("#divImageMediaPreview");
-		    //dvPreview.html("");            
+		    dvPreview.html("");            
 		    $($(this)[0].files).each(function () {
 		        var file = $(this);                
 		            var reader = new FileReader();

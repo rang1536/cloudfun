@@ -78,6 +78,84 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
 	}
 	
 	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/post/editPicture", method = RequestMethod.GET)
+	public String editPicture(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		String email = (String)session.getAttribute("email");
+    	String name = (String)session.getAttribute("name");
+    	String memberId = (String)session.getAttribute("memberId");
+    	
+
+    	model.addAttribute("email", email);
+    	model.addAttribute("name", name);
+
+		//return "home";
+		return "post/editPicture";
+	}
 	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/post/edit3D", method = RequestMethod.GET)
+	public String edit3D(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		String email = (String)session.getAttribute("email");
+    	String name = (String)session.getAttribute("name");
+    	String memberId = (String)session.getAttribute("memberId");
+    	
+
+    	model.addAttribute("email", email);
+    	model.addAttribute("name", name);
+
+		//return "home";
+		return "post/edit3D";
+	}
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/post/editMusic", method = RequestMethod.GET)
+	public String editMusic(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		String email = (String)session.getAttribute("email");
+    	String name = (String)session.getAttribute("name");
+    	String memberId = (String)session.getAttribute("memberId");
+    	
+
+    	model.addAttribute("email", email);
+    	model.addAttribute("name", name);
+
+		//return "home";
+		return "post/editMusic";
+	}
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/post/editComic", method = RequestMethod.GET)
+	public String editComic(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		String email = (String)session.getAttribute("email");
+    	String name = (String)session.getAttribute("name");
+    	String memberId = (String)session.getAttribute("memberId");
+    	
+
+    	model.addAttribute("email", email);
+    	model.addAttribute("name", name);
+
+		//return "home";
+		return "post/editComic";
+	}
 	
 }

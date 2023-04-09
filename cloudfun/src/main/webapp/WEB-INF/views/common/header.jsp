@@ -13,8 +13,7 @@
 	<div class="container">
 		<!-- logo -->
 		<a class="site-logo" href="${path}/">
-			site logo
-			
+			<img src="${path}/img/new/logo2.png" alt="">
 		</a>
 		
 		   <% if(session.getAttribute("memberId")!= null){ %>
@@ -41,6 +40,10 @@
 			<ul>
 				<li><a href="${path}/">Home</a></li>
 				<li><a href="${path}/post/editText">editText</a></li>
+				<li><a href="${path}/post/editPicture">editPicture</a></li>
+				<li><a href="${path}/post/edit3D">edit3D</a></li>
+				<li><a href="${path}/post/editMusic">editMusic</a></li>
+				<li><a href="${path}/post/editComic">editComic</a></li>
 				<li><a href="${path}/component">component</a></li>
 				<li><a href="${path}/join">join</a></li>
 				<!-- <li><a href="community.html">Forums</a></li>

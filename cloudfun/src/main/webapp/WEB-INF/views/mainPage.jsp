@@ -19,7 +19,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="hs-item set-bg" data-setbg="${path}/img/slider-2.jpg">
+			<%-- <div class="hs-item set-bg" data-setbg="${path}/img/slider-2.jpg"> --%>
+			<div class="hs-item set-bg" style="background : black;">
 				<div class="hs-text">
 					<div class="container">
 						<h2>The Best <span>Games</span> Out There</h2>

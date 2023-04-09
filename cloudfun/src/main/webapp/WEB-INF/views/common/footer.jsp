@@ -14,7 +14,8 @@
 			<div class="row">
 				<div class="col-lg-4">
 					<div class="footer-logo text-white">
-						<img src="${path}/img/footer-logo.png" alt="">
+						<img src="${path}/img/new/logo2.png" alt="">
+						<!-- <a href="#" >logo</a> -->
 						<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p>
 					</div>
 				</div>
