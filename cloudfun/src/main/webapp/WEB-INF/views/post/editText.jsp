@@ -51,7 +51,7 @@
 					<div class="col-lg-7">
 						<div class="file-drop-area mb-3 ">
 							<span class="file-message span-upload">Choose the main picture</span>
-							<input type="file" class="file-input" id="inputPreview" accept=".jfif,.jpg,.jpeg,.png,.gif" multiple>
+							<input type="file" class="file-input" name="mainImg" id="inputPreview" accept=".jfif,.jpg,.jpeg,.png,.gif" multiple>
 						</div>
 					</div>
 				</div>
@@ -280,6 +280,14 @@ $(document).ready(function() {
 		for(var i =0; i< files.length ; i++){
 			formData.append("uploadFile",files[i]);	
 		} 
+		
+		var inputFile2 = $("input[name='mainImg']");
+		var files2 = inputFile2[0].files;
+		
+		for(var i =0; i< files2.length ; i++){
+			formData.append("mainImg",files2[i]);	
+		} 
+		
 		
 		 $.ajax({
 	    	  url: "${path}" + '/api/post/save',
