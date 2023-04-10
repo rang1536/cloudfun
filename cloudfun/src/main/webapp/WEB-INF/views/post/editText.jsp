@@ -34,10 +34,14 @@
 						<p class="edit-title mb-0" >CREATIVE FILE</p>
 					</div>
 					<div class="col-lg-11">
-						<div class="file-drop-area mb-4">
-						  <span class="file-message span-upload">Upload your creation</span>
-						  <input class="file-input" name="uploadFile" type="file" >
-						</div>
+						
+						<button type="button" class="btn btn-info btn-block" onclick="document.getElementById('inputPreview2').click()">Upload your creation(*.txt)</button>
+					    <div class="form-group inputDnD file-drop-area">
+					        <!-- <label class="sr-only " for="inputFile">File Upload</label> -->
+					        <label class="sr-only file-message" for="inputFile">Upload your creation(*.txt)</label>
+					        <input type="file" class="form-control-file text-info font-weight-bold"  name="uploadFile" id="inputPreview2" accept=".txt" onchange="readUrl(this)" data-title="Drag and drop a file">
+					    </div>
+						
 					</div>
 				</div>
 				
@@ -174,7 +178,7 @@ $(document).ready(function() {
 		                var img = $("<img />");
 		                img.attr("style", "width: 100%; height:100%; padding: 10px");
 		                img.attr("src", e.target.result);
-		                dvPreview.append(img);
+		                dvPreview.html(img);
 		            }
 		            reader.readAsDataURL(file[0]);                
 		    });

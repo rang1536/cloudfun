@@ -9,30 +9,30 @@
 			<form class="comment-form" id="frm-join" name="frm-join" >
 			
 			<h4 id="join-title">Sign Up</h4>
-				</br>
+				<br>
 				<div class="row justify-content-md-center">
-					<div class="col-lg-12 mb-lg-0" >
+					<div class="col-lg-12 mb-3" >
 						<p class="text-left mb-0">Email</p>
 						<input type="text" name="email" placeholder="Email" value ="${email}" readonly>
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="col-lg-12 mb-lg-0">
+					<div class="col-lg-12 mb-3">
 						<p class="text-left mb-0">Name</p>
 						<input type="text" name="name" placeholder="Name" value = "${name}" readonly>
 					</div>
 				</div>
 				
 				<div class="row">
-					<div class="col-lg-12 mb-lg-0">
+					<div class="col-lg-12 mb-3">
 						<p class="text-left mb-0">Password</p>
 						<input type="password" name="password" placeholder="Password"  autocomplete="off">
 					</div>
 				</div>
 				
 				<div class="row">
-					<div class="col-lg-12 mb-lg-0">
+					<div class="col-lg-12 mb-3">
 						<p class="text-left mb-0">Date of brith</p>
 						<input class="datetimepicker" name="birth" id="birth" type="text"  placeholder="Date of brith" autocomplete="off">
 					</div>

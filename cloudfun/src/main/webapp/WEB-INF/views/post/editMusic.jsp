@@ -29,17 +29,17 @@
 				<jsp:include page="/WEB-INF/views/common/post.jsp"/>
 				
 				<div class="row mb-3" >
-					<div class="col-lg-1">
+					<div class="col-lg-2">
 						<p class="edit-title mb-0" >CREATIVE FILE</p>
 					</div>
-					<div class="col-lg-4 mb-1">
+					<div class="col-lg-6 mb-1">
 						<table class="table table-bordered table-sm">
 						  <thead>
 						    <tr>
 						      <%-- <th scope="col">#</th> --%>
-						      <th scope="col">FILE NAME</th>
-						      <th scope="col">UPDATED</th>
-						      <th scope="col">DELETE</th>
+						      <th scope="col" class="text-center">FILE NAME</th>
+						      <th scope="col" class="text-center">UPDATED</th>
+						      <th scope="col" class="text-center">DELETE</th>
 						    </tr>
 						  </thead>
 						  <tbody id="divImageMediaPreview2">
@@ -48,11 +48,13 @@
     						
 						</table>
 					</div>
-					<div class="col-lg-7 mb-1">
-						<div class="file-drop-area">
-							<span class="file-message span-upload">Choose the main picture</span>
-							<input type="file" class="file-input" id="inputPreview2"  accept=".jfif,.jpg,.jpeg,.png,.gif" >
-						</div>
+					<div class="col-lg-4 mb-1">
+						<button type="button" class="btn btn-info btn-block" onclick="document.getElementById('inputPreview2').click()">Upload your creation(*.mp3, *.wav)</button>
+					    <div class="form-group inputDnD file-drop-area">
+					        <!-- <label class="sr-only " for="inputFile">File Upload</label> -->
+					        <label class="sr-only file-message" for="inputFile">Upload your creation(*.mp3, *.wav)</label>
+					        <input type="file" class="form-control-file text-info font-weight-bold"  name="uploadFile" id="inputPreview2" accept=".mp3, .wav" onchange="readUrl(this)" data-title="Drag and drop a file">
+					    </div>
 					</div>
 					
 					
@@ -243,9 +245,9 @@ $(document).ready(function() {
 			            	
 			            	
 			            		var tr = $("<tr id='file" + fileNo + "'></tr>");
-			            		var td1 = $('<td class="mb-1">' + fileName + '</td>')
-			            		var td2 = $('<td class="mb-1"> '+    dt    + '</td>')
-			            		var td3 = $('<td class="mb-1"><a class="delete" onclick="deleteFile(' + fileNo + ');"><i class="fa fa-times" aria-hidden="true"></i></a></td>')
+			            		var td1 = $('<td class="align-middle">' + fileName + '</td>')
+			            		var td2 = $('<td class="align-middle"> '+    dt    + '</td>')
+			            		var td3 = $('<td class="align-middle"><button type="button" class="delete btn btn-info btn-sm" onclick="deleteFile(' + fileNo + ');">DELETE</button></td>')
 			            	
 			            		
 			            	 	tr.append(td1);
@@ -256,7 +258,9 @@ $(document).ready(function() {
 			            	
 				            	var div = $("<div class='row d-flex' id='file" + fileNo + "' > </div>");
 				                var pTag = $('<p class="name mb-1">' + fileName + '</p>')
-				                var aTag = $('<a class="delete" onclick="deleteFile(' + fileNo + ');"><i class="fa fa-times" aria-hidden="true"></i></a>')
+				                /* var aTag = $('<a class="delete" onclick="deleteFile(' + fileNo + ');"><i class="fa fa-times" aria-hidden="true"></i></a>') */
+				                var aTag = $('<button type="button" class="delete btn btn-info" onclick="deleteFile(' + fileNo + ');">DELETE</button>')
+				                
 				                var pTag2 = $('<p class="mb-1">' + 'updated : 00/00/0000' + '</p>')
 				                
 				                filesArr.push(file[0]);

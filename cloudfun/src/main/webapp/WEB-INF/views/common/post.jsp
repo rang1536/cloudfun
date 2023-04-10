@@ -13,11 +13,22 @@
 		</div>
 	</div>
 	<div class="col-lg-7 mb-1">
-		<div class="file-drop-area">
+		<!-- <div class="file-drop-area">
 			<span class="file-message span-upload">Choose the main picture</span>
 			<input type="file" class="file-input" name="mainImg" id="inputPreview" accept=".jfif,.jpg,.jpeg,.png,.gif" multiple>
-		</div>
+		</div> -->
+		
+		
+		<button type="button" class="btn btn-info btn-block" onclick="document.getElementById('inputPreview').click()">Add Image</button>
+	    <div class="form-group inputDnD file-drop-area">
+	        <!-- <label class="sr-only " for="inputFile">File Upload</label> -->
+	        <label class="sr-only file-message" for="inputFile">File Upload</label>
+	        <input type="file" class="form-control-file text-info font-weight-bold"  name="mainImg" id="inputPreview" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+	    </div>
 	</div>
+	
+	
+	
 </div>
 
 

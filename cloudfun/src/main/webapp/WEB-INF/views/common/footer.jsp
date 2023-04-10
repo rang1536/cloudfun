@@ -24,7 +24,7 @@
 						<h4 class="fw-title">Latest Posts</h4>
 						<div class="latest-blog">
 							<div class="lb-item">
-								<div class="lb-thumb set-bg" data-setbg="${path}/img/latest-blog/1.jpg"></div>
+								<div class="lb-thumb set-bg" data-setbg="${path}/img/new/french.png"></div>
 								<div class="lb-content">
 									<div class="lb-date">June 21, 2018</div>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum </p>
@@ -32,7 +32,7 @@
 								</div>
 							</div>
 							<div class="lb-item">
-								<div class="lb-thumb set-bg" data-setbg="${path}/img/latest-blog/2.jpg"></div>
+								<div class="lb-thumb set-bg" data-setbg="${path}/img/new/french.png"></div>
 								<div class="lb-content">
 									<div class="lb-date">June 21, 2018</div>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum </p>
@@ -40,7 +40,7 @@
 								</div>
 							</div>
 							<div class="lb-item">
-								<div class="lb-thumb set-bg" data-setbg="${path}/img/latest-blog/3.jpg"></div>
+								<div class="lb-thumb set-bg" data-setbg="${path}/img/new/french.png"></div>
 								<div class="lb-content">
 									<div class="lb-date">June 21, 2018</div>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum </p>
@@ -55,28 +55,28 @@
 						<h4 class="fw-title">Top Comments</h4>
 						<div class="top-comment">
 							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="${path}/img/authors/1.jpg"></div>
+								<div class="tc-thumb set-bg" data-setbg="${path}/img/new/french.png"></div>
 								<div class="tc-content">
 									<p><a href="#">James Smith</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
 									<div class="tc-date">June 21, 2018</div>
 								</div>
 							</div>
 							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="${path}/img/authors/2.jpg"></div>
+								<div class="tc-thumb set-bg" data-setbg="${path}/img/new/french.png"></div>
 								<div class="tc-content">
 									<p><a href="#">James Smith</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
 									<div class="tc-date">June 21, 2018</div>
 								</div>
 							</div>
 							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="${path}/img/authors/3.jpg"></div>
+								<div class="tc-thumb set-bg" data-setbg="${path}/img/new/french.png"></div>
 								<div class="tc-content">
 									<p><a href="#">James Smith</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
 									<div class="tc-date">June 21, 2018</div>
 								</div>
 							</div>
 							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="${path}/img/authors/4.jpg"></div>
+								<div class="tc-thumb set-bg" data-setbg="${path}/img/new/french.png"></div>
 								<div class="tc-content">
 									<p><a href="#">James Smith</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
 									<div class="tc-date">June 21, 2018</div>

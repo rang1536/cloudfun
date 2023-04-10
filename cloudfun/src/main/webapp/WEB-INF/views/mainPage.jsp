@@ -53,7 +53,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3 col-md-6 p-0">
-					<div class="feature-item set-bg" data-setbg="${path}/img/features/1.jpg">
+					<div class="feature-item set-bg" data-setbg="${path}/img/new/menu.png">
 						<span class="cata new">new</span>
 						<div class="fi-content text-white">
 							<h5><a href="#">Suspendisse ut justo tem por, rutrum</a></h5>
@@ -63,7 +63,7 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 p-0">
-					<div class="feature-item set-bg" data-setbg="${path}/img/features/2.jpg">
+					<div class="feature-item set-bg" data-setbg="${path}/img/new/menu.png">
 						<span class="cata strategy">strategy</span>
 						<div class="fi-content text-white">
 							<h5><a href="#">Justo tempor, rutrum erat id, molestie</a></h5>
@@ -73,7 +73,7 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 p-0">
-					<div class="feature-item set-bg" data-setbg="${path}/img/features/3.jpg">
+					<div class="feature-item set-bg" data-setbg="${path}/img/new/menu.png">
 						<span class="cata new">new</span>
 						<div class="fi-content text-white">
 							<h5><a href="#">Nullam lacinia ex eleifend orci porttitor</a></h5>
@@ -83,7 +83,7 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 p-0">
-					<div class="feature-item set-bg" data-setbg="${path}/img/features/4.jpg">
+					<div class="feature-item set-bg" data-setbg="${path}/img/new/menu.png">
 						<span class="cata racing">racing</span>
 						<div class="fi-content text-white">
 							<h5><a href="#">Lacinia ex eleifend orci suscipit</a></h5>
@@ -108,7 +108,7 @@
 			<div class="row">
 				<div class="col-lg-4 col-md-6">
 					<div class="recent-game-item">
-						<div class="rgi-thumb set-bg" data-setbg="${path}/img/recent-game/1.jpg">
+						<div class="rgi-thumb set-bg" data-setbg="${path}/img/new/menu.png">
 							<div class="cata new">new</div>
 						</div>
 						<div class="rgi-content">
@@ -124,7 +124,7 @@
 				</div>
 				<div class="col-lg-4 col-md-6">
 					<div class="recent-game-item">
-						<div class="rgi-thumb set-bg" data-setbg="${path}/img/recent-game/2.jpg">
+						<div class="rgi-thumb set-bg" data-setbg="${path}/img/new/menu.png">
 							<div class="cata racing">racing</div>
 						</div>
 						<div class="rgi-content">
@@ -140,7 +140,7 @@
 				</div>
 				<div class="col-lg-4 col-md-6">
 					<div class="recent-game-item">
-						<div class="rgi-thumb set-bg" data-setbg="${path}/img/recent-game/3.jpg">
+						<div class="rgi-thumb set-bg" data-setbg="${path}/img/new/menu.png">
 							<div class="cata adventure">Adventure</div>
 						</div>
 						<div class="rgi-content">
@@ -169,7 +169,7 @@
 					<div class="tournament-item mb-4 mb-lg-0">
 						<div class="ti-notic">Premium Tournament</div>
 						<div class="ti-content">
-							<div class="ti-thumb set-bg" data-setbg="${path}/img/tournament/1.jpg"></div>
+							<div class="ti-thumb set-bg" data-setbg="${path}/img/new/menu.png"></div>
 							<div class="ti-text">
 								<h4>World Of WarCraft</h4>
 								<ul>
@@ -187,7 +187,7 @@
 					<div class="tournament-item">
 						<div class="ti-notic">Premium Tournament</div>
 						<div class="ti-content">
-							<div class="ti-thumb set-bg" data-setbg="${path}/img/tournament/2.jpg"></div>
+							<div class="ti-thumb set-bg" data-setbg="${path}/img/new/menu.png"></div>
 							<div class="ti-text">
 								<h4>DOOM</h4>
 								<ul>
@@ -217,7 +217,7 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-6">
 					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="${path}/img/review/1.jpg">
+						<div class="review-cover set-bg" data-setbg="${path}/img/new/menu.png">
 							<div class="score yellow">9.3</div>
 						</div>
 						<div class="review-text">
@@ -228,7 +228,7 @@
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="${path}/img/review/2.jpg">
+						<div class="review-cover set-bg" data-setbg="${path}/img/new/menu.png">
 							<div class="score purple">9.5</div>
 						</div>
 						<div class="review-text">
@@ -239,7 +239,7 @@
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="${path}/img/review/3.jpg">
+						<div class="review-cover set-bg" data-setbg="${path}/img/new/menu.png">
 							<div class="score green">9.1</div>
 						</div>
 						<div class="review-text">
@@ -250,7 +250,7 @@
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="${path}/img/review/4.jpg">
+						<div class="review-cover set-bg" data-setbg="${path}/img/new/menu.png">
 							<div class="score pink">9.7</div>
 						</div>
 						<div class="review-text">

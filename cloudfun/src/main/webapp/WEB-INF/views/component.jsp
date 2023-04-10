@@ -89,6 +89,16 @@
 								<input type="text" class="form-control" name="country"/>
 							</div>
 			        </div>
+			        
+			        
+			        <div class="col-md-12">
+			            <button type="button" class="btn btn-warning btn-block" onclick="document.getElementById('inputFile').click()">Add Image</button>
+			            <div class="form-group inputDnD">
+			                <label class="sr-only" for="inputFile">File Upload</label>
+			                <input type="file" class="form-control-file text-warning font-weight-bold" id="inputFile" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+			            </div>
+			        
+			        </div>
 								
 				</div>
 				
@@ -216,7 +226,7 @@ $(document).ready(function(){
 	
 })
 	
-	
+
 
 </script>
 

@@ -48,18 +48,26 @@
 						<p class="edit-title mb-0" >CREATIVE FILE</p>
 					</div>
 					<div class="col-lg-11 mb-1">
-						<div class="file-drop-area">
+					
+						<button type="button" class="btn btn-info btn-block" onclick="document.getElementById('inputPreview2').click()">Upload your creation(*.txt)</button>
+					    <div class="form-group inputDnD file-drop-area">
+					        <!-- <label class="sr-only " for="inputFile">File Upload</label> -->
+					        <label class="sr-only file-message" for="inputFile">Upload your creation(Image)</label>
+					        <input type="file" class="form-control-file text-info font-weight-bold"  name="uploadFile" id="inputPreview2" accept=".jfif,.jpg,.jpeg,.png,.gif" onchange="readUrl(this)" data-title="Drag and drop a file">
+					    </div>
+					
+						<!-- <div class="file-drop-area">
 							<span class="file-message span-upload">Choose the main picture</span>
-							<!-- <input type="file" class="file-input" name="mainImg" id="inputPreview2" onchange="addFile(this);" accept=".jfif,.jpg,.jpeg,.png,.gif" multiple> -->
+							<input type="file" class="file-input" name="mainImg" id="inputPreview2" onchange="addFile(this);" accept=".jfif,.jpg,.jpeg,.png,.gif" multiple>
 							<input type="file" class="file-input" id="inputPreview2"  accept=".jfif,.jpg,.jpeg,.png,.gif" >
-						</div>
+						</div> -->
 					</div>
 					<div class="col-lg-1">
 						<p class="explain-text">File List</p>
 					</div>
 					<div class="col-lg-11 mb-1">
 						<div class="file-preview-container " >
-							<div class="row" id="divImageMediaPreview2">
+							<div class="row m-0" id="divImageMediaPreview2">
 							
 							
 							</div>
@@ -244,22 +252,25 @@ $(document).ready(function() {
 			            reader.onload = function (e) {
 			            	 
 			            	
-				            	var div = $("<div class='col-lg-2 d-flex justify-content-center px-3 filebox' id='file" + fileNo + "' > </div>");
-				            	var div2 = $("<div> </div>");
-				            	var div3 = $("<div class='d-flex justify-content-center'> </div>");
+				            	var div = $("<div class='col-lg-2 filebox row m-0' id='file" + fileNo + "' style='border: 1px solid #d6dee7;' > </div>");
+				            	var div2 = $("<div class='col-lg-12 text-center mb-3'> </div>");
+				            	var div2_2 = $("<div class='col-lg-12'> </div>");
+				            	var div3 = $("<div class='text-center'> </div>");
 				                var img = $("<img />");
-				                img.attr("style", "max-height:200px; padding: 0px");
+				                img.attr("style","max-height:150px;padding: 0px");
 				                img.attr("src", e.target.result);
 				                var pTag = $('<p class="name">' + fileName + '</p>')
-				                var aTag = $('<a class="delete" onclick="deleteFile(' + fileNo + ');"><i class="fa fa-times" aria-hidden="true"></i></a>')
+				                var aTag = $('<button type="button" class="delete btn btn-info btn-sm" onclick="deleteFile(' + fileNo + ');">DELETE</button>')
 				                
 				                
-				                div3.append(pTag);
 				                div3.append(aTag);
+				                div3.append(pTag);
 				                
-				                div2.append(div3);
+				                
+				                div2_2.append(div3);
 				                div2.append(img);
 				                
+				                div.append(div2_2);
 				                div.append(div2);
 				                dvPreview.append(div);
 				                
