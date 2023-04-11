@@ -102,7 +102,7 @@ public class LoginRestController {
 		
 		  
 		// 1. 회원인지 확인한다.(유형 확인.)
-		Map<String, String> objParam = new HashMap<>();
+		Map<String, String> objParam = new HashMap<String,String>();
 		objParam.put("email", email);
 		objParam.put("name", name);
 		  

@@ -3,6 +3,7 @@ package com.cloudfun.www.post;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -149,6 +150,10 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
 		String email = (String)session.getAttribute("email");
     	String name = (String)session.getAttribute("name");
     	String memberId = (String)session.getAttribute("memberId");
+    	String type = (String)session.getAttribute("type");
+    	
+    	
+    	
     	
 
     	model.addAttribute("email", email);
@@ -169,6 +174,21 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
 		
 		HttpSession session = request.getSession();
 		
+		String email = (String)session.getAttribute("email");
+    	String name = (String)session.getAttribute("name");
+    	String memberId = (String)session.getAttribute("memberId");
+    	String type = (String)session.getAttribute("type");
+    	
+    	Map<String, String> objParam = new HashMap<String,String>();
+    	
+    	objParam.put("email", email);
+    	objParam.put("name", name);
+    	objParam.put("memberId", memberId);
+    	objParam.put("type", type);
+		
+    	List<Map<String, String>> resultList = postService.selectPostList(objParam);
+    	
+    	model.addAttribute("resultList", resultList);
 
 		//return "home";
 		return "post/postList";

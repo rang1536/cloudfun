@@ -60,7 +60,7 @@ private static final Logger logger = LoggerFactory.getLogger(LoginController.cla
         ResponseEntity<GoogleResponse> resultEntity = restTemplate.postForEntity("https://oauth2.googleapis.com/token",
                 googleOAuthRequestParam, GoogleResponse.class);
         String jwtToken=resultEntity.getBody().getId_token();
-        Map<String, String> map=new HashMap<>();
+        Map<String, String> map=new HashMap<String,String>();
         map.put("id_token",jwtToken);
         ResponseEntity<GoogleInfResponse> resultEntity2 = restTemplate.postForEntity("https://oauth2.googleapis.com/tokeninfo",
                 map, GoogleInfResponse.class);
@@ -72,7 +72,7 @@ private static final Logger logger = LoggerFactory.getLogger(LoginController.cla
         
         // 기존 이메일이 있는경우 로그인처리 
         
-        Map<String, String> a = new HashMap<>();
+        Map<String, String> a = new HashMap<String,String>();
         a.put("email", email);
         a.put("name", name);
         

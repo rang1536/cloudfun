@@ -29,6 +29,15 @@ public class PostService {
 	}
 	
 	
+	public List<Map<String, String>> selectPostList(Map<String, String> obj) {
+		
+		// post µî·Ï
+		return postDao.selectPostList(obj);
+	}
+	
+	
+	
+	
 	/*
 	public String isLogin(Map<String, String> obj) {
 		

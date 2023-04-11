@@ -161,7 +161,7 @@ public class UtilFile {
             	File thumbnailFile = new File(savePath2);
             	
             	File destFile2 = new File(savePath);
-            	Thumbnailator.createThumbnail(destFile2, thumbnailFile,100,100);
+            	Thumbnailator.createThumbnail(destFile2, thumbnailFile,200,200);
             	
             	uploadFile.put("thumbnailNm", "s_"+thumbnailSaveName);
             	

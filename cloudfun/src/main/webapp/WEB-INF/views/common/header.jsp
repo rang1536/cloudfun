@@ -44,7 +44,13 @@
 				<li><a href="${path}/post/edit3D">edit3D</a></li>
 				<li><a href="${path}/post/editMusic">editMusic</a></li>
 				<li><a href="${path}/post/editComic">editComic</a></li>
+				
+				
+				<li><a href="${path}/post/postList">postList</a></li>
+				
 				<li><a href="${path}/component">component</a></li>
+				
+				
 				<li><a href="${path}/join">join</a></li>
 				<!-- <li><a href="community.html">Forums</a></li>
 				<li><a href="contact.html">Contact</a></li> -->

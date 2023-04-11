@@ -59,5 +59,43 @@
 	
 	
 	</insert>
+	
+	
+	<!-- 포스트 목록을 조회한다. -->
+	<select id="selectPostList" resultType="map" parameterType="map">
+		SELECT A.POST_ID
+		     , A.TITLE
+		     , A.CONTENTS
+		     , A.TAGS
+		     , A.AI_YN
+		     , A.FUN_START_DT
+		     , A.FUN_END_DT
+		     , A.TGT_AMT
+		     , A.OPEN_AMT
+		     , A.ANO_FUN_YN
+		     , A.DOMAIN_TYPE
+		     , A.REGIST_ID
+		     , B.THUMBNAIL_NM
+		     , C.NAME
+		/* SELECT **/
+		FROM POST A
+		LEFT JOIN UPLOAD_FILE B
+		  ON B.POST_ID = A.POST_ID
+		 AND B.GROUP_ID = '001' /*001 썸네일 이미지.*/
+		JOIN MEMBER C
+		  ON C.MEMBER_ID = A.REGIST_ID
+		WHERE 1=1
+		 <if test='type != null'>
+
+ 		</if>
+ 		 <if test='regMemberId != null'>
+
+ 		</if>
+		ORDER BY rand()
+		LIMIT 10
+		
+		
+		   
+	</select>
 
 </mapper>

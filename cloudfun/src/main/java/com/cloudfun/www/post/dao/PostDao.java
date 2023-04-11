@@ -38,14 +38,23 @@ public class PostDao {
 		 
 	 }
 	 
-	 // 상세정보(비밀번호 + 프로필)은 사이트마다 개별로 관리한다.
-	 // PARAM : memberId, type, password, birth
+	 // 신규 게시물을 등록한다.
 	 public int insertPost(Map<String,String> obj) {
 		 
 		 int result =  sql.insert("post.insertPost", obj);
 		 return result;
 		 
 	 }
+	 
+	 
+	 
+	 
+	// 게시물 목록 조회
+	 public List<Map<String,String>> selectPostList(Map<String,String> obj){
+		 
+		 List<Map<String, String>> result =  sql.selectList("post.selectPostList", obj);
+		 return result;
+	}
 	 
 	
 	 

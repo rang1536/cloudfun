@@ -26,6 +26,26 @@
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="row">
+					
+						<c:forEach var="item" items="${resultList}" >
+							<div class="col-md-6">
+								<div class="recent-game-item">
+									<div class="rgi-thumb set-bg" data-setbg="${path}/display?filename=${item.THUMBNAIL_NM}">
+										<div class="cata new">${item.DOMAIN_TYPE}</div>
+									</div>
+									<div class="rgi-content">
+										<h5>${item.TITLE}</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit amet, consectetur elit. </p>
+										<a href="#" class="comment">${item.NAME}</a>
+										<%-- <div class="rgi-extra">
+											<div class="rgi-star"><img src="${path}/img/icons/star.png" alt=""></div>
+											<div class="rgi-heart"><img src="${path}/img/icons/heart.png" alt=""></div>
+										</div> --%>
+									</div>
+								</div>	
+							</div>
+						  
+						</c:forEach>
 						
 						
 						

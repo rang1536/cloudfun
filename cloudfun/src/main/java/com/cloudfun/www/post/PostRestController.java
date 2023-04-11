@@ -131,15 +131,9 @@ public class PostRestController {
 			resultMap = utilFile.uploadFile(multipartFile,obj) ;
 		}
 		
-		
 		obj.put("postId",postId);
-		
-		
-		
 		postService.insertPost(obj);
 		
-
-				
 		return resultMap;
 
     }
@@ -150,7 +144,10 @@ public class PostRestController {
 	public ResponseEntity<Resource> display(@RequestParam("filename") String filename) {
 		String path = filePath;
 		String folder = "";
-		filename = "s_20230411212455963dd6d9c19f488fa325be51a0c8c949.png";
+		if(filename.equals("1")) {
+			filename="20230412070039ec1ae3e3b1a04fbb8e5afc6d718dfa17.jpg";
+		}
+		/*filename = "s_20230411212455963dd6d9c19f488fa325be51a0c8c949.png";*/
 		Resource resource = new FileSystemResource(path + folder + filename);
 		if(!resource.exists()) 
 			return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND);
@@ -165,7 +162,27 @@ public class PostRestController {
 		return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
 	}
 	
-	
+	/*@Value("${spring.servlet.multipart.location}")
+	String filePath;
+
+	@GetMapping("/download")
+	public ResponseEntity<Resource> download(@ModelAttribute FileDto dto) throws IOException {
+
+		Path path = Paths.get(filePath + "/" + dto.getFileName());
+		String contentType = Files.probeContentType(path);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentDisposition(
+		ContentDisposition.builder("attachment")
+			.filename(dto.getFileName(), StandardCharsets.UTF_8)
+			.build());
+		headers.add(HttpHeaders.CONTENT_TYPE, contentType);
+
+		Resource resource = new InputStreamResource(Files.newInputStream(path));
+
+		return new ResponseEntity<>(resource, headers, HttpStatus.OK);
+
+	}*/
 	
 	
 }
