@@ -99,6 +99,12 @@
 			            </div>
 			        
 			        </div>
+			        
+			        <div class="col-md-6">
+			        	<h4>thumbnail</h4>
+			        	<img src="${path}/display?filename=1" alt="">
+			        
+			        </div>
 								
 				</div>
 				

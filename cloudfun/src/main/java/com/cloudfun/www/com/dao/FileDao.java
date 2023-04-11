@@ -18,6 +18,12 @@ public class FileDao {
 		 return result;
 	 }
 	 
+	 // 파일정보 업로드.
+	 public int updateThumbnail(Map<String,String> obj) {
+		 int result =  sql.update("com.updateThumbnail", obj);
+		 return result;
+	 }
+	 
 	 
 	 
 	 

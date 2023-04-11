@@ -39,5 +39,14 @@
 	
 	
 	</insert>
+	
+	
+	
+	<update id="updateThumbnail" parameterType="map">
+		UPDATE UPLOAD_FILE
+		SET THUMBNAIL_NM = #{thumbnailNm}
+		WHERE FILE_ID = #{fileName}
+	</update>
+	
 
 </mapper>

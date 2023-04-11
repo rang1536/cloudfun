@@ -158,4 +158,21 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
 		return "post/editComic";
 	}
 	
+	
+	
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/post/postList", method = RequestMethod.GET)
+	public String postList(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+
+		//return "home";
+		return "post/postList";
+	}
+	
+	
 }

@@ -98,8 +98,10 @@ ol {
 
 .set-bg {
 	background-repeat: no-repeat;
-	background-size: cover;
+	/* background-size: cover; */
+	background-size: contain;
 	background-position: top center;
+	
 }
 
 .spad {
@@ -526,6 +528,10 @@ ol {
 .recent-game-item .rgi-thumb {
 	height: 204px;
 	padding: 25px 28px;
+}
+
+.rgi-thumb {
+	border: 1px solid #d6dee7;
 }
 
 .recent-game-item .rgi-content {

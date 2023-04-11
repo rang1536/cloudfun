@@ -40,6 +40,7 @@ import com.mortennobel.imagescaling.ResampleOp;
 import com.mortennobel.imagescaling.AdvancedResizeOp;
 import com.mortennobel.imagescaling.MultiStepRescaleOp;
 
+import net.coobird.thumbnailator.Thumbnailator;
 import net.coobird.thumbnailator.Thumbnails;
 
 @Component
@@ -126,9 +127,10 @@ public class UtilFile {
 			// 
 			LocalDateTime now = LocalDateTime.now();
 			//
-			//String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"));
-			String formatedNow = "";
+			String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+			//String formatedNow = "";
 			String uuid = UUID.randomUUID().toString();
+			String uuid2 = UUID.randomUUID().toString();
 
 	        String fileName = formatedNow + uuid + fileExtension; //DB
 	        fileName = fileName.replace("-", "");
@@ -149,6 +151,23 @@ public class UtilFile {
 			
 			// 파일업로드 이력 저장.
 			fileDao.insertFile(uploadFile);
+			
+			
+			// 이미지 파일인 경우 썸네일 생성
+            if(multipartFile.getContentType().startsWith("image") == true){
+            	String thumbnailSaveName = formatedNow + uuid2 + fileExtension; //DB
+            	thumbnailSaveName = thumbnailSaveName.replace("-", "");
+            	String savePath2 = rootPath  +"s_"+thumbnailSaveName;
+            	File thumbnailFile = new File(savePath2);
+            	
+            	File destFile2 = new File(savePath);
+            	Thumbnailator.createThumbnail(destFile2, thumbnailFile,100,100);
+            	
+            	uploadFile.put("thumbnailNm", "s_"+thumbnailSaveName);
+            	
+            	fileDao.updateThumbnail(uploadFile);
+            	
+            }
 			
 			
 		} catch (IllegalStateException e) {
