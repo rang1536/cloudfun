@@ -57,6 +57,19 @@ public class PostDao {
 	}
 	 
 	
+	// 게시물 조회(1건, 화면조회시사용)
+	 public Map<String,String> selectPost(Map<String,String> obj){
+		 
+		 Map<String, String> result =  sql.selectOne("post.selectPost", obj);
+		 return result;
+	}
+
+	public List<Map<String, String>> selectPostFileList(Map<String, String> obj) {
+		
+		List<Map<String, String>> result =  sql.selectList("post.selectPostFileList", obj);
+		 return result;
+	}
+	
 	 
 
 	 

@@ -4,14 +4,14 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <t:layout>
-
-	<section class="page-info-section">
+	<!-- Page info section -->
+	<section class="page-info-section set-bg" data-setbg="${path}/img/page-top-bg/2.jpg">
 		<div class="pi-content">
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-5 col-lg-6 text-white">
-						<h2>CREATION LIST</h2>
-						<p>...</p>
+						<h2>Genji - The Game</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum.</p>
 					</div>
 				</div>
 			</div>
@@ -19,59 +19,106 @@
 	</section>
 	<!-- Page info section -->
 
+<!--  
+fileList
+result
 
+-->
 	<!-- Page section -->
-	<section class="page-section recent-game-page spad">
+	<section class="page-section single-blog-page spad">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
-					<div class="row">
+					<div class="blog-thumb set-bg" data-setbg="${path}/display?filename=${result.FILE_ID}">
+						<div class="cata new">${result.DOMAIN_TYPE}</div>
+						<div class="rgi-extra">
+							<div class="rgi-star"><img src="${path}/img/icons/star.png" alt=""></div>
+							<div class="rgi-heart"><img src="${path}/img/icons/heart.png" alt=""></div>
+						</div>
+					</div>
+					<div class="blog-content">
+						<h3>${result.TITLE}</h3>
+						<a href="" class="meta-comment">3 comment</a>
+						<p style="white-space: pre-line;">${result.CONTENTS}</p>
+					</div>
 					
-						<c:forEach var="item" items="${resultList}" >
-							<div class="col-md-6" onclick="postSend(this)">
-								<input type="hidden" value="${item.POST_ID}"/>
-								<div class="recent-game-item">
-									<div class="rgi-thumb set-bg" data-setbg="${path}/display?filename=${item.THUMBNAIL_NM}">
-										<div class="cata new">${item.DOMAIN_TYPE}</div>
-									</div>
-									<div class="rgi-content">
-										<h5>${item.TITLE}</h5>
-										<p>${item.CONTENTS2} </p>
-										<a href="#" class="comment">${item.NAME}</a>
-										<%-- <div class="rgi-extra">
-											<div class="rgi-star"><img src="${path}/img/icons/star.png" alt=""></div>
-											<div class="rgi-heart"><img src="${path}/img/icons/heart.png" alt=""></div>
-										</div> --%>
-									</div>
-								</div>	
+					
+					<div class="comment-warp">
+						<h4 class="">Creations</h4>
+						<p class="mb-3">If you sponsor more than the minimum donation, you can download the creation.</p>
+						
+						
+						<c:set var="loop_flag" value="false" />
+						<c:forEach var="item" items="${fileList}" varStatus="status">
+						    <c:if test="${not loop_flag }">
+						        <c:if test="${not empty  item.THUMBNAIL_NM }">
+						        <div class="blog-thumb rgi-thumb set-bg blur p-0" data-setbg="${path}/display?filename=${item.THUMBNAIL_NM}">
+						        	<div class="blur-container">
+						        	</div>
+									
+								</div>
+						            <%-- <div class="rgi-thumb set-bg" data-setbg="${path}/display?filename=${item.THUMBNAIL_NM}">
+						            </div> 
+						            <p>${item.THUMBNAIL_NM}</p>
+						            --%>
+						            <c:set var="loop_flag" value="true" />
+						        </c:if>
+						    </c:if>
+						</c:forEach>
+
+						
+						<c:forEach var="item" items="${fileList}" >
+							<div class="ml-3">
+								<input type="hidden" value="${item.FILE_ID}"/>
+								<p class="font-weight-bold">${item.FILE_NM}</p>
 							</div>
-						  
 						</c:forEach>
 						
+					</div>
 						
-						<%-- <div class="col-md-6">
-							<div class="recent-game-item">
-								<div class="rgi-thumb set-bg" data-setbg="${path}/display?filename=1">
-									<div class="cata racing">racing</div>
-								</div>
-								<div class="rgi-content">
-									<h5>Susce pulvinar metus nulla, vel  facilisis sem </h5>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit amet, consectetur elit. </p>
-									<a href="#" class="comment">3 Comments</a>
-									<div class="rgi-extra">
-										<div class="rgi-star"><img src="${path}/img/icons/star.png" alt=""></div>
-										<div class="rgi-heart"><img src="${path}/img/icons/heart.png" alt=""></div>
+					<div class="comment-warp">
+						<h4 class="comment-title">Top Coments</h4>
+						<ul class="comment-list">
+							<li>
+								<div class="comment">
+									<div class="comment-avator set-bg" data-setbg="${path}/img/authors/1.jpg"></div>
+									<div class="comment-content">
+										<h5>James Smith <span>June 21, 2018</span></h5>
+										<p>Donec venenatis at eros sit amet aliquam. Donec vel orci efficitur, dictum nisl vitae, scelerisque nibh. Curabitur eget ipsum pulvinar nunc gravida interdum. </p>
+										<a href="" class="reply">Reply</a>
 									</div>
 								</div>
-							</div>	
-						</div> --%>
-						
-						
+							</li>
+							<li>
+								<div class="comment">
+									<div class="comment-avator set-bg" data-setbg="${path}/img/authors/2.jpg"></div>
+									<div class="comment-content">
+										<h5>James Smith <span>June 21, 2018</span></h5>
+										<p>Donec venenatis at eros sit amet aliquam. Donec vel orci efficitur, dictum nisl vitae, scelerisque nibh. Curabitur eget ipsum pulvinar nunc gravida interdum. </p>
+										<a href="" class="reply">Reply</a>
+									</div>
+								</div>
+							</li>
+						</ul>
 					</div>
-					<div class="site-pagination">
-						<span class="active">01.</span>
-						<a href="#">02.</a>
-						<a href="#">03.</a>
+					<div class="comment-form-warp" disabled>
+						<h4 class="comment-title mb-0">Leave Your Comment</h4>
+						<p class="mb-3">If you sponsor more than the minimum amount, you can leave a message to the creator.</p>
+						<form class="comment-form">
+							<div class="row">
+								<div class="col-md-6">
+									<input type="text" placeholder="Name" disabled>
+								</div>
+								<div class="col-md-6">
+									<input type="email" placeholder="Email" disabled>
+								</div>
+								<div class="col-lg-12">
+									<input type="text" placeholder="Subject" disabled>
+									<textarea placeholder="Message"  disabled></textarea>
+									<button class="site-btn btn-sm " style="display:none">Send</button>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
 				<!-- sidebar -->
@@ -174,17 +221,23 @@
 </t:layout>
 
 
+<link rel="stylesheet" href='<c:url value="/css/amsify.suggestags.css"/>'>
+<link rel="stylesheet" href='<c:url value="/css/jquery.datetimepicker.min.css"/>'>
+<script src="${path}/resources/js/jquery.amsify.suggestags.js"></script>
+<script src="${path}/resources/js/jquery.datetimepicker.full.min.js"></script>
+
+
+
 
 <script>
-function postSend(param){
-	console.log($(param).children("input").val())
-	location.href="${path}/post/viewText?postId=" + $(param).children("input").val();
-}
 
 
 $(document).ready(function() {
+
+	
 	
 })
+
 
 
 </script>

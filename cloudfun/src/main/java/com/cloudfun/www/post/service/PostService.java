@@ -36,6 +36,17 @@ public class PostService {
 	}
 	
 	
+	public Map<String, String> selectPost(Map<String, String> obj) {
+		
+		// post 등록
+		return postDao.selectPost(obj);
+	}
+
+	public List<Map<String, String>> selectPostFileList(Map<String, String> obj) {
+		// post 등록
+		return postDao.selectPostFileList(obj);
+	}
+	
 	
 	
 	/*

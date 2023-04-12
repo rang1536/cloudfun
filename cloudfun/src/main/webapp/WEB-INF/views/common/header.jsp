@@ -48,6 +48,9 @@
 				
 				<li><a href="${path}/post/postList">postList</a></li>
 				
+				
+				<li><a href="${path}/post/viewText?postId=1">viewText</a></li>
+				
 				<li><a href="${path}/component">component</a></li>
 				
 				

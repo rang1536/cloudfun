@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cloudfun.www.post.service.PostService;
 
@@ -66,6 +67,8 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
 		
 		HttpSession session = request.getSession();
 		
+		session.setAttribute("type", "text");
+		
 		String email = (String)session.getAttribute("email");
     	String name = (String)session.getAttribute("name");
     	String memberId = (String)session.getAttribute("memberId");
@@ -87,6 +90,8 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
 		
 		HttpSession session = request.getSession();
 		
+		session.setAttribute("type", "picture");
+		
 		String email = (String)session.getAttribute("email");
     	String name = (String)session.getAttribute("name");
     	String memberId = (String)session.getAttribute("memberId");
@@ -106,6 +111,8 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
 	public String edit3D(Model model, HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
+		
+		session.setAttribute("type", "model");
 		
 		String email = (String)session.getAttribute("email");
     	String name = (String)session.getAttribute("name");
@@ -127,6 +134,8 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
 		
 		HttpSession session = request.getSession();
 		
+		session.setAttribute("type", "music");
+		
 		String email = (String)session.getAttribute("email");
     	String name = (String)session.getAttribute("name");
     	String memberId = (String)session.getAttribute("memberId");
@@ -147,6 +156,8 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
 		
 		HttpSession session = request.getSession();
 		
+		session.setAttribute("type", "comic");
+		
 		String email = (String)session.getAttribute("email");
     	String name = (String)session.getAttribute("name");
     	String memberId = (String)session.getAttribute("memberId");
@@ -162,6 +173,148 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
 		//return "home";
 		return "post/editComic";
 	}
+	
+	
+	/****************************************/
+	
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/post/viewText", method = RequestMethod.GET)
+	public String viewText(@RequestParam("postId") String postId, Model model, HttpServletRequest request) {
+		
+    	Map<String, String> objParam = new HashMap<String,String>();
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("type", "text");
+		
+		String email = (String)session.getAttribute("email");
+    	String name = (String)session.getAttribute("name");
+    	String memberId = (String)session.getAttribute("memberId");
+    	
+
+    	model.addAttribute("email", email);
+    	model.addAttribute("name", name);
+    	
+		objParam.put("postId", postId);
+		objParam.put("groupId", "002");  // 001 ¸ÞÀÎ,½æ³×ÀÏ  2.Ã·ºÎÆÄÀÏ.
+		
+		Map<String, String> result = postService.selectPost(objParam);
+		List<Map<String, String>> fileList = postService.selectPostFileList(objParam);
+		
+		
+    	//
+		model.addAttribute("result", result);
+		model.addAttribute("fileList", fileList);
+
+		//return "home";
+		return "post/viewText";
+	}
+	
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/post/viewPicture", method = RequestMethod.GET)
+	public String viewPicture(@RequestParam("postId") String postId, Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("type", "picture");
+		
+		String email = (String)session.getAttribute("email");
+    	String name = (String)session.getAttribute("name");
+    	String memberId = (String)session.getAttribute("memberId");
+    	
+
+    	model.addAttribute("email", email);
+    	model.addAttribute("name", name);
+
+		//return "home";
+		return "post/viewPicture";
+	}
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/post/view3D", method = RequestMethod.GET)
+	public String view3D(@RequestParam("postId") String postId, Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("type", "model");
+		
+		String email = (String)session.getAttribute("email");
+    	String name = (String)session.getAttribute("name");
+    	String memberId = (String)session.getAttribute("memberId");
+    	
+
+    	model.addAttribute("email", email);
+    	model.addAttribute("name", name);
+
+		//return "home";
+		return "post/view3D";
+	}
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/post/viewMusic", method = RequestMethod.GET)
+	public String viewMusic(@RequestParam("postId") String postId, Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("type", "music");
+		
+		String email = (String)session.getAttribute("email");
+    	String name = (String)session.getAttribute("name");
+    	String memberId = (String)session.getAttribute("memberId");
+    	
+
+    	model.addAttribute("email", email);
+    	model.addAttribute("name", name);
+
+		//return "home";
+		return "post/viewMusic";
+	}
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/post/viewComic", method = RequestMethod.GET)
+	public String viewComic(@RequestParam("postId") String postId, Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("type", "comic");
+		
+		String email = (String)session.getAttribute("email");
+    	String name = (String)session.getAttribute("name");
+    	String memberId = (String)session.getAttribute("memberId");
+    	String type = (String)session.getAttribute("type");
+    	
+    	model.addAttribute("email", email);
+    	model.addAttribute("name", name);
+
+		//return "home";
+		return "post/viewComic";
+	}
+	
+	
+	
+	
+	
+	
+	
+	/******************************************/
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
