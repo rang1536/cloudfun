@@ -5,7 +5,7 @@
 
 <t:layout>
 	<!-- Page info section -->
-	<section class="page-info-section set-bg" data-setbg="${path}/img/page-top-bg/2.jpg">
+	<%-- <section class="page-info-section set-bg" data-setbg="${path}/img/page-top-bg/2.jpg">
 		<div class="pi-content">
 			<div class="container">
 				<div class="row">
@@ -16,7 +16,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> --%>
 	<!-- Page info section -->
 
 <!--  
@@ -32,8 +32,8 @@ result
 					<div class="blog-thumb set-bg" data-setbg="${path}/display?filename=${result.FILE_ID}">
 						<div class="cata new">${result.DOMAIN_TYPE}</div>
 						<div class="rgi-extra">
-							<div class="rgi-star"><img src="${path}/img/icons/star.png" alt=""></div>
-							<div class="rgi-heart"><img src="${path}/img/icons/heart.png" alt=""></div>
+							<%-- <div class="rgi-star"><img src="${path}/img/icons/star.png" alt=""></div>
+							<div class="rgi-heart"><img src="${path}/img/icons/heart.png" alt=""></div> --%>
 						</div>
 					</div>
 					<div class="blog-content">
@@ -41,6 +41,76 @@ result
 						<a href="" class="meta-comment">3 comment</a>
 						<p style="white-space: pre-line;">${result.CONTENTS}</p>
 					</div>
+					
+					
+					<div class="comment-warp">
+						<h4 class="mb-3">Description Image</h4>
+						
+						
+						
+						<div id="demo" class="carousel slide" data-ride="carousel">
+						
+							 <!-- Indicators -->
+							 <ul class="carousel-indicators">
+							<c:set var="loop_flag" value="false" />
+							<c:forEach var="item" items="${fileList3}" varStatus="status">
+								<c:if test="${not empty  item.THUMBNAIL_NM }">
+									
+									<c:choose>
+										<c:when test="${not loop_flag}">
+											<li data-target="#demo" data-slide-to="0" class="active"></li>
+											<c:set var="loop_flag" value="true" />
+										</c:when>
+										<c:otherwise>
+											<li data-target="#demo" data-slide-to="${status.index}" ></li>
+										</c:otherwise>
+									</c:choose>
+							        
+						        </c:if>
+							</c:forEach>
+							</ul>
+						
+							<!-- The slideshow -->
+							  <div class="carousel-inner">
+								<c:set var="loop_flag" value="false" />
+								<c:forEach var="item" items="${fileList3}" varStatus="status">
+									<c:if test="${not empty  item.THUMBNAIL_NM }">
+										
+										<c:choose>
+											<c:when test="${not loop_flag}">
+												<div class="carousel-item active">
+											      <img src="${path}/display?filename=${item.THUMBNAIL_NM}" width="1100" height="500">
+											    </div>
+												<c:set var="loop_flag" value="true" />
+											</c:when>
+											<c:otherwise>
+												<div class="carousel-item">
+													<img src="${path}/display?filename=${item.THUMBNAIL_NM}" width="1100" height="500">
+											    </div>
+											</c:otherwise>
+										</c:choose>
+								        
+							        </c:if>
+								</c:forEach>
+							</div>
+						
+							  <!-- Left and right controls -->
+							  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+							    <span class="carousel-control-prev-icon"></span>
+							  </a>
+							  <a class="carousel-control-next" href="#demo" data-slide="next">
+							    <span class="carousel-control-next-icon"></span>
+							  </a>
+							  
+							  
+						</div>
+						
+						
+						
+						
+						
+					</div>
+					
 					
 					
 					<div class="comment-warp">

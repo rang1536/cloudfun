@@ -204,9 +204,12 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
 		List<Map<String, String>> fileList = postService.selectPostFileList(objParam);
 		
 		
+		objParam.put("groupId", "003");  // 001 ¸ÞÀÎ,½æ³×ÀÏ  2.Ã·ºÎÆÄÀÏ.
+		List<Map<String, String>> fileList3 = postService.selectPostFileList(objParam);
     	//
 		model.addAttribute("result", result);
 		model.addAttribute("fileList", fileList);
+		model.addAttribute("fileList3", fileList3);
 
 		//return "home";
 		return "post/viewText";

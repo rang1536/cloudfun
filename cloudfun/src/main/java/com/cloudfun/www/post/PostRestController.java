@@ -87,6 +87,7 @@ public class PostRestController {
 	@RequestMapping(value="/api/post/save", method = RequestMethod.POST)
 	public HashMap<String, String> Save(@RequestPart("uploadFile") MultipartFile[] uploadFile
 			, @RequestPart("mainImg") MultipartFile[] mainImg
+			, @RequestPart(value="desImg", required = false) MultipartFile[] desImg
 			, @RequestParam("jsonStr") String jsonStr
 			,  HttpServletRequest request) throws JsonParseException, JsonMappingException, IOException{
 		
@@ -116,23 +117,32 @@ public class PostRestController {
 		/*file group id 
 		 * 001 : 메인화면 썸네일 이미지.
 		 * 002 : 컨텐츠파일
+		 * 003 : 설명이미지 (3d에서 사용)
 		 * */
-		 
+		obj.put("groupId","003");
+		for(MultipartFile multipartFile : desImg) {
+			//resultMap = utilFile.uploadFile(multipartFile, filePath);
+			utilFile.uploadFile(multipartFile,obj) ;
+		}
 		
 		obj.put("groupId","002");
 		for(MultipartFile multipartFile : uploadFile) {
 			//resultMap = utilFile.uploadFile(multipartFile, filePath);
-			resultMap = utilFile.uploadFile(multipartFile,obj) ;
+			utilFile.uploadFile(multipartFile,obj) ;
 		}
 		
 		obj.put("groupId","001");
 		for(MultipartFile multipartFile : mainImg) {
 			//resultMap = utilFile.uploadFile(multipartFile, filePath);
-			resultMap = utilFile.uploadFile(multipartFile,obj) ;
+			utilFile.uploadFile(multipartFile,obj) ;
 		}
 		
 		obj.put("postId",postId);
 		postService.insertPost(obj);
+		
+		
+		//result set
+		resultMap.put("postId",postId);
 		
 		return resultMap;
 

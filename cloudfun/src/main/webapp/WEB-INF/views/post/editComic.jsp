@@ -51,16 +51,10 @@
 					
 						<button type="button" class="btn btn-info btn-block" onclick="document.getElementById('inputPreview2').click()">Upload your creation(*.txt)</button>
 					    <div class="form-group inputDnD file-drop-area">
-					        <!-- <label class="sr-only " for="inputFile">File Upload</label> -->
 					        <label class="sr-only file-message" for="inputFile">Upload your creation(Image)</label>
 					        <input type="file" class="form-control-file text-info font-weight-bold"  name="uploadFile" id="inputPreview2" accept=".jfif,.jpg,.jpeg,.png,.gif" onchange="readUrl(this)" data-title="Drag and drop a file">
 					    </div>
 					
-						<!-- <div class="file-drop-area">
-							<span class="file-message span-upload">Choose the main picture</span>
-							<input type="file" class="file-input" name="mainImg" id="inputPreview2" onchange="addFile(this);" accept=".jfif,.jpg,.jpeg,.png,.gif" multiple>
-							<input type="file" class="file-input" id="inputPreview2"  accept=".jfif,.jpg,.jpeg,.png,.gif" >
-						</div> -->
 					</div>
 					<div class="col-lg-1">
 						<p class="explain-text">File List</p>
@@ -176,7 +170,7 @@ $(document).ready(function() {
 	        	alert(error);
 	        	return ; 
 	        }else{
-	        	alert(res)
+	        	location.href = "${path}/post/viewText?postId="+res.postId
 	        }
 	    });
 		

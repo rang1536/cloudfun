@@ -176,7 +176,7 @@ $(document).ready(function() {
 	        	alert(error);
 	        	return ; 
 	        }else{
-	        	alert(res)
+	        	location.href = "${path}/post/viewText?postId="+res.postId
 	        }
 	    });
 		
