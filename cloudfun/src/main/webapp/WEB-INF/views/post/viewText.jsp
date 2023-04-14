@@ -36,17 +36,43 @@ result
 							<div class="rgi-heart"><img src="${path}/img/icons/heart.png" alt=""></div> --%>
 						</div>
 					</div>
+					
+					
+					
+					
+					
 					<div class="blog-content">
 						<h3>${result.TITLE}</h3>
-						<a href="" class="meta-comment">3 comment</a>
+						<a href="" class="meta-comment">3comment</a>
 						<p style="white-space: pre-line;">${result.CONTENTS}</p>
 					</div>
 					
+					<c:if test="${result.DOMAIN_TYPE == 'text'}">
+					<div class="blog-content">
+						<h3>PREVIEW</h3>
+						<c:set var="loop_flag" value="false" />
+						<c:forEach var="item" items="${fileList}" varStatus="status">
+							<c:if test="${not empty  item.TXT_PREVIEW }">
+							
+								<c:if test="${not loop_flag}">
+								
+									<p style="white-space: pre-line;">${item.TXT_PREVIEW}</p>
+									<p style="white-space: pre-line;">................</p>
+									<c:set var="loop_flag" value="true" />
+									
+								</c:if>
+							
+							</c:if>
+						
+						
+						</c:forEach>
+					</div>
+					</c:if>
 					
+					
+					<c:if test="${result.DOMAIN_TYPE == 'model'}">
 					<div class="comment-warp">
 						<h4 class="mb-3">Description Image</h4>
-						
-						
 						
 						<div id="demo" class="carousel slide" data-ride="carousel">
 						
@@ -102,16 +128,10 @@ result
 							    <span class="carousel-control-next-icon"></span>
 							  </a>
 							  
-							  
 						</div>
 						
-						
-						
-						
-						
 					</div>
-					
-					
+					</c:if>
 					
 					<div class="comment-warp">
 						<h4 class="">Creations</h4>
@@ -204,30 +224,19 @@ result
 					<div class="widget-item">
 						<h4 class="widget-title">Latest Posts</h4>
 						<div class="latest-blog">
-							<div class="lb-item">
-								<div class="lb-thumb set-bg" data-setbg="${path}/img/latest-blog/1.jpg"></div>
-								<div class="lb-content">
-									<div class="lb-date">June 21, 2018</div>
-									<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
-									<a href="#" class="lb-author">By Admin</a>
+						
+							<c:forEach var="item" items="${resentList}" >
+								<div class="lb-item">					
+									<div class="lb-thumb set-bg" data-setbg="${path}/display?filename=${item.THUMBNAIL_NM}"></div>
+									<div class="lb-content">
+										<div class="lb-date">~ ${item.FUN_END_DT}</div>
+										<p>${item.TITLE}</p>
+										<a href="#" class="lb-author">${item.NAME}</a>
+									</div>
 								</div>
-							</div>
-							<div class="lb-item">
-								<div class="lb-thumb set-bg" data-setbg="${path}/img/latest-blog/2.jpg"></div>
-								<div class="lb-content">
-									<div class="lb-date">June 21, 2018</div>
-									<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
-									<a href="#" class="lb-author">By Admin</a>
-								</div>
-							</div>
-							<div class="lb-item">
-								<div class="lb-thumb set-bg" data-setbg="${path}/img/latest-blog/3.jpg"></div>
-								<div class="lb-content">
-									<div class="lb-date">June 21, 2018</div>
-									<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
-									<a href="#" class="lb-author">By Admin</a>
-								</div>
-							</div>
+							</c:forEach>
+							
+							
 						</div>
 					</div>
 					<!-- widget -->

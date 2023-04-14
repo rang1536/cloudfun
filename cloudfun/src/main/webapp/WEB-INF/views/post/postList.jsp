@@ -37,7 +37,10 @@
 									<div class="rgi-content">
 										<h5>${item.TITLE}</h5>
 										<p>${item.CONTENTS2} </p>
+										
+										<div class="comment mb-2">PERIOD : ${item.FUN_START_DT} ~ ${item.FUN_END_DT}</div>
 										<a href="#" class="comment">${item.NAME}</a>
+										
 										<%-- <div class="rgi-extra">
 											<div class="rgi-star"><img src="${path}/img/icons/star.png" alt=""></div>
 											<div class="rgi-heart"><img src="${path}/img/icons/heart.png" alt=""></div>
@@ -47,24 +50,6 @@
 							</div>
 						  
 						</c:forEach>
-						
-						
-						<%-- <div class="col-md-6">
-							<div class="recent-game-item">
-								<div class="rgi-thumb set-bg" data-setbg="${path}/display?filename=1">
-									<div class="cata racing">racing</div>
-								</div>
-								<div class="rgi-content">
-									<h5>Susce pulvinar metus nulla, vel  facilisis sem </h5>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit amet, consectetur elit. </p>
-									<a href="#" class="comment">3 Comments</a>
-									<div class="rgi-extra">
-										<div class="rgi-star"><img src="${path}/img/icons/star.png" alt=""></div>
-										<div class="rgi-heart"><img src="${path}/img/icons/heart.png" alt=""></div>
-									</div>
-								</div>
-							</div>	
-						</div> --%>
 						
 						
 					</div>
@@ -87,30 +72,18 @@
 					<div class="widget-item">
 						<h4 class="widget-title">Latest Posts</h4>
 						<div class="latest-blog">
-							<div class="lb-item">
-								<div class="lb-thumb set-bg" data-setbg="${path}/img/latest-blog/1.jpg"></div>
+							
+						<c:forEach var="item" items="${resentList}" >
+							<div class="lb-item">					
+								<div class="lb-thumb set-bg" data-setbg="${path}/display?filename=${item.THUMBNAIL_NM}"></div>
 								<div class="lb-content">
-									<div class="lb-date">June 21, 2018</div>
-									<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
-									<a href="#" class="lb-author">By Admin</a>
+									<div class="lb-date">${item.FUN_START_DT} ~ ${item.FUN_END_DT}</div>
+									<p>${item.TITLE}</p>
+									<a href="#" class="lb-author">${item.NAME}</a>
 								</div>
 							</div>
-							<div class="lb-item">
-								<div class="lb-thumb set-bg" data-setbg="${path}/img/latest-blog/2.jpg"></div>
-								<div class="lb-content">
-									<div class="lb-date">June 21, 2018</div>
-									<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
-									<a href="#" class="lb-author">By Admin</a>
-								</div>
-							</div>
-							<div class="lb-item">
-								<div class="lb-thumb set-bg" data-setbg="${path}/img/latest-blog/3.jpg"></div>
-								<div class="lb-content">
-									<div class="lb-date">June 21, 2018</div>
-									<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
-									<a href="#" class="lb-author">By Admin</a>
-								</div>
-							</div>
+						</c:forEach>
+							
 						</div>
 					</div>
 					<!-- widget -->

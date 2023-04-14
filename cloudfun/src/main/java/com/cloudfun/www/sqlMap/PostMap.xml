@@ -78,6 +78,7 @@
 		     , A.REGIST_ID
 		     , B.THUMBNAIL_NM
 		     , C.NAME
+		     , B.TXT_PREVIEW
 		/* SELECT **/
 		FROM POST A
 		LEFT JOIN UPLOAD_FILE B
@@ -92,8 +93,8 @@
  		 <if test='regMemberId != null'>
 			
  		</if>
-		ORDER BY rand()
-		LIMIT 10
+		ORDER BY A.REGIST_DT DESC
+		LIMIT ${limit} OFFSET  ${offset}
 		
 		
 		   
@@ -142,6 +143,7 @@
 		SELECT FILE_ID
 		     , FILE_NM
 		     , THUMBNAIL_NM
+		     , TXT_PREVIEW
 		FROM UPLOAD_FILE
 		WHERE 1=1
 		 AND POST_ID = #{postId}

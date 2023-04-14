@@ -48,5 +48,13 @@
 		WHERE FILE_ID = #{fileName}
 	</update>
 	
+	
+	<update id="updateTxtPreview" parameterType="map">
+		UPDATE UPLOAD_FILE
+		SET TXT_PREVIEW = #{txtPreview}
+		WHERE FILE_ID = #{fileName}
+	</update>
+	
+	
 
 </mapper>

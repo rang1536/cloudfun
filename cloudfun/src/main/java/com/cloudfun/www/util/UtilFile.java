@@ -5,11 +5,16 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,6 +25,8 @@ import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.io.FilenameUtils;
+import org.mozilla.universalchardet.UniversalDetector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -168,6 +175,45 @@ public class UtilFile {
             	fileDao.updateThumbnail(uploadFile);
             	
             }
+            
+            List<String> txtList = new ArrayList<String>();
+            
+            String extension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());
+            if(extension.equals("txt")) {
+            	
+            	String encoding = UniversalDetector.detectCharset(destFile);
+            	if (encoding != null) {
+            		BufferedReader reader = new BufferedReader(
+            			    new InputStreamReader(new FileInputStream(savePath), encoding)
+            			);
+            	    String str ;
+            	    String strResult ="";
+            	    int i = 0 ;
+            	    
+                    while ((str = reader.readLine()) != null) {
+                    	strResult += str ; 
+                    	i++;
+                    	if(i==10) {
+                    		break;
+                    	}
+                    	strResult += "<br/>";
+                    }
+                    
+             
+                    System.out.println("strResult");
+                    System.out.println(strResult);
+                    
+                    reader.close();
+                    
+                    uploadFile.put("txtPreview", strResult);
+                	fileDao.updateTxtPreview(uploadFile);
+                    
+                    
+        		} else {
+        			System.out.println("No encoding detected.");
+        		}
+            }
+            
 			
 			
 		} catch (IllegalStateException e) {

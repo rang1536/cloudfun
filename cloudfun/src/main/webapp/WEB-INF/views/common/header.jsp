@@ -38,23 +38,30 @@
 		<!-- site menu -->
 		<nav class="main-menu">
 			<ul>
-				<li><a href="${path}/">Home</a></li>
-				<li><a href="${path}/post/editText">editText</a></li>
-				<li><a href="${path}/post/editPicture">editPicture</a></li>
-				<li><a href="${path}/post/edit3D">edit3D</a></li>
-				<li><a href="${path}/post/editMusic">editMusic</a></li>
-				<li><a href="${path}/post/editComic">editComic</a></li>
+				<li><a href="${path}/">HOME</a></li>
 				
 				
-				<li><a href="${path}/post/postList">postList</a></li>
+				<li><a href="${path}/post/postList">CREATION LIST</a></li>
 				
 				
-				<li><a href="${path}/post/viewText?postId=1">viewText</a></li>
+				<li><a href="${path}/post/editText">EDIT-TEXT</a></li>
+				<li><a href="${path}/post/editPicture">EDIT-PICTURES</a></li>
+				<li><a href="${path}/post/edit3D">EDIT-3D MODEL</a></li>
+				<li><a href="${path}/post/editMusic">EDIT-MUSIC</a></li>
+				<li><a href="${path}/post/editComic">EDIT-COMIC</a></li>
 				
-				<li><a href="${path}/component">component</a></li>
 				
 				
-				<li><a href="${path}/join">join</a></li>
+				
+				<%-- 
+				<li><a href="${path}/post/viewText?postId=1">viewText</a></li> --%>
+				
+				<li><a href="${path}/component">COMPONENTS</a></li>
+				
+				
+				<li><a href="${path}/join">JOIN</a></li>
+				<li><a href="${path}/terms">TERMS</a></li>
+				
 				<!-- <li><a href="community.html">Forums</a></li>
 				<li><a href="contact.html">Contact</a></li> -->
 			</ul>

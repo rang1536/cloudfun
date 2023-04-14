@@ -211,7 +211,13 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
 		model.addAttribute("fileList", fileList);
 		model.addAttribute("fileList3", fileList3);
 
-		//return "home";
+		
+		objParam.put("offset", "0");
+    	objParam.put("limit", "5");
+    	List<Map<String, String>> resentList = postService.selectPostList(objParam);
+    	model.addAttribute("resentList", resentList);
+		
+		
 		return "post/viewText";
 	}
 	
@@ -340,11 +346,38 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     	objParam.put("email", email);
     	objParam.put("name", name);
     	objParam.put("memberId", memberId);
-    	objParam.put("type", type);
+
+    	
+    	
+    	int limit = 10 ;
+    	
+    	
+    	String pageNo = request.getParameter("pageNo");
+    	
+    	if(pageNo == null ) {
+    		pageNo = "1";
+    	}
+    	
+    	
+    	objParam.put("limit", limit+"");
+    	
+    	int intPageNo = Integer.parseInt(pageNo);
+    	objParam.put("offset", (intPageNo * limit-limit)+"" );
+    	
+    	
+        
+    	objParam.put("type", pageNo);
 		
     	List<Map<String, String>> resultList = postService.selectPostList(objParam);
     	
+    	objParam.put("offset", "0");
+    	objParam.put("limit", "5");
+    	List<Map<String, String>> resentList = postService.selectPostList(objParam);
+    	
+    	
     	model.addAttribute("resultList", resultList);
+    	model.addAttribute("resentList", resentList);
+    	
 
 		//return "home";
 		return "post/postList";
