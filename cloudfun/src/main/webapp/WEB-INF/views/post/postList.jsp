@@ -74,7 +74,8 @@
 						<div class="latest-blog">
 							
 						<c:forEach var="item" items="${resentList}" >
-							<div class="lb-item">					
+							<div class="lb-item" onclick="postSend(this)">	
+								<input type="hidden" value="${item.POST_ID}"/>		
 								<div class="lb-thumb set-bg" data-setbg="${path}/display?filename=${item.THUMBNAIL_NM}"></div>
 								<div class="lb-content">
 									<div class="lb-date">${item.FUN_START_DT} ~ ${item.FUN_END_DT}</div>

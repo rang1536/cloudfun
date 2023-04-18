@@ -194,7 +194,7 @@ result
 					<div class="comment-form-warp" disabled>
 						<h4 class="comment-title mb-0">Leave Your Comment</h4>
 						<p class="mb-3">If you sponsor more than the minimum amount, you can leave a message to the creator.</p>
-						<form class="comment-form">
+						<form class="comment-form" onSubmit="return false;">
 							<div class="row">
 								<div class="col-md-6">
 									<input type="text" placeholder="Name" disabled>
@@ -202,10 +202,17 @@ result
 								<div class="col-md-6">
 									<input type="email" placeholder="Email" disabled>
 								</div>
+								
 								<div class="col-lg-12">
 									<input type="text" placeholder="Subject" disabled>
 									<textarea placeholder="Message"  disabled></textarea>
-									<button class="site-btn btn-sm " style="display:none">Send</button>
+									
+								</div>
+								<div class="col-lg-6">
+									<button class="site-btn btn-sm bg-light">Send</button>
+								</div>
+								<div class="col-lg-6">
+									<button class="site-btn btn-sm " >Donation</button>
 								</div>
 							</div>
 						</form>
@@ -226,7 +233,8 @@ result
 						<div class="latest-blog">
 						
 							<c:forEach var="item" items="${resentList}" >
-								<div class="lb-item">					
+								<div class="lb-item" onclick="postSend(this)">	
+									<input type="hidden" value="${item.POST_ID}"/>				
 									<div class="lb-thumb set-bg" data-setbg="${path}/display?filename=${item.THUMBNAIL_NM}"></div>
 									<div class="lb-content">
 										<div class="lb-date">~ ${item.FUN_END_DT}</div>
@@ -309,6 +317,11 @@ result
 
 
 <script>
+function postSend(param){
+	console.log($(param).children("input").val())
+	location.href="${path}/post/viewText?postId=" + $(param).children("input").val();
+}
+
 
 
 $(document).ready(function() {

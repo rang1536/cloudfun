@@ -1,6 +1,5 @@
-
 var Utils = {};
-var preUrl = "/www";
+
 
 /** form to json return */
 Utils.getFormValue = function (formObj) {

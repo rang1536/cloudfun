@@ -49,10 +49,13 @@ public class HomeController {
 
 		model.addAttribute("serverTime", formattedDate );
 		
-		
 		// todo
         HttpSession session = request.getSession();
 		session.setAttribute("type", "text");
+		
+		if(session.getAttribute("localCountry") == null ) {
+			session.setAttribute("localCountry", request.getLocale().getCountry()); // KR
+		}
 				
 		//return "home";
 		return "mainPage";
@@ -109,6 +112,17 @@ public class HomeController {
         fis.close();
         os.close();
     }
-
-
+    
+    // 다국어 session 처리
+    @RequestMapping("/local/{lang}")
+    public String localLang(@PathVariable String lang
+    		, HttpServletRequest request) throws IOException {
+    	// todo
+        HttpSession session = request.getSession();
+		session.setAttribute("localCountry", lang);
+    	
+		String referer = request.getHeader("Referer"); // 헤더에서 이전 페이지를 읽는다.
+		return "redirect:"+ referer;
+    }
+    
 }

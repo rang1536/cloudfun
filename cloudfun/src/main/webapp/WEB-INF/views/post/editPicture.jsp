@@ -49,7 +49,7 @@
 					</div>
 					<div class="col-lg-11 mb-1">
 					
-						<button type="button" class="btn btn-info btn-block" onclick="document.getElementById('inputPreview2').click()">Upload your creation(*.txt)</button>
+						<button type="button" class="btn btn-info btn-block" onclick="document.getElementById('inputPreview2').click()">Upload your creation(image)</button>
 					    <div class="form-group inputDnD file-drop-area">
 					        <!-- <label class="sr-only " for="inputFile">File Upload</label> -->
 					        <label class="sr-only file-message" for="inputFile">Upload your creation(Image)</label>

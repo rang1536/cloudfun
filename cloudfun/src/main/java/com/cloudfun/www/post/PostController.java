@@ -365,8 +365,8 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     	objParam.put("offset", (intPageNo * limit-limit)+"" );
     	
     	
-        
-    	objParam.put("type", pageNo);
+
+    	objParam.put("pageNo", pageNo);
 		
     	List<Map<String, String>> resultList = postService.selectPostList(objParam);
     	
