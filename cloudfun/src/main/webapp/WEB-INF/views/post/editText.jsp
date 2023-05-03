@@ -38,7 +38,7 @@
 						<button type="button" class="btn btn-info btn-block" onclick="document.getElementById('inputPreview2').click()">Upload your creation(*.txt)</button>
 					    <div class="form-group inputDnD file-drop-area">
 					        <!-- <label class="sr-only " for="inputFile">File Upload</label> -->
-					        <label class="sr-only file-message" for="inputFile">Upload your creation(*.txt)</label>
+					        <label class="sr-only file-message" for="inputFile" >Upload your creation(*.txt)</label>
 					        <input type="file" class="form-control-file text-info font-weight-bold"  name="uploadFile" id="inputPreview2" accept=".txt" onchange="readUrl(this)" data-title="Drag and drop a file">
 					    </div>
 						
@@ -88,8 +88,7 @@ $(document).ready(function() {
 	
 	
 
-	//tags
-	$('input[name="tags"]').amsifySuggestags();
+	
 	
 	
 	// datetimepicker
@@ -189,9 +188,14 @@ $(document).ready(function() {
 	});
 	 
 	 
-	 
+	//tags
+	$('input[name="tags"]').amsifySuggestags({
+	    tagLimit: 5
+	});
+	
 	<c:if test="${not empty param.postId}">
 		bolEdit = true
+		$('input[name="tags"]').amsifySuggestags({},'destroy');
 	</c:if>
 		
 			
@@ -213,6 +217,12 @@ $(document).ready(function() {
 	        	return ; 
 	        }else{
 	        	console.log(res)
+	        	
+	        	
+	        	
+	        	setPreviewImg(res.result.THUMBNAIL_NM);
+	        	setCommonInfo(res);
+	        	setTextFile(res.fileList[0].FILE_NM);
 	        }
 	    });
 		
@@ -223,6 +233,63 @@ $(document).ready(function() {
 	
 })
 
+
+function setPreviewImg(url, fileName){
+	
+	if(fileName){
+		var textbox = $("#inputPreviewLabel");
+		textbox.text(fileName);
+		
+		var inputPreview = $("#inputPreview");
+		inputPreview.attr("data-title", fileName);
+	}
+	
+	var dvPreview = $("#divImageMediaPreview");
+	var img = $("<img />");
+	img.attr("style", "width: 100%; height:100%; padding: 10px");
+	img.attr("src", "${path}/display?filename=" +url);
+	dvPreview.html(img);
+	
+}
+
+/*
+param.result.
+*/
+function setCommonInfo(param){
+	$("#title").val(param.result.TITLE)
+	$("#contents").text(param.result.CONTENTS)
+	
+	
+	var tags = param.result.TAGS;
+	//var arrTags = tags.split(",");
+	$('input[name="tags"]').val(tags)
+	// tags
+	$('input[name="tags"]').amsifySuggestags({
+		 tagLimit: 5
+	});
+	
+	
+	$("input:radio[name='aiYn']:radio[value="+param.result.AI_YN+"]").prop('checked', true);
+	$("input:radio[name='anoFunYn']:radio[value="+param.result.ANO_FUN_YN+"]").prop('checked', true);
+	
+	$('input[name="funStartDt"]').val(param.result.FUN_START_DT);
+	$('input[name="funEndDt"]').val(param.result.FUN_END_DT);
+	
+	$('input[name="tgtAmt"]').val(param.result.TGT_AMT);
+	$('input[name="openAmt"]').val(param.result.OPEN_AMT);
+	
+}
+
+function setTextFile(fileName){
+	if(fileName){
+		
+		
+		var inputPreview = $("#inputPreview2");
+		inputPreview.attr("data-title", fileName);
+	}
+	
+	
+}
 
 
 </script>
