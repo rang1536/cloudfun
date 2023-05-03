@@ -2,6 +2,7 @@ package com.cloudfun.www.post;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -172,6 +173,34 @@ public class PostRestController {
 		return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
 	}
 	
+	
+	@RequestMapping("/download")
+	public ResponseEntity<Resource> download(@RequestParam("filename") String filename) {
+		String path = filePath;
+		String folder = "";
+		if(filename.equals("1")) {
+			filename="20230412070039ec1ae3e3b1a04fbb8e5afc6d718dfa17.jpg";
+		}
+		/*filename = "s_20230411212455963dd6d9c19f488fa325be51a0c8c949.png";*/
+		Resource resource = new FileSystemResource(path + folder + filename);
+		
+		String resourceName = resource.getFilename();
+		org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
+		
+		try {
+			headers.add("Content-Disposition"
+					, "attachment; filename="+ new String(resourceName.getBytes("UTF-8"),"ISO-8859-1"));
+			
+		}catch(UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
+		
+	}
+	
+	
+	
 	/*@Value("${spring.servlet.multipart.location}")
 	String filePath;
 
@@ -195,4 +224,185 @@ public class PostRestController {
 	}*/
 	
 	
+	// 후원 금액 지불
+	// /api/sponsorship
+	/**
+	 * 
+	 */
+	@RequestMapping(value="/api/sponsorship", method = RequestMethod.POST)
+	public HashMap<String, String> sponsorship(@RequestBody HashMap<String, String> map, HttpServletRequest request){
+		
+		HttpSession session = request.getSession();
+
+		HashMap<String, String> resultMap = new HashMap<String, String>();
+		  
+		  
+		// session 정보
+		String sessionEmail = (String)session.getAttribute("email");
+		String sessionName = (String)session.getAttribute("name");
+		String sessionType = (String)session.getAttribute("type");
+		String memberId = (String)session.getAttribute("memberId");
+		  
+		
+		// form 정보
+		String postId = map.get("postId");
+		String amt = map.get("amt");
+		
+		  
+		// 1. 후원테이블에 저장
+		Map<String, String> objParam = new HashMap<String,String>();
+		objParam.put("amt", amt);
+		objParam.put("postId", postId);
+		objParam.put("memberId", memberId);
+		
+		postService.setSponsership(objParam);
+		
+		Map<String, String> resultSponAmt = postService.selectMemberSponAmt(objParam);
+	
+		resultMap.put("SUM_AMT", String.format("%.2f", resultSponAmt.get("SUM_AMT")));
+  
+		return resultMap;
+	}
+	
+	
+	
+	// 후원 금액 지불
+		// /api/sponsorship
+		/**
+		 * 
+		 */
+		@RequestMapping(value="/api/sponComments", method = RequestMethod.POST)
+		public HashMap<String, String> sponComments(@RequestBody HashMap<String, String> map, HttpServletRequest request){
+			
+			HttpSession session = request.getSession();
+
+			HashMap<String, String> resultMap = new HashMap<String, String>();
+			  
+			  
+			// session 정보
+			String sessionEmail = (String)session.getAttribute("email");
+			String sessionName = (String)session.getAttribute("name");
+			String sessionType = (String)session.getAttribute("type");
+			String memberId = (String)session.getAttribute("memberId");
+			  
+			
+			// form 정보
+			String postId = map.get("postId");
+			String sponMessage = map.get("sponMessage");
+			
+			  
+			// 1. 후원테이블에 저장
+			Map<String, String> objParam = new HashMap<String,String>();
+			objParam.put("sponMessage", sponMessage);
+			objParam.put("postId", postId);
+			objParam.put("memberId", memberId);
+			
+			postService.insertSponComments(objParam);
+			
+			/*Map<String, String> resultSponAmt = postService.selectMemberSponAmt(objParam);*/
+		
+			/*resultMap.put("SUM_AMT", String.format("%.2f", resultSponAmt.get("SUM_AMT")));*/
+	  
+			return resultMap;
+		}
+		
+		
+		// 관리자에게 신고
+		@RequestMapping(value="/api/alertMessage", method = RequestMethod.POST)
+		public HashMap<String, String> alertMessage(@RequestBody HashMap<String, String> map, HttpServletRequest request){
+			
+			HttpSession session = request.getSession();
+
+			HashMap<String, String> resultMap = new HashMap<String, String>();
+			  
+			  
+			// session 정보
+			String sessionEmail = (String)session.getAttribute("email");
+			String sessionName = (String)session.getAttribute("name");
+			String sessionType = (String)session.getAttribute("type");
+			String memberId = (String)session.getAttribute("memberId");
+			  
+			
+			// form 정보
+			String postId = map.get("postId");
+			String alertMessage = map.get("alertMessage");
+			
+			  
+			// 1. 후원테이블에 저장
+			Map<String, String> objParam = new HashMap<String,String>();
+			objParam.put("alertMessage", alertMessage);
+			objParam.put("postId", postId);
+			objParam.put("memberId", memberId);
+			
+			postService.insertAlertMessage(objParam);
+			
+			/*Map<String, String> resultSponAmt = postService.selectMemberSponAmt(objParam);*/
+		
+			/*resultMap.put("SUM_AMT", String.format("%.2f", resultSponAmt.get("SUM_AMT")));*/
+	  
+			return resultMap;
+		}
+		
+		
+		
+		// 편집시 이전데이터 불러오기.
+		@RequestMapping(value="/api/post/getPostData", method = RequestMethod.POST)
+		public HashMap<String, Object> getPostData(@RequestBody HashMap<String, String> map, HttpServletRequest request){
+			
+			HttpSession session = request.getSession();
+
+			HashMap<String, Object> resultMap = new HashMap<String, Object>();
+			  
+			  
+			Map<String, String> objParam = new HashMap<String,String>();
+			
+			//session.setAttribute("type", "text");
+			
+			String email = (String)session.getAttribute("email");
+	    	String name = (String)session.getAttribute("name");
+	    	String memberId = (String)session.getAttribute("memberId");
+	    	String postId = map.get("postId");
+	    	
+	    	resultMap.put("email", email);
+	    	resultMap.put("name", name);
+	    	
+			objParam.put("postId", postId);
+			objParam.put("groupId", "002");  // 001 메인,썸네일  2.첨부파일.
+			
+			Map<String, String> result = postService.selectPost(objParam);
+			List<Map<String, String>> fileList = postService.selectPostFileList(objParam);
+			
+			
+			objParam.put("groupId", "003");  // 001 메인,썸네일  2.첨부파일.
+			List<Map<String, String>> fileList3 = postService.selectPostFileList(objParam);
+	    	//
+			resultMap.put("result", result);
+			resultMap.put("fileList", fileList);
+			resultMap.put("fileList3", fileList3);
+
+			
+			
+	    	
+	    	// member sponsorShip
+	    	objParam.put("memberId",memberId);
+	    	Map<String, String> resultSponAmt = postService.selectMemberSponAmt(objParam);
+	    	resultMap.put("resultSponAmt", resultSponAmt);
+	    	
+	    	// 후원 순위 목록
+	    	List<Map<String, String>> resultRankSpon = postService.selectRankSponAmtList(objParam);
+	    	resultMap.put("resultRankSpon", resultRankSpon);
+	    	
+	    	
+	    	// 후원코멘트 목록
+	    	List<Map<String, String>> resultRankComments = postService.selectRankCommentsList(objParam);
+	    	resultMap.put("resultRankComments", resultRankComments);
+			
+			return resultMap;
+		}
+		
+		
+		
+		
+		
+		
 }

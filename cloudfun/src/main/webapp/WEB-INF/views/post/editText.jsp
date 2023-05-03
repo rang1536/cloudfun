@@ -68,7 +68,7 @@
 
 <script>
 
-
+var bolEdit = false;
 $(document).ready(function() {
 
 	 $(".file-drop-area").on('change', '.file-input', function() {
@@ -156,7 +156,6 @@ $(document).ready(function() {
 	// main img preview
 	$(".file-drop-area").on('change', '#inputPreview', function() {
 
-		
 		var filesCount = $(this)[0].files.length;
 
 		var textbox = $(this).prev();
@@ -188,6 +187,39 @@ $(document).ready(function() {
 	
 	
 	});
+	 
+	 
+	 
+	<c:if test="${not empty param.postId}">
+		bolEdit = true
+	</c:if>
+		
+			
+	if(bolEdit){
+		var jsonData = {
+				 postId : "${param.postId}"
+		}
+		
+		
+		$.ajax({
+			url: "${path}" + '/api/post/getPostData',
+	          dataType:'json',
+	          data : JSON.stringify(jsonData),
+	          type: 'post',
+	          contentType: "application/json"
+	    }).done(function (res) {
+	        if(res.error){
+	        	alert(error);
+	        	return ; 
+	        }else{
+	        	console.log(res)
+	        }
+	    });
+		
+		
+	}
+		
+	
 	
 })
 
