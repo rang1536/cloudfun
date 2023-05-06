@@ -51,7 +51,7 @@ public class HomeController {
 		
 		// todo
         HttpSession session = request.getSession();
-		session.setAttribute("type", "text");
+		//session.setAttribute("type", "text");
 		
 		if(session.getAttribute("localCountry") == null ) {
 			session.setAttribute("localCountry", request.getLocale().getCountry()); // KR
@@ -123,6 +123,19 @@ public class HomeController {
     	
 		String referer = request.getHeader("Referer"); // 헤더에서 이전 페이지를 읽는다.
 		return "redirect:"+ referer;
+    }
+    
+    
+    // session type 설정
+    @RequestMapping("/setType/{lang}")
+    public String setType(@PathVariable String lang
+    		, HttpServletRequest request) throws IOException {
+    	// todo
+        HttpSession session = request.getSession();
+		session.setAttribute("type", lang);
+    	
+		String referer = request.getHeader("Referer"); // 헤더에서 이전 페이지를 읽는다.
+		return "redirect:"+ "/";
     }
     
 }

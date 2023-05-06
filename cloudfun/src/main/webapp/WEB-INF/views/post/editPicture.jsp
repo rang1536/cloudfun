@@ -25,21 +25,6 @@
 	<section class="page-section single-blog-page spad">
 		<div class="container">
 			<form class="comment-form" id="postFrm" onSubmit="return false;">
-				
-				<!-- upload file -->
-			<!-- 	<div class="row mb-3" >
-					<div class="col-lg-1">
-						<p class="edit-title mb-0" >CREATIVE FILE</p>
-					</div>
-					<div class="col-lg-11">
-						<div class="file-drop-area mb-4">
-						  <span class="file-message span-upload">Upload your creation</span>
-						  <input class="file-input" name="uploadFile" type="file" >
-						</div>
-					</div>
-				</div> -->
-				
-			
 								
 				<jsp:include page="/WEB-INF/views/common/post.jsp"/>
 				
@@ -97,6 +82,9 @@
 
 
 <script>
+var bolEdit = false;
+
+
 var fileNo = 0;
 var filesArr = new Array();
 
@@ -120,8 +108,9 @@ $(document).ready(function() {
 	
 
 	//tags
-	$('input[name="tags"]').amsifySuggestags();
-	
+	$('input[name="tags"]').amsifySuggestags({
+	    tagLimit: 5
+	});	
 	
 	// datetimepicker
 	$(".datetimepicker").datetimepicker({ 
@@ -292,6 +281,43 @@ $(document).ready(function() {
 	    }
 	
 	});
+	
+	
+	
+
+	<c:if test="${not empty param.postId}">
+		bolEdit = true
+		$('input[name="tags"]').amsifySuggestags({},'destroy');
+	</c:if>
+		
+			
+	if(bolEdit){
+		var jsonData = {
+				 postId : "${param.postId}"
+		}
+		
+		
+		$.ajax({
+			url: "${path}" + '/api/post/getPostData',
+	          dataType:'json',
+	          data : JSON.stringify(jsonData),
+	          type: 'post',
+	          contentType: "application/json"
+	    }).done(function (res) {
+	        if(res.error){
+	        	alert(error);
+	        	return ; 
+	        }else{
+	        	console.log(res)
+	        	
+	        	setPreviewImg(res.result.THUMBNAIL_NM);
+	        	setCommonInfo(res);
+	        	setTextFile(res.fileList[0].FILE_NM);
+	        }
+	    });
+		
+		
+	}
 	
 })
 

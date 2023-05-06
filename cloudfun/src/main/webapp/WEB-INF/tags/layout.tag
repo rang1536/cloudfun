@@ -7,7 +7,9 @@
 
 
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-
+<script type="text/javascript" charset="utf-8">
+	sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+</script>
 <%
 	session = request.getSession();
 

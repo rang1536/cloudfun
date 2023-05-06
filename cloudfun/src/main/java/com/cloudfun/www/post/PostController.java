@@ -188,15 +188,19 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     	Map<String, String> objParam = new HashMap<String,String>();
 		HttpSession session = request.getSession();
 		
-		//session.setAttribute("type", "text");
+		
 		
 		String email = (String)session.getAttribute("email");
     	String name = (String)session.getAttribute("name");
     	String memberId = (String)session.getAttribute("memberId");
+    	String type = (String)session.getAttribute("type");
     	
 
+    	
     	model.addAttribute("email", email);
     	model.addAttribute("name", name);
+    	model.addAttribute("type", type);
+    	
     	
 		objParam.put("postId", postId);
 		objParam.put("groupId", "002");  // 001 ¸ÞÀÎ,½æ³×ÀÏ  2.Ã·ºÎÆÄÀÏ.
@@ -362,6 +366,8 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     	objParam.put("email", email);
     	objParam.put("name", name);
     	objParam.put("memberId", memberId);
+    	objParam.put("type", type);
+    	
 
     	
     	
@@ -469,6 +475,7 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     	objParam.put("email", email);
     	objParam.put("name", name);
     	objParam.put("memberId", memberId);
+    	objParam.put("type", type);
     	
     	objParam.put("myPost", "Y");
 
@@ -567,6 +574,7 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     	Map<String, String> objParam = new HashMap<String,String>();
     	
     	
+    	objParam.put("type", type);
     	objParam.put("postId", postId);
     	objParam.put("memberId", memberId);
     	

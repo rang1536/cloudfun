@@ -27,6 +27,15 @@
 	System.out.println(paramLocal);
 	pageContext.setAttribute("paramLocal",paramLocal);
 	
+	
+	// type
+	if(session.getAttribute("type")==null){
+		session.setAttribute("type","text");
+	}
+	
+	pageContext.setAttribute("type",session.getAttribute("type"));
+	
+	
 %>
 <fmt:setLocale value="${paramLocal}"/>
 
@@ -36,8 +45,18 @@
 <header class="header-section">
 	<div class="container">
 		<!-- logo -->
+		<div class="text-right">
+		<select class="" id="changeType" onchange="changesType(this)">
+		    <option value="text"    <c:if test="${type == 'text'}">selected </c:if> >text</option>
+		    <option value="picture" <c:if test="${type == 'picture'}">selected </c:if> >picture</option>
+		    <option value="comic"   <c:if test="${type == 'comic'}">selected </c:if> >comic</option>
+		    <option value="music"   <c:if test="${type == 'music'}">selected </c:if> >music</option>
+		    <option value="model"   <c:if test="${type == 'model'}">selected </c:if> >model</option>
+		</select>
+		</div>
 		<div class="text-right" style="color:white;">
 				<a style="color:white;" href="${path}/local/en">English</a>  /  <a style="color:white;" href="${path}/local/ko">한국어</a>
+				
 		</div>
 		
 		<a class="site-logo" href="${path}/">

@@ -87,10 +87,6 @@ $(document).ready(function() {
 	});
 	
 	
-
-	
-	
-	
 	// datetimepicker
 	$(".datetimepicker").datetimepicker({ 
 		format: "d-m-Y"
@@ -218,8 +214,6 @@ $(document).ready(function() {
 	        }else{
 	        	console.log(res)
 	        	
-	        	
-	        	
 	        	setPreviewImg(res.result.THUMBNAIL_NM);
 	        	setCommonInfo(res);
 	        	setTextFile(res.fileList[0].FILE_NM);
@@ -233,63 +227,6 @@ $(document).ready(function() {
 	
 })
 
-
-function setPreviewImg(url, fileName){
-	
-	if(fileName){
-		var textbox = $("#inputPreviewLabel");
-		textbox.text(fileName);
-		
-		var inputPreview = $("#inputPreview");
-		inputPreview.attr("data-title", fileName);
-	}
-	
-	var dvPreview = $("#divImageMediaPreview");
-	var img = $("<img />");
-	img.attr("style", "width: 100%; height:100%; padding: 10px");
-	img.attr("src", "${path}/display?filename=" +url);
-	dvPreview.html(img);
-	
-}
-
-/*
-param.result.
-*/
-function setCommonInfo(param){
-	$("#title").val(param.result.TITLE)
-	$("#contents").text(param.result.CONTENTS)
-	
-	
-	var tags = param.result.TAGS;
-	//var arrTags = tags.split(",");
-	$('input[name="tags"]').val(tags)
-	// tags
-	$('input[name="tags"]').amsifySuggestags({
-		 tagLimit: 5
-	});
-	
-	
-	$("input:radio[name='aiYn']:radio[value="+param.result.AI_YN+"]").prop('checked', true);
-	$("input:radio[name='anoFunYn']:radio[value="+param.result.ANO_FUN_YN+"]").prop('checked', true);
-	
-	$('input[name="funStartDt"]').val(param.result.FUN_START_DT);
-	$('input[name="funEndDt"]').val(param.result.FUN_END_DT);
-	
-	$('input[name="tgtAmt"]').val(param.result.TGT_AMT);
-	$('input[name="openAmt"]').val(param.result.OPEN_AMT);
-	
-}
-
-function setTextFile(fileName){
-	if(fileName){
-		
-		
-		var inputPreview = $("#inputPreview2");
-		inputPreview.attr("data-title", fileName);
-	}
-	
-	
-}
 
 
 </script>

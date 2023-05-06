@@ -91,6 +91,8 @@
 
 
 <script>
+var bolEdit = false;
+
 var fileNo = 0;
 var filesArr = new Array();
 
@@ -113,10 +115,7 @@ $(document).ready(function() {
 	
 	
 
-	//tags
-	$('input[name="tags"]').amsifySuggestags();
-	
-	
+
 	// datetimepicker
 	$(".datetimepicker").datetimepicker({ 
 		format: "d-m-Y"
@@ -286,6 +285,47 @@ $(document).ready(function() {
 	    }
 	
 	});
+	
+	
+	//tags
+	$('input[name="tags"]').amsifySuggestags({
+	    tagLimit: 5
+	});
+	
+	<c:if test="${not empty param.postId}">
+		bolEdit = true
+		$('input[name="tags"]').amsifySuggestags({},'destroy');
+	</c:if>
+		
+			
+	if(bolEdit){
+		var jsonData = {
+				 postId : "${param.postId}"
+		}
+		
+		
+		$.ajax({
+			url: "${path}" + '/api/post/getPostData',
+	          dataType:'json',
+	          data : JSON.stringify(jsonData),
+	          type: 'post',
+	          contentType: "application/json"
+	    }).done(function (res) {
+	        if(res.error){
+	        	alert(error);
+	        	return ; 
+	        }else{
+	        	console.log(res)
+	        	
+	        	setPreviewImg(res.result.THUMBNAIL_NM);
+	        	setCommonInfo(res);
+	        	setTextFile(res.fileList[0].FILE_NM);
+	        }
+	    });
+		
+		
+	}
+	
 	
 })
 
