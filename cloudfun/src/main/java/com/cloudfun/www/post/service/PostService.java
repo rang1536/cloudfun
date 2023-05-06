@@ -38,14 +38,51 @@ public class PostService {
 	
 	public Map<String, String> selectPost(Map<String, String> obj) {
 		
-		// post 등록
+		// post 조회
 		return postDao.selectPost(obj);
 	}
 
 	public List<Map<String, String>> selectPostFileList(Map<String, String> obj) {
-		// post 등록
+		
 		return postDao.selectPostFileList(obj);
 	}
+
+	public void setSponsership(Map<String, String> obj) {
+		// Sponsership 등록
+		postDao.insertSponsership(obj);
+		
+	}
+
+	public Map<String, String> selectMemberSponAmt(Map<String, String> objParam) {
+		// member post의 amt조회
+		return postDao.selectMemberSponAmt(objParam);
+	}
+
+	public Map<String, String> selectPostPaging(Map<String, String> objParam) {
+		// TODO Auto-generated method stub
+		return postDao.selectPostPaging(objParam);
+	}
+
+	public List<Map<String, String>> selectRankSponAmtList(Map<String, String> objParam) {
+
+		return postDao.selectRankSponAmtList(objParam);
+	}
+
+	public void insertSponComments(Map<String, String> objParam) {
+		postDao.insertSponComments(objParam);
+
+		
+	}
+
+	public void insertAlertMessage(Map<String, String> objParam) {
+		postDao.insertAlertMessage(objParam);
+		
+	}
+
+	public List<Map<String, String>> selectRankCommentsList(Map<String, String> objParam) {
+		return postDao.selectRankCommentsList(objParam);
+	}
+
 	
 	
 	

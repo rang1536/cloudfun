@@ -38,7 +38,7 @@
 						<button type="button" class="btn btn-info btn-block" onclick="document.getElementById('inputPreview2').click()">Upload your creation(*.txt)</button>
 					    <div class="form-group inputDnD file-drop-area">
 					        <!-- <label class="sr-only " for="inputFile">File Upload</label> -->
-					        <label class="sr-only file-message" for="inputFile">Upload your creation(*.txt)</label>
+					        <label class="sr-only file-message" for="inputFile" >Upload your creation(*.txt)</label>
 					        <input type="file" class="form-control-file text-info font-weight-bold"  name="uploadFile" id="inputPreview2" accept=".txt" onchange="readUrl(this)" data-title="Drag and drop a file">
 					    </div>
 						
@@ -68,7 +68,7 @@
 
 <script>
 
-
+var bolEdit = false;
 $(document).ready(function() {
 
 	 $(".file-drop-area").on('change', '.file-input', function() {
@@ -85,11 +85,6 @@ $(document).ready(function() {
 	    textbox.text(filesCount + ' files selected');
 	  }
 	});
-	
-	
-
-	//tags
-	$('input[name="tags"]').amsifySuggestags();
 	
 	
 	// datetimepicker
@@ -156,7 +151,6 @@ $(document).ready(function() {
 	// main img preview
 	$(".file-drop-area").on('change', '#inputPreview', function() {
 
-		
 		var filesCount = $(this)[0].files.length;
 
 		var textbox = $(this).prev();
@@ -188,6 +182,48 @@ $(document).ready(function() {
 	
 	
 	});
+	 
+	 
+	//tags
+	$('input[name="tags"]').amsifySuggestags({
+	    tagLimit: 5
+	});
+	
+	<c:if test="${not empty param.postId}">
+		bolEdit = true
+		$('input[name="tags"]').amsifySuggestags({},'destroy');
+	</c:if>
+		
+			
+	if(bolEdit){
+		var jsonData = {
+				 postId : "${param.postId}"
+		}
+		
+		
+		$.ajax({
+			url: "${path}" + '/api/post/getPostData',
+	          dataType:'json',
+	          data : JSON.stringify(jsonData),
+	          type: 'post',
+	          contentType: "application/json"
+	    }).done(function (res) {
+	        if(res.error){
+	        	alert(error);
+	        	return ; 
+	        }else{
+	        	console.log(res)
+	        	
+	        	setPreviewImg(res.result.THUMBNAIL_NM);
+	        	setCommonInfo(res);
+	        	setTextFile(res.fileList[0].FILE_NM);
+	        }
+	    });
+		
+		
+	}
+		
+	
 	
 })
 

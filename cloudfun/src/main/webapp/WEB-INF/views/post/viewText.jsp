@@ -37,13 +37,14 @@ result
 						</div>
 					</div>
 					
-					
+			
 					
 					
 					
 					<div class="blog-content">
 						<h3>${result.TITLE}</h3>
-						<a href="" class="meta-comment">3comment</a>
+						<p class="meta-comment mb-1">last updated : ${result.LAST_UPDATED}</p>
+						<p class="color-green ">${result.FUN_START_DT} ~ ${result.FUN_END_DT} </p>
 						<p style="white-space: pre-line;">${result.CONTENTS}</p>
 					</div>
 					
@@ -135,7 +136,7 @@ result
 					
 					<div class="comment-warp">
 						<h4 class="">Creations</h4>
-						<p class="mb-3">If you sponsor more than the minimum donation, you can download the creation.</p>
+						<p class="mb-3">If you sponsor more than the minimum amount of money, you can download the creation.</p>
 						
 						
 						<c:set var="loop_flag" value="false" />
@@ -159,26 +160,39 @@ result
 						
 						<c:forEach var="item" items="${fileList}" >
 							<div class="ml-3">
-								<input type="hidden" value="${item.FILE_ID}"/>
-								<p class="font-weight-bold">${item.FILE_NM}</p>
+								
+								<c:if test="${result.OPEN_AMT+0 <= resultSponAmt.SUM_AMT+0}">
+										<a href='${path}/download?filename=${item.FILE_ID}'>${item.FILE_NM}</a>
+								</c:if>
+								<c:if test="${result.OPEN_AMT+0 > resultSponAmt.SUM_AMT+0}">
+										<p class="font-weight-bold">${item.FILE_NM}</p>
+								</c:if>
+								
 							</div>
 						</c:forEach>
 						
 					</div>
+					
+					
 						
 					<div class="comment-warp">
-						<h4 class="comment-title">Top Coments</h4>
+						<h4 class="comment-title">Top Comments</h4>
 						<ul class="comment-list">
-							<li>
-								<div class="comment">
-									<div class="comment-avator set-bg" data-setbg="${path}/img/authors/1.jpg"></div>
-									<div class="comment-content">
-										<h5>James Smith <span>June 21, 2018</span></h5>
-										<p>Donec venenatis at eros sit amet aliquam. Donec vel orci efficitur, dictum nisl vitae, scelerisque nibh. Curabitur eget ipsum pulvinar nunc gravida interdum. </p>
-										<a href="" class="reply">Reply</a>
+							
+							<c:forEach var="item" items="${resultRankComments}" >
+								<li>
+									<div class="comment">
+										<div class="comment-avator set-bg" data-setbg="${path}/img/authors/1.jpg"></div>
+										<div class="comment-content">
+											<h5>${item.NAME}<span>${item.DATE_NM}</span></h5>
+											<p style="white-space: pre-line;">${item.COMMENTS}</p>
+										</div>
 									</div>
-								</div>
-							</li>
+								</li>
+								
+							</c:forEach>
+							
+							
 							<li>
 								<div class="comment">
 									<div class="comment-avator set-bg" data-setbg="${path}/img/authors/2.jpg"></div>
@@ -191,42 +205,85 @@ result
 							</li>
 						</ul>
 					</div>
+					
+					
+					<div class="comment-warp  mb-3">
+						<h4 class="comment-title">Sponsorship</h4>
+						<div class="row">
+							<div class="col-md-4">
+								Sponsorship Period
+							</div>
+							<div class="col-md-8">
+								<p class=" ">${result.FUN_START_DT} ~ ${result.FUN_END_DT} </p>
+							</div>
+							<div class="col-md-4">
+								 Minimum Sponsorship Amount
+							</div>
+							<div class="col-md-8">
+								<p class=" ">${result.OPEN_AMT}$ </p>
+							</div>
+							<div class="col-md-4">
+								 Target Sponsorship Amount
+							</div>
+							<div class="col-md-8">
+								<p class=" ">${result.TGT_AMT}$ </p>
+							</div>
+							<div class="col-md-4">
+								 Your Sponsorship Amount
+							</div>
+							<div class="col-md-8">
+								<p class=" " id="sponAmtTxt">${resultSponAmt.SUM_AMT}$ </p>
+							</div>
+						</div>
+						<div class="col-lg-6">
+						
+							<button class="site-btn btn-sm " data-toggle="modal" data-target="#sponsorship" >Sponsorship</button>
+						</div>
+						
+						
+					</div>
+					
+					
 					<div class="comment-form-warp" disabled>
 						<h4 class="comment-title mb-0">Leave Your Comment</h4>
 						<p class="mb-3">If you sponsor more than the minimum amount, you can leave a message to the creator.</p>
 						<form class="comment-form" onSubmit="return false;">
 							<div class="row">
-								<div class="col-md-6">
-									<input type="text" placeholder="Name" disabled>
-								</div>
-								<div class="col-md-6">
-									<input type="email" placeholder="Email" disabled>
-								</div>
 								
 								<div class="col-lg-12">
-									<input type="text" placeholder="Subject" disabled>
-									<textarea placeholder="Message"  disabled></textarea>
+									
+
+									
+									<textarea placeholder="Message"  id="sponMessage" name="sponMessage" <c:if test="${result.OPEN_AMT+0 > resultSponAmt.SUM_AMT+0}" >disabled</c:if>>Please work quickly.</textarea>
 									
 								</div>
 								<div class="col-lg-6">
-									<button class="site-btn btn-sm bg-light">Send</button>
+									<c:if test="${result.OPEN_AMT+0 <= resultSponAmt.SUM_AMT+0}">
+										<button class="site-btn btn-sm"  onclick="sendComments()">Send</button>
+									</c:if>
+									<c:if test="${result.OPEN_AMT+0 > resultSponAmt.SUM_AMT+0}">
+										<button class="site-btn btn-sm bg-light">Send</button>
+									</c:if>
+									
+									
+									
+													
 								</div>
-								<div class="col-lg-6">
-									<button class="site-btn btn-sm " >Donation</button>
+								<div class="col-lg-6 text-right">
+								  <i class="fa fa-exclamation-triangle text-danger fa-2x " aria-hidden="true" data-toggle="modal" data-target="#alertPost"></i>
 								</div>
 							</div>
 						</form>
 					</div>
+					
+					
+					
+					<!--  -->
 				</div>
 				<!-- sidebar -->
 				<div class="col-lg-4 col-md-7 sidebar pt-5 pt-lg-0">
 					<!-- widget -->
-					<div class="widget-item">
-						<form class="search-widget">
-							<input type="text" placeholder="Search">
-							<button><i class="fa fa-search"></i></button>
-						</form>
-					</div>
+					
 					<!-- widget -->
 					<div class="widget-item">
 						<h4 class="widget-title">Latest Posts</h4>
@@ -249,32 +306,40 @@ result
 					</div>
 					<!-- widget -->
 					<div class="widget-item">
-						<h4 class="widget-title">Top Comments</h4>
+						<h4 class="widget-title">Sponsorship Ranking</h4>
 						<div class="top-comment">
-							<div class="tc-item">
+						
+							<c:forEach var="item" items="${resultRankSpon}" >
+								<div class="tc-item">
+									<div class="tc-thumb set-bg" data-setbg="${path}/img/authors/1.jpg"></div>
+									<div class="tc-content">
+										<div class="tc-date">${item.SUM_AMT}$</div>
+										<p>${item.NAME}</p>
+										
+										<c:if test="${not empty  item.COMMENTS_MIN}">
+											<p>${item.COMMENTS_MIN}</p>
+										</c:if>
+										<c:if test="${empty  item.COMMENTS_MIN}">
+											<p>No comments.</p>
+										</c:if>
+										<!-- <div class="tc-date">June 21, 2018</div> -->
+									</div>
+								</div>
+							</c:forEach>
+							
+						
+							<%-- <div class="tc-item">
 								<div class="tc-thumb set-bg" data-setbg="${path}/img/authors/1.jpg"></div>
 								<div class="tc-content">
 									<p><a href="#">James Smith</a> <span>on</span> Lorem consec ipsum dolor sit amet, co</p>
+									
 									<div class="tc-date">June 21, 2018</div>
 								</div>
-							</div>
-							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="${path}/img/authors/2.jpg"></div>
-								<div class="tc-content">
-									<p><a href="#">Michael James</a> <span>on</span>Cras sit amet sapien aliquam</p>
-									<div class="tc-date">June 21, 2018</div>
-								</div>
-							</div>
-							<div class="tc-item">
-								<div class="tc-thumb set-bg" data-setbg="${path}/img/authors/3.jpg"></div>
-								<div class="tc-content">
-									<p><a href="#">Justin More</a> <span>on</span> Lorem ipsum dolor consecsit amet, co</p>
-									<div class="tc-date">June 21, 2018</div>
-								</div>
-							</div>
+							</div> --%>
+							
 						</div>
 					</div>
-					<!-- widget -->
+					<%-- <!-- widget -->
 					<div class="widget-item">
 						<div class="feature-item set-bg" data-setbg="${path}/img/features/1.jpg">
 							<span class="cata new">new</span>
@@ -296,14 +361,87 @@ result
 								<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p>
 							</div>
 						</div>
-					</div>
+					</div> --%>
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- Page section end -->
 	
+
 	
+	<div class="modal fade" id="sponsorship" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Sponsorship</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+	          <div class="form-group">
+	            <label for="recipient-name" class="col-form-label">Minimum Sponsorship Amount($):</label>
+	            <h3>${result.OPEN_AMT}</h3>
+	            
+	          </div>
+	          <div class="form-group">
+	            <label for="message-text" class="col-form-label">Amount to sponsor($):</label>
+	            <input type="number" class="form-control" id="sponAmt" value="${result.OPEN_AMT}" >
+	          </div>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" onclick="sendPay()">Sponsorship</button>
+	      </div>
+	    </div>
+	    
+	  </div>
+	</div>
+	
+	
+	
+	<div class="modal fade" id="alertPost" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">report</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+	          <div class="form-group">
+		           <div class="input-group mb-3">
+					  <div class="input-group-prepend">
+					    <label class="input-group-text" for="inputGroupSelect01">Options</label>
+					  </div>
+					  <select class="custom-select" id="alertMessageSelect" onchange="changeAlertSelect(this)">
+					    <option value="1" selected>There are ethical issues.</option>
+					    <option value="2">You have infringed on the copyrights of others.</option>
+					    <option value="3">Creation is different from description.</option>
+					    <option value="4">Direct entry.</option>
+					  </select>
+					</div>
+	            
+	          </div>
+	          <div class="form-group">
+	          		<textarea class="alert-textarea" id="alertMessage"></textarea>
+	         
+	          </div>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" onclick="sendAlertMessage()">send</button>
+	      </div>
+	    </div>
+	    
+	  </div>
+	</div>
 	
 </t:layout>
 
@@ -318,17 +456,117 @@ result
 
 <script>
 function postSend(param){
-	console.log($(param).children("input").val())
 	location.href="${path}/post/viewText?postId=" + $(param).children("input").val();
+}
+
+function sendPay(){
+	//<c:out value="${empty var1 ? 'var1 is empty or null' : 'var1 is NOT empty or null'}" />
+	if($("#sponAmt").val() < <c:out value="${empty result.OPEN_AMT ? 0 :  result.OPEN_AMT}" />){
+		alert("Less than the minimum amount of sponsorship.")
+		return;
+	}
+	
+	var jsonData = {
+			amt : $("#sponAmt").val()
+			, postId : "${result.POST_ID}"
+	}
+	
+		
+	if (confirm("Not yet implemented PayPal, should I send it as a test?") == true) {
+		$.ajax({
+	    	  url: preUrl + '/api/sponsorship',
+	          dataType:'json',
+	          data : JSON.stringify(jsonData),
+	          type: 'post',
+	          contentType: "application/json"
+	    }).done(function (res) {
+	        if(res.error){
+	        	alert(error);
+	        	return ; 
+	        }else{
+	        	if(res.SUM_AMT != "0"){
+	        		
+	        		$("#sponAmtTxt").text(res.SUM_AMT + "$");
+	        		$('#sponsorship').modal('toggle');
+	        		
+	        	}	
+	        }
+	    });
+		
+	} 
+	
+	
+}
+
+function sendComments(){
+	//
+	var sponMessage = $("#sponMessage").val(); 
+	
+	var jsonData = {
+			sponMessage : sponMessage
+			, postId : "${result.POST_ID}"
+	}
+	
+	if (confirm("Would you like to register a comment?") == true) {
+		$.ajax({
+	    	  url: preUrl + '/api/sponComments',
+	          dataType:'json',
+	          data : JSON.stringify(jsonData),
+	          type: 'post',
+	          contentType: "application/json"
+	    }).done(function (res) {
+	        if(res.error){
+	        	alert(error);
+	        	return ; 
+	        }else{
+	        	location.reload();
+	        }
+	    });
+		
+	} 
+	
+}
+
+
+function sendAlertMessage(){
+	//
+	var alertMessage = $("#alertMessage").val();
+	var reportCd =  $('#alertMessageSelect').find(":selected").val();
+	
+	var jsonData = {
+			alertMessage : alertMessage
+			, postId : "${result.POST_ID}"
+			, reportCd : reportCd
+	}
+	
+	if (confirm("Do you want to register?") == true) {
+		$.ajax({
+	    	  url: preUrl + '/api/alertMessage',
+	          dataType:'json',
+	          data : JSON.stringify(jsonData),
+	          type: 'post',
+	          contentType: "application/json"
+	    }).done(function (res) {
+	        if(res.error){
+	        	alert(error);
+	        	return ; 
+	        }else{
+	        	alert("Your report has been registered.")
+	        	$('#alertPost').modal('toggle');
+	        }
+	    });
+		
+	} 
+	
 }
 
 
 
-$(document).ready(function() {
+function changeAlertSelect(){
+	$('#alertMessage').val( $('#alertMessageSelect').find(":selected").text());
+}
 
-	
-	
-})
+$('#alertMessage').val( $('#alertMessageSelect').find(":selected").text());
 
 
 

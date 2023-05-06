@@ -25,21 +25,6 @@
 	<section class="page-section single-blog-page spad">
 		<div class="container">
 			<form class="comment-form" id="postFrm" onSubmit="return false;">
-				
-				<!-- upload file -->
-			<!-- 	<div class="row mb-3" >
-					<div class="col-lg-1">
-						<p class="edit-title mb-0" >CREATIVE FILE</p>
-					</div>
-					<div class="col-lg-11">
-						<div class="file-drop-area mb-4">
-						  <span class="file-message span-upload">Upload your creation</span>
-						  <input class="file-input" name="uploadFile" type="file" >
-						</div>
-					</div>
-				</div> -->
-				
-			
 								
 				<jsp:include page="/WEB-INF/views/common/post.jsp"/>
 				
@@ -97,6 +82,9 @@
 
 
 <script>
+var bolEdit = false;
+
+
 var fileNo = 0;
 var filesArr = new Array();
 
@@ -120,8 +108,9 @@ $(document).ready(function() {
 	
 
 	//tags
-	$('input[name="tags"]').amsifySuggestags();
-	
+	$('input[name="tags"]').amsifySuggestags({
+	    tagLimit: 5
+	});	
 	
 	// datetimepicker
 	$(".datetimepicker").datetimepicker({ 
@@ -293,6 +282,43 @@ $(document).ready(function() {
 	
 	});
 	
+	
+	
+
+	<c:if test="${not empty param.postId}">
+		bolEdit = true
+		$('input[name="tags"]').amsifySuggestags({},'destroy');
+	</c:if>
+		
+			
+	if(bolEdit){
+		var jsonData = {
+				 postId : "${param.postId}"
+		}
+		
+		
+		$.ajax({
+			url: "${path}" + '/api/post/getPostData',
+	          dataType:'json',
+	          data : JSON.stringify(jsonData),
+	          type: 'post',
+	          contentType: "application/json"
+	    }).done(function (res) {
+	        if(res.error){
+	        	alert(error);
+	        	return ; 
+	        }else{
+	        	console.log(res)
+	        	
+	        	setPreviewImg(res.result.THUMBNAIL_NM);
+	        	setCommonInfo(res);
+	        	setTextFile(res.fileList[0].FILE_NM);
+	        }
+	    });
+		
+		
+	}
+	
 })
 
 /* 첨부파일 추가 */
@@ -359,5 +385,49 @@ function deleteFile(num) {
     filesArr[num].is_delete = true;
 }
 
+
+
+// 첨부파일 미리보기
+
+function setEditPicturePreview(){
+	var dvPreview = $("#divImageMediaPreview2");
+    //dvPreview.html("");            
+    $($(this)[0].files).each(function () {
+        var file = $(this);       
+        if (validation(file[0])) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            	 
+            	
+	            	var div = $("<div class='col-lg-2 filebox row m-0' id='file" + fileNo + "' style='border: 1px solid #d6dee7;' > </div>");
+	            	var div2 = $("<div class='col-lg-12 text-center mb-3'> </div>");
+	            	var div2_2 = $("<div class='col-lg-12'> </div>");
+	            	var div3 = $("<div class='text-center'> </div>");
+	                var img = $("<img />");
+	                img.attr("style","max-height:150px;padding: 0px");
+	                img.attr("src", e.target.result);
+	                var pTag = $('<p class="name">' + fileName + '</p>')
+	                var aTag = $('<button type="button" class="delete btn btn-info btn-sm" onclick="deleteFile(' + fileNo + ');">DELETE</button>')
+	                
+	                
+	                div3.append(aTag);
+	                div3.append(pTag);
+	                
+	                
+	                div2_2.append(div3);
+	                div2.append(img);
+	                
+	                div.append(div2_2);
+	                div.append(div2);
+	                dvPreview.append(div);
+	                
+	                filesArr.push(file[0]);
+	                fileNo++;
+             }
+           
+            reader.readAsDataURL(file[0]);         
+	
+	
+}
 </script>
 

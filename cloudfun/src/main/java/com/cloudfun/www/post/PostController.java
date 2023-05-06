@@ -1,6 +1,7 @@
 package com.cloudfun.www.post;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -187,15 +188,19 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     	Map<String, String> objParam = new HashMap<String,String>();
 		HttpSession session = request.getSession();
 		
-		session.setAttribute("type", "text");
+		
 		
 		String email = (String)session.getAttribute("email");
     	String name = (String)session.getAttribute("name");
     	String memberId = (String)session.getAttribute("memberId");
+    	String type = (String)session.getAttribute("type");
     	
 
+    	
     	model.addAttribute("email", email);
     	model.addAttribute("name", name);
+    	model.addAttribute("type", type);
+    	
     	
 		objParam.put("postId", postId);
 		objParam.put("groupId", "002");  // 001 메인,썸네일  2.첨부파일.
@@ -217,7 +222,22 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     	List<Map<String, String>> resentList = postService.selectPostList(objParam);
     	model.addAttribute("resentList", resentList);
 		
-		
+    	
+    	// member sponsorShip
+    	objParam.put("memberId",memberId);
+    	Map<String, String> resultSponAmt = postService.selectMemberSponAmt(objParam);
+    	model.addAttribute("resultSponAmt", resultSponAmt);
+    	
+    	// 후원 순위 목록
+    	List<Map<String, String>> resultRankSpon = postService.selectRankSponAmtList(objParam);
+    	model.addAttribute("resultRankSpon", resultRankSpon);
+    	
+    	
+    	// 후원코멘트 목록
+    	List<Map<String, String>> resultRankComments = postService.selectRankCommentsList(objParam);
+    	model.addAttribute("resultRankComments", resultRankComments);
+    		
+    
 		return "post/viewText";
 	}
 	
@@ -346,6 +366,8 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     	objParam.put("email", email);
     	objParam.put("name", name);
     	objParam.put("memberId", memberId);
+    	objParam.put("type", type);
+    	
 
     	
     	
@@ -370,6 +392,44 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
 		
     	List<Map<String, String>> resultList = postService.selectPostList(objParam);
     	
+    	
+    	Map<String, String> resultPaging = postService.selectPostPaging(objParam);
+    	
+    	String strNowPage = String.valueOf(resultPaging.get("NOW_PAGE"));
+    	int nowPage = Integer.parseInt(strNowPage);
+    	String strLastPage = String.valueOf(resultPaging.get("LAST_PAGE"));
+    	int lastPage = Integer.parseInt(strLastPage);
+    	
+//    	int nowPage  = Integer.valueOf(resultPaging.get("NOW_PAGE").toString());
+//    	int LastPage = Integer.valueOf(resultPaging.get("LAST_PAGE").toString());
+    	int tmpLastPage = nowPage+4; // 마지막 페이지  1~5 인우 5임.6~10인경우 10 
+    	
+    	String arrowYN = "Y";
+    	
+    	if(lastPage <= tmpLastPage) {
+    		tmpLastPage = lastPage ;
+    		arrowYN = "N";
+    	}
+    	
+    	List<Integer> pageList = new ArrayList<>();
+    	for(int i = nowPage ; i <=tmpLastPage ; i++ ) {
+    		pageList.add(i);
+    	}
+    	
+    	    	
+    	
+    	// 다음페이지 여부
+    	model.addAttribute("arrowYN", arrowYN);
+    	// 현재페이지
+    	model.addAttribute("pageNo", pageNo);
+    	// 페이지리스트 
+    	model.addAttribute("pageList", pageList);
+    	
+    	model.addAttribute("arrowNextPage", tmpLastPage+1); // 10인경우 다음페이지는 11이므로 +1
+    	model.addAttribute("arrowBeforePage", tmpLastPage-5);  // 10  인경우 5여야하므로 -5
+    	
+    	
+    	
     	objParam.put("offset", "0");
     	objParam.put("limit", "5");
     	List<Map<String, String>> resentList = postService.selectPostList(objParam);
@@ -377,11 +437,184 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     	
     	model.addAttribute("resultList", resultList);
     	model.addAttribute("resentList", resentList);
+    	model.addAttribute("resultPaging", resultPaging);
+    	
     	
 
 		//return "home";
 		return "post/postList";
 	}
 	
+	
+	
+	// 나의 창작물 목록
+	//myPostList
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/post/myPostList", method = RequestMethod.GET)
+	public String myPostList(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		String email = (String)session.getAttribute("email");
+    	String name = (String)session.getAttribute("name");
+    	String memberId = (String)session.getAttribute("memberId");
+    	String type = (String)session.getAttribute("type");
+    	
+    	
+    	if(memberId == null ) {
+    		//return "home";
+    		return "mainPage";
+    	}
+    	
+    	
+    	
+    	Map<String, String> objParam = new HashMap<String,String>();
+    	
+    	objParam.put("email", email);
+    	objParam.put("name", name);
+    	objParam.put("memberId", memberId);
+    	objParam.put("type", type);
+    	
+    	objParam.put("myPost", "Y");
+
+    	
+    	
+    	int limit = 10 ;
+    	
+    	
+    	String pageNo = request.getParameter("pageNo");
+    	
+    	if(pageNo == null ) {
+    		pageNo = "1";
+    	}
+    	
+    	
+    	objParam.put("limit", limit+"");
+    	
+    	int intPageNo = Integer.parseInt(pageNo);
+    	objParam.put("offset", (intPageNo * limit-limit)+"" );
+    	
+    	objParam.put("pageNo", pageNo);
+		
+    	List<Map<String, String>> resultList = postService.selectPostList(objParam);
+    	
+    	
+    	Map<String, String> resultPaging = postService.selectPostPaging(objParam);
+    	
+    	String strNowPage = String.valueOf(resultPaging.get("NOW_PAGE"));
+    	int nowPage = Integer.parseInt(strNowPage);
+    	String strLastPage = String.valueOf(resultPaging.get("LAST_PAGE"));
+    	int lastPage = Integer.parseInt(strLastPage);
+    	
+//    	int nowPage  = Integer.valueOf(resultPaging.get("NOW_PAGE").toString());
+//    	int LastPage = Integer.valueOf(resultPaging.get("LAST_PAGE").toString());
+    	int tmpLastPage = nowPage+4; // 마지막 페이지  1~5 인우 5임.6~10인경우 10 
+    	
+    	String arrowYN = "Y";
+    	
+    	if(lastPage <= tmpLastPage) {
+    		tmpLastPage = lastPage ;
+    		arrowYN = "N";
+    	}
+    	
+    	List<Integer> pageList = new ArrayList<>();
+    	for(int i = nowPage ; i <=tmpLastPage ; i++ ) {
+    		pageList.add(i);
+    	}
+    	
+    	    	
+    	
+    	// 다음페이지 여부
+    	model.addAttribute("arrowYN", arrowYN);
+    	// 현재페이지
+    	model.addAttribute("pageNo", pageNo);
+    	// 페이지리스트 
+    	model.addAttribute("pageList", pageList);
+    	
+    	model.addAttribute("arrowNextPage", tmpLastPage+1); // 10인경우 다음페이지는 11이므로 +1
+    	model.addAttribute("arrowBeforePage", tmpLastPage-5);  // 10  인경우 5여야하므로 -5
+    	
+    	
+    	/*
+    	objParam.put("offset", "0");
+    	objParam.put("limit", "5");
+    	List<Map<String, String>> resentList = postService.selectPostList(objParam);
+    	*/
+    	
+    	model.addAttribute("resultList", resultList);
+    	//model.addAttribute("resentList", resentList);
+    	model.addAttribute("resultPaging", resultPaging);
+    	
+    	
+
+		//return "home";
+		return "post/myPostList";
+	}
+	
+	
+	@RequestMapping(value = "/post/postEdit", method = RequestMethod.GET)
+	public String postEdit(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		String email = (String)session.getAttribute("email");
+    	String name = (String)session.getAttribute("name");
+    	String memberId = (String)session.getAttribute("memberId");
+    	String type = (String)session.getAttribute("type");
+    	
+    	String postId = request.getParameter("postId");
+    	
+    	if(memberId == null ) {
+    		//return "home";
+    		return "mainPage";
+    	}
+    	
+    	Map<String, String> objParam = new HashMap<String,String>();
+    	
+    	
+    	objParam.put("type", type);
+    	objParam.put("postId", postId);
+    	objParam.put("memberId", memberId);
+    	
+    	Map<String, String> result = postService.selectPost(objParam);
+    	String postType = result.get("DOMAIN_TYPE");
+    	
+    	// postType 
+    	/*
+    	  * 글 : text
+	      * 그림 : picture
+	      * 만화 : comic
+	      * 음악 : music
+          * 3D Model : model
+    	 * */
+    	String url = request.getContextPath();
+    	switch(postType) {
+    	  case "text":
+    		  url = url+"/post/editText?postId=" + postId;
+    	    break;
+    	  case "picture":
+    		  url = url+"/post/editPicture?postId=" + postId;
+    	    break;
+    	  case "comic":
+    		  url = url+"/post/editComic?postId=" + postId;
+      	    break;
+    	  case "music":
+    		  url = url+"/post/editMusic?postId=" + postId;
+      	    break;
+    	  case "model":
+    		  url = url+"/post/edit3D?postId=" + postId;
+      	    break;
+    	  default:
+    	}
+    	
+//    	
+//    	model.addAttribute("arrowNextPage", tmpLastPage+1); // 10인경우 다음페이지는 11이므로 +1
+//    	model.addAttribute("arrowBeforePage", tmpLastPage-5);  // 10  인경우 5여야하므로 -5
+
+		//return "home";
+		return "redirect: "+url;
+	}
 	
 }

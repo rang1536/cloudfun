@@ -19,10 +19,10 @@
 		</div> -->
 		
 		
-		<button type="button" class="btn btn-info btn-block" onclick="document.getElementById('inputPreview').click()">Add Image</button>
+		<button type="button" class="btn btn-info btn-block" id="inputPreviewLabel" onclick="document.getElementById('inputPreview').click()">Add Image</button>
 	    <div class="form-group inputDnD file-drop-area">
 	        <!-- <label class="sr-only " for="inputFile">File Upload</label> -->
-	        <label class="sr-only file-message" for="inputFile">File Upload</label>
+	        <label class="sr-only file-message" for="inputFile" id="inputPreviewLabel">File Upload</label>
 	        <input type="file" class="form-control-file text-info font-weight-bold"  name="mainImg" id="inputPreview" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
 	    </div>
 	</div>
@@ -44,7 +44,7 @@
 	</div>
 	
 	<div class="col-lg-11">
-		<input type="text" name="title" placeholder="TITLE">
+		<input type="text" name="title" id="title" placeholder="TITLE">
 	</div>
 </div>
 
@@ -56,7 +56,7 @@
 	</div>
 	
 	<div class="col-lg-11">
-		<textarea class="mb-0" name="contents" placeholder="CONTENTS"></textarea>
+		<textarea class="mb-0" name="contents" id="contents" placeholder="CONTENTS"></textarea>
 	</div>
 </div>
 
@@ -68,7 +68,7 @@
 	
 	<div class="col-lg-11">
 		<div class="form-group">
-			<input type="text" class="form-control" name="tags"/>
+			<input type="text" class="form-control" id="tags" name="tags"/>
 		</div>
 	</div>
 </div>
@@ -82,7 +82,7 @@
 	
 	<div class="col-lg-8">
 		<div class="form-check form-check-inline">
-		  <input class="form-check-input" type="radio" name="aiYn" id="inlineRadio1" value="Y">
+		  <input class="form-check-input" type="radio" name="aiYn"  id="inlineRadio1" value="Y">
 		  <label class="form-check-label" for="inlineRadio1">YES</label>
 		</div>
 		<div class="form-check form-check-inline">
@@ -100,9 +100,9 @@
 		<p class="mb-0 edit-title">Sponsorship period</p>
 	</div>
 	<div class="col-lg-6   d-flex">
-				<input class="datetimepicker" name="funStartDt" id="fromDt" type="text"  placeholder="start date" autocomplete="off">
+				<input class="datetimepicker" name="funStartDt" id="fromDt funStartDt" type="text"  placeholder="start date" autocomplete="off">
 				<span class="ml-3 mr-3">~</span>
-				<input class="datetimepicker" name="funEndDt" id="toDt" type="text"  placeholder="end date" autocomplete="off">
+				<input class="datetimepicker" name="funEndDt" id="toDt funEndDt" type="text"  placeholder="end date" autocomplete="off">
 	</div>
 </div>
 
@@ -112,7 +112,7 @@
 		<p class="mb-0 edit-title">target amount</p>
 	</div>
 	<div class="col-lg-4">
-		<input type="text" placeholder="target amount" id="tagetAmount" name ="tgtAmt">
+		<input type="text" placeholder="target amount" id="tgtAmt" name ="tgtAmt">
 	</div>
 </div>
 
@@ -154,11 +154,11 @@
 	
 	<div class="col-lg-8">
 		<div class="form-check form-check-inline">
-		  <input class="form-check-input" type="radio" name="anoFunYn" id="AnonymousYN1" value="Y" disabled>
+		  <input class="form-check-input" type="radio" name="anoFunYn2" id="AnonymousYN12" value="Y" disabled>
 		  <label class="form-check-label" for="AnonymousYN1">YES</label>
 		</div>
 		<div class="form-check form-check-inline">
-		  <input class="form-check-input" type="radio" name="anoFunYn" id="AnonymousYN2" value="N" disabled>
+		  <input class="form-check-input" type="radio" name="anoFunYn2" id="AnonymousYN22" value="N" disabled>
 		  <label class="form-check-label" for="AnonymousYN2">NO</label>
 		</div>
 	</div>

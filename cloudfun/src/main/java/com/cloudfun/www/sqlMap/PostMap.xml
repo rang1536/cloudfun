@@ -79,6 +79,7 @@
 		     , B.THUMBNAIL_NM
 		     , C.NAME
 		     , B.TXT_PREVIEW
+		     , DATE_FORMAT(A.UPDATE_DT,'%d-%m-%Y') LAST_UPDATED
 		/* SELECT **/
 		FROM POST A
 		LEFT JOIN UPLOAD_FILE B
@@ -88,10 +89,13 @@
 		  ON C.MEMBER_ID = A.REGIST_ID
 		WHERE 1=1
 		 <if test='type != null'>
-
+		 AND A.DOMAIN_TYPE = #{type}
  		</if>
  		 <if test='regMemberId != null'>
 			
+ 		</if>
+ 		<if test='myPost eq "Y".toString()'>
+		  AND A.REGIST_ID = #{memberId}
  		</if>
 		ORDER BY A.REGIST_DT DESC
 		LIMIT ${limit} OFFSET  ${offset}
@@ -99,6 +103,32 @@
 		
 		   
 	</select>
+	
+	
+	<!-- 포스트목록(selectPostList) 페이징 처리 조회 -->
+	<select id="selectPostPaging" resultType="map" parameterType="map">
+		SELECT 
+		CEILING(${pageNo}/${limit})*5-4 NOW_PAGE /* 올림(현재페이지/표현페이지) *  표현페이지수 - 표현페이지수+1*/
+		, CEILING( COUNT(1)/${limit}) AS LAST_PAGE /*전체목록 / 표현페이지 -올림하여 마지막 페이지 확인*/
+		FROM POST A
+		LEFT JOIN UPLOAD_FILE B
+		  ON B.POST_ID = A.POST_ID
+		 AND B.GROUP_ID = '001' /*001 썸네일 이미지.*/
+		JOIN MEMBER C
+		  ON C.MEMBER_ID = A.REGIST_ID
+		WHERE 1=1
+		<if test='myPost eq "Y".toString()'>
+		  AND A.REGIST_ID = #{memberId}
+ 		</if>
+ 		<if test='type != null'>
+		 AND A.DOMAIN_TYPE = #{type}
+ 		</if>
+ 		 <if test='regMemberId != null'>
+ 		</if>
+ 		
+		
+	</select>
+	
 	
 	
 		<!-- 포스트 목록을 조회한다. -->
@@ -119,6 +149,8 @@
 		     , B.THUMBNAIL_NM
 		     , B.FILE_ID
 		     , C.NAME
+		     , DATE_FORMAT(A.UPDATE_DT,'%d-%m-%Y') LAST_UPDATED
+		     
 		/* SELECT **/
 		FROM POST A
 		LEFT JOIN UPLOAD_FILE B
@@ -149,9 +181,208 @@
 		 AND POST_ID = #{postId}
 		 AND USE_YN = 'Y'
 		 AND GROUP_ID = #{groupId}
+	</select>
+	
+	
+	
+	<!--후원금 저장  -->
+	<insert id="insertSponsership"  parameterType="map" >
 		
+		INSERT INTO FUND_PAY_LIST (
+				POST_ID 
+				, FUND_SNO
+				, MEMBER_ID
+				, USE_YN
+				, REGIST_DT
+				, REGIST_ID
+				, REGIST_IP
+				, UPDATE_DT
+				, UPDATE_ID
+				, UPDATE_IP
+				, FUN_AMT 
+				, PAY_CD
+				, PAY_YN   
+				)
+		VALUES(
+			#{postId} 
+			, CONCAT(#{postId}
+				  , #{memberId}
+				  , (SELECT LPAD((COUNT(1)+1),'4','0') FROM FUND_PAY_LIST a WHERE 1=1 AND POST_ID = #{postId} AND MEMBER_ID = #{memberId})
+			 )   
+			, #{memberId}
+			, 'Y'
+			,SYSDATE()
+			,#{memberId}
+			,'0.0.0.0'
+			,SYSDATE()
+			,#{memberId}
+			,'0.0.0.0'
+			, #{amt} 
+			, ''
+			, 'Y'   
+		)
+	
+	</insert>
+	
+	
+	<!-- 포스트 후원금 조회 -->
+	<select id="selectMemberSponAmt" resultType="map" parameterType="map">
+		SELECT  IFNULL(ROUND(SUM(FUN_AMT),2),0)  AS SUM_AMT
 		
+		FROM FUND_PAY_LIST
+		WHERE 1=1
+		  AND MEMBER_ID = #{memberId}
+		  AND USE_YN = 'Y'
+		  AND POST_ID  = #{postId}
 		   
 	</select>
+	
+	
+	<!-- 포스트 조회화면 - 순위 조회 -->
+	<select id="selectRankSponAmtList" resultType="map" parameterType="map">
+		SELECT B.*
+		     , LEFT(B.COMMENTS,50) AS COMMENTS_MIN
+		FROM (
+			SELECT A.SUM_AMT
+				, A.MEMBER_ID
+				, (SELECT COMMENTS 
+					FROM POST_COMMENTS B 
+					WHERE 1=1  
+					  AND A.MEMBER_ID = B.REGIST_ID 
+					  AND A.POST_ID = B.POST_ID 
+					ORDER BY REGIST_DT DESC LIMIT 1
+				) AS  COMMENTS
+				, C.NAME
+			FROM (
+			SELECT  IFNULL(ROUND(SUM(FUN_AMT),2),0)  AS SUM_AMT
+					, MEMBER_ID
+					, POST_ID
+					FROM FUND_PAY_LIST
+					WHERE 1=1
+					  AND USE_YN = 'Y'
+					  AND POST_ID  = #{postId}
+					  GROUP BY MEMBER_ID, POST_ID
+			) A
+			INNER JOIN MEMBER C
+			 ON A.MEMBER_ID = C.MEMBER_ID
+		) B
+		ORDER BY SUM_AMT DESC LIMIT 5
+
+		   
+	</select>
+	
+	
+	<!-- 포스트 조회화면 - 코멘트 조회 -->
+	<select id="selectRankCommentsList" resultType="map" parameterType="map">
+		SELECT B.*
+		     , LEFT(B.COMMENTS,50) AS COMMENTS_MIN
+		FROM (
+			SELECT A.SUM_AMT
+				, A.MEMBER_ID
+				, (SELECT COMMENTS 
+					FROM POST_COMMENTS B 
+					WHERE 1=1  
+					  AND A.MEMBER_ID = B.REGIST_ID 
+					  AND A.POST_ID = B.POST_ID 
+					ORDER BY REGIST_DT DESC LIMIT 1
+				) AS  COMMENTS
+				, (SELECT CONCAT(MONTHNAME(B.REGIST_DT), DATE_FORMAT(B.REGIST_DT ,' %d, %Y')) AS DATE_NM 
+					FROM POST_COMMENTS B 
+					WHERE 1=1  
+					  AND A.MEMBER_ID = B.REGIST_ID 
+					  AND A.POST_ID = B.POST_ID 
+					ORDER BY REGIST_DT DESC LIMIT 1
+				) AS  DATE_NM
+				, C.NAME
+				
+			FROM (
+			SELECT  IFNULL(ROUND(SUM(FUN_AMT),2),0)  AS SUM_AMT
+					, MEMBER_ID
+					, POST_ID
+					FROM FUND_PAY_LIST
+					WHERE 1=1
+					  AND USE_YN = 'Y'
+					  AND POST_ID  = #{postId}
+					  GROUP BY MEMBER_ID, POST_ID
+			) A
+			INNER JOIN MEMBER C
+			 ON A.MEMBER_ID = C.MEMBER_ID
+		) B
+		ORDER BY SUM_AMT DESC LIMIT 10
+	</select>
+	
+	
+	
+	
+	<!--코멘트 저장  -->
+	<insert id="insertSponComments"  parameterType="map" >
+		
+		INSERT INTO POST_COMMENTS (
+				POST_ID 
+				, COMMENT_ID
+				, COMMENTS
+				, USE_YN
+				, REGIST_DT
+				, REGIST_ID
+				, REGIST_IP
+				, UPDATE_DT
+				, UPDATE_ID
+				, UPDATE_IP
+				)
+		VALUES(
+			#{postId} 
+			, CONCAT(#{postId}
+				  ,  IFNULL(#{memberId},999)
+				  , (SELECT LPAD((COUNT(1)+1),'4','0') FROM POST_COMMENTS a WHERE 1=1 AND POST_ID = #{postId} AND REGIST_ID = #{memberId})
+			 )   
+			, #{sponMessage}
+			, 'Y'
+			,SYSDATE()
+			,#{memberId}
+			,'0.0.0.0'
+			,SYSDATE()
+			,#{memberId}
+			,'0.0.0.0'
+		)
+	
+	</insert>
+	
+		
+	<!--코멘트 저장  -->
+	<insert id="insertAlertMessage"  parameterType="map" >
+		
+		INSERT INTO POST_REPORT (
+				POST_ID 
+				, REPORT_ID
+				, REPORT_CD
+				, COMMENTS
+				, USE_YN
+				, REGIST_DT
+				, REGIST_ID
+				, REGIST_IP
+				, UPDATE_DT
+				, UPDATE_ID
+				, UPDATE_IP
+				)
+		VALUES(
+			#{postId} 
+			, CONCAT(#{postId}
+				  , IFNULL(#{memberId},999)
+				  , (SELECT LPAD((COUNT(1)+1),'4','0') FROM POST_REPORT a WHERE 1=1 AND POST_ID = #{postId})
+			 )   
+			, #{reportCd}
+			, #{alertMessage}
+			, 'Y'
+			,SYSDATE()
+			,#{memberId}
+			,'0.0.0.0'
+			,SYSDATE()
+			,#{memberId}
+			,'0.0.0.0'
+		)
+	
+	</insert>
+	
+	
 
 </mapper>

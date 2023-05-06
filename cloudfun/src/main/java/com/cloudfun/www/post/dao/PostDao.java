@@ -69,6 +69,40 @@ public class PostDao {
 		List<Map<String, String>> result =  sql.selectList("post.selectPostFileList", obj);
 		 return result;
 	}
+
+	public void insertSponsership(Map<String, String> obj) {
+		 int result =  sql.insert("post.insertSponsership", obj);
+	}
+
+	public Map<String, String> selectMemberSponAmt(Map<String, String> objParam) {
+		 Map<String, String> result =  sql.selectOne("post.selectMemberSponAmt", objParam);
+		 return result;
+	}
+
+	public Map<String, String> selectPostPaging(Map<String, String> objParam) {
+		Map<String, String> result =  sql.selectOne("post.selectPostPaging", objParam);
+		 return result;
+	}
+
+	public List<Map<String, String>> selectRankSponAmtList(Map<String, String> objParam) {
+		List<Map<String, String>> result =  sql.selectList("post.selectRankSponAmtList", objParam);
+		 return result;
+	}
+
+	public void insertSponComments(Map<String, String> objParam) {
+		 int result =  sql.insert("post.insertSponComments", objParam);
+		
+	}
+
+	public void insertAlertMessage(Map<String, String> objParam) {
+		 int result =  sql.insert("post.insertAlertMessage", objParam);
+		
+	}
+
+	public List<Map<String, String>> selectRankCommentsList(Map<String, String> objParam) {
+		List<Map<String, String>> result =  sql.selectList("post.selectRankCommentsList", objParam);
+		 return result;
+	}
 	
 	 
 

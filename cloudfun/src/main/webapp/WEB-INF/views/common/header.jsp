@@ -27,6 +27,15 @@
 	System.out.println(paramLocal);
 	pageContext.setAttribute("paramLocal",paramLocal);
 	
+	
+	// type
+	if(session.getAttribute("type")==null){
+		session.setAttribute("type","text");
+	}
+	
+	pageContext.setAttribute("type",session.getAttribute("type"));
+	
+	
 %>
 <fmt:setLocale value="${paramLocal}"/>
 
@@ -36,20 +45,41 @@
 <header class="header-section">
 	<div class="container">
 		<!-- logo -->
+		<div class="text-right">
+		<select class="" id="changeType" onchange="changesType(this)">
+		    <option value="text"    <c:if test="${type == 'text'}">selected </c:if> >text</option>
+		    <option value="picture" <c:if test="${type == 'picture'}">selected </c:if> >picture</option>
+		    <option value="comic"   <c:if test="${type == 'comic'}">selected </c:if> >comic</option>
+		    <option value="music"   <c:if test="${type == 'music'}">selected </c:if> >music</option>
+		    <option value="model"   <c:if test="${type == 'model'}">selected </c:if> >model</option>
+		</select>
+		</div>
+		<div class="text-right" style="color:white;">
+				<a style="color:white;" href="${path}/local/en">English</a>  /  <a style="color:white;" href="${path}/local/ko">한국어</a>
+				
+		</div>
+		
 		<a class="site-logo" href="${path}/">
 			<img src="${path}/img/new/logo2.png" alt="">
 		</a>
 		
+		
+		
 		   <% if(session.getAttribute("memberId")!= null){ %>
-		    <div class="user-panel" onclick="logout();">
-				<a href="#">Logout</a>
+		    <div class="user-panel mt-3" onclick="logout();">
+				<a href="#"><fmt:message key="header.Logout" /></a>
 			</div>
 		   <%}else{%>
-		    <div class="user-panel" onclick="loginWithGoogle();">
-				<a href="#">Login</a>  /  <a href="#">Register</a>
+		    <div class="user-panel mt-3" onclick="loginWithGoogle();">
+				<a href="#"><fmt:message key="header.Login" /></a>  /  <a href="#"><fmt:message key="header.Register" /></a>
 			</div>
+			
+			
+			
+			
+				
 		    <%} %>
-		 
+		 	
 		
 		
 		
@@ -63,10 +93,14 @@
 		<nav class="main-menu">
 			<ul>
 				<!-- HOME -->
-				<li><a href="${path}/">HOME</a></li>
+				<li><a href="${path}/"><fmt:message key="header.HOME" /></a></li>
 				
 				<!-- CREATION LIST -->
 				<li><a href="${path}/post/postList"><fmt:message key="header.CREATION.LIST" /></a></li>
+				
+				<!-- CREATION LIST -->
+				<li><a href="${path}/post/myPostList"><fmt:message key="header.MY.CREATION.LIST" /></a></li>
+				
 				
 				<!-- EDIT-TEXT -->
 				<li><a href="${path}/post/editText"><fmt:message key="header.EDIT-TEXT" /></a></li>
