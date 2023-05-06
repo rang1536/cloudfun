@@ -385,5 +385,49 @@ function deleteFile(num) {
     filesArr[num].is_delete = true;
 }
 
+
+
+// 첨부파일 미리보기
+
+function setEditPicturePreview(){
+	var dvPreview = $("#divImageMediaPreview2");
+    //dvPreview.html("");            
+    $($(this)[0].files).each(function () {
+        var file = $(this);       
+        if (validation(file[0])) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            	 
+            	
+	            	var div = $("<div class='col-lg-2 filebox row m-0' id='file" + fileNo + "' style='border: 1px solid #d6dee7;' > </div>");
+	            	var div2 = $("<div class='col-lg-12 text-center mb-3'> </div>");
+	            	var div2_2 = $("<div class='col-lg-12'> </div>");
+	            	var div3 = $("<div class='text-center'> </div>");
+	                var img = $("<img />");
+	                img.attr("style","max-height:150px;padding: 0px");
+	                img.attr("src", e.target.result);
+	                var pTag = $('<p class="name">' + fileName + '</p>')
+	                var aTag = $('<button type="button" class="delete btn btn-info btn-sm" onclick="deleteFile(' + fileNo + ');">DELETE</button>')
+	                
+	                
+	                div3.append(aTag);
+	                div3.append(pTag);
+	                
+	                
+	                div2_2.append(div3);
+	                div2.append(img);
+	                
+	                div.append(div2_2);
+	                div.append(div2);
+	                dvPreview.append(div);
+	                
+	                filesArr.push(file[0]);
+	                fileNo++;
+             }
+           
+            reader.readAsDataURL(file[0]);         
+	
+	
+}
 </script>
 
