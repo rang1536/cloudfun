@@ -125,6 +125,11 @@ public class HomeController {
 		return "redirect:"+ referer;
     }
     
+    @RequestMapping(value = "/pay", method = RequestMethod.GET)
+	public String papalTest() {
+
+		return "payapalTest";
+	}
     
     // session type ¼³Á¤
     @RequestMapping("/setType/{lang}")
