@@ -132,7 +132,7 @@ public class HomeController {
 	}
     
     // session type ¼³Á¤
-    @RequestMapping("/setType/{lang}")
+    @RequestMapping("/setType/{lang}") 
     public String setType(@PathVariable String lang
     		, HttpServletRequest request) throws IOException {
     	// todo
