@@ -214,9 +214,9 @@ $(document).ready(function() {
 	        }else{
 	        	console.log(res)
 	        	
-	        	setPreviewImg(res.result.THUMBNAIL_NM);
+	        	setPreviewImg(res);
 	        	setCommonInfo(res);
-	        	setTextFile(res.fileList[0].FILE_NM);
+	        	setTextFile(res);
 	        }
 	    });
 		

@@ -317,9 +317,9 @@ $(document).ready(function() {
 	        }else{
 	        	console.log(res)
 	        	
-	        	setPreviewImg(res.result.THUMBNAIL_NM);
+	        	setPreviewImg(res);
 	        	setCommonInfo(res);
-	        	setTextFile(res.fileList[0].FILE_NM);
+	        	setTextFile(res);
 	        }
 	    });
 		
@@ -388,9 +388,13 @@ function validation(obj){
 }
 
 /* 첨부파일 삭제 */
-function deleteFile(num) {
+function deleteFile(num,oldFileId) {
     document.querySelector("#file" + num).remove();
     filesArr[num].is_delete = true;
+    if(oldFileId){
+    	deleteOldFile(oldFileId);	
+    }
+    
 }
 
 </script>

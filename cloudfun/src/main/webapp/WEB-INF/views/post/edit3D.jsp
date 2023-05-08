@@ -349,7 +349,7 @@ $(document).ready(function() {
 			            var reader = new FileReader();
 			            reader.onload = function (e) {
 			            	
-				            	var div = $("<div class='col-lg-2 filebox3 row m-0' id='file" + fileNo3 + "' style='border: 1px solid #d6dee7;' > </div>");
+				            	var div = $("<div class='col-lg-2 filebox3 row m-0' id='fileImg" + fileNo3 + "' style='border: 1px solid #d6dee7;' > </div>");
 				            	var div2 = $("<div class='col-lg-12 text-center mb-3'> </div>");
 				            	var div2_2 = $("<div class='col-lg-12'> </div>");
 				            	var div3 = $("<div class='text-center'> </div>");
@@ -357,7 +357,7 @@ $(document).ready(function() {
 				                img.attr("style","max-height:150px;padding: 0px");
 				                img.attr("src", e.target.result);
 				                var pTag = $('<p class="name">' + fileName + '</p>')
-				                var aTag = $('<button type="button" class="delete btn btn-info btn-sm" onclick="deleteFile(' + fileNo3 + ');">DELETE</button>')
+				                var aTag = $('<button type="button" class="delete btn btn-info btn-sm" onclick="deleteFileImg(' + fileNo3 + ');">DELETE</button>')
 				                
 				                
 				                div3.append(aTag);
@@ -421,9 +421,12 @@ $(document).ready(function() {
 	        }else{
 	        	console.log(res)
 	        	
-	        	setPreviewImg(res.result.THUMBNAIL_NM);
+	        	setPreviewImg(res);
 	        	setCommonInfo(res);
-	        	setTextFile(res.fileList[0].FILE_NM);
+	        	//setTextFile(res);
+	        	setEdit3DImgPreview(res);
+	        	setEdit3DFilePreview(res);
+	        	
 	        }
 	    });
 		
@@ -456,10 +459,23 @@ function validation(obj){
 }
 
 /* 첨부파일 삭제 */
-function deleteFile(num) {
+function deleteFile(num,oldFileId) {
     document.querySelector("#file" + num).remove();
     filesArr[num].is_delete = true;
+    if(oldFileId){
+    	deleteOldFile(oldFileId);	
+    }
+    
+}
+
+/* 첨부파일 삭제 */
+function deleteFileImg(num,oldFileId) {
+    document.querySelector("#fileImg" + num).remove();
+    filesArr[num].is_delete = true;
+    if(oldFileId){
+    	deleteOldFile(oldFileId);	
+    }
+    
 }
 
 </script>
-

@@ -255,6 +255,14 @@ function readUrl(input) {
 		}
 		reader.readAsDataURL(input.files[0]);
 	}
+	
+	var inputId = input.getAttribute("id");
+	if(inputId=="inputPreview"){
+		$(".group001").remove()
+		
+	}else if(inputId=="inputPreview2"){
+		$(".group002").remove()
+	}
 
 }	
 
@@ -264,21 +272,27 @@ function readUrl(input) {
 // post edit 
 
 
-function setPreviewImg(url, fileName){
+function setPreviewImg(res){
 	
-	if(fileName){
+	var url = res.result.THUMBNAIL_NM
+	
+	var fileId = res.result.FILE_ID
+	
+	/*if(fileName){
 		var textbox = $("#inputPreviewLabel");
 		textbox.text(fileName);
 		
 		var inputPreview = $("#inputPreview");
 		inputPreview.attr("data-title", fileName);
-	}
+	}*/
 	
 	var dvPreview = $("#divImageMediaPreview");
 	var img = $("<img />");
 	img.attr("style", "width: 100%; height:100%; padding: 10px");
 	img.attr("src", path+"/display?filename=" +url);
 	dvPreview.html(img);
+	
+	addOldFile(fileId, "001");
 	
 }
 
@@ -310,7 +324,9 @@ function setCommonInfo(param){
 	
 }
 
-function setTextFile(fileName){
+function setTextFile(res){
+	var fileName = res.fileList[0].FILE_NM
+	var fileId = res.fileList[0].FILE_ID
 	if(fileName){
 		
 		
@@ -318,6 +334,146 @@ function setTextFile(fileName){
 		inputPreview.attr("data-title", fileName);
 	}
 	
+	//addOldFile(fileId);
+	
+	addOldFile(fileId, "002");
+}
+
+
+
+//첨부파일 미리보기
+
+function setEditPicturePreview(param){
+	var dvPreview = $("#divImageMediaPreview2");
+	var inputPreview2 = $("#inputPreview2")
+ //dvPreview.html("");
+	
+	var fileList = param.fileList;
+	
+	for(var i in fileList){
+		var div = $("<div class='col-lg-2 filebox row m-0' id='file" + fileNo + "' style='border: 1px solid #d6dee7;' > </div>");
+ 	var div2 = $("<div class='col-lg-12 text-center mb-3'> </div>");
+ 	var div2_2 = $("<div class='col-lg-12'> </div>");
+ 	var div3 = $("<div class='text-center'> </div>");
+     var img = $("<img />");
+     img.attr("style","max-height:150px;padding: 0px");
+     img.attr("src", path+"/display?filename=" + fileList[i].FILE_ID);
+     var pTag = $('<p class="name">' + fileList[i].FILE_NM + '</p>')
+     var aTag = $('<button type="button" class="delete btn btn-info btn-sm" onclick="deleteFile(' + fileNo + ",'" + fileList[i].FILE_ID+"'" +');">DELETE</button>')
+     
+     
+     div3.append(aTag);
+     div3.append(pTag);
+     
+     
+     div2_2.append(div3);
+     div2.append(img);
+     
+     div.append(div2_2);
+     div.append(div2);
+     dvPreview.append(div);
+     
+     filesArr.push("before");
+     //filesArr.push(file[0]);
+     fileNo++;
+     
+     
+     addOldFile(fileList[i].FILE_ID);
+		
+	}
+		
+}
+
+
+
+//첨부파일 미리보기
+function setEdit3DImgPreview(param){
+	var dvPreview = $("#divImageMediaPreview3");
+	var inputPreview2 = $("#inputPreview3")
+	
+	var fileList = param.fileList3;
+	
+	for(var i in fileList){
+		var div = $("<div class='col-lg-2 filebox3 row m-0' id='fileImg" + fileNo3 + "' style='border: 1px solid #d6dee7;' > </div>");
+		var div2 = $("<div class='col-lg-12 text-center mb-3'> </div>");
+		var div2_2 = $("<div class='col-lg-12'> </div>");
+		var div3 = $("<div class='text-center'> </div>");
+	   var img = $("<img />");
+	   img.attr("style","max-height:150px;padding: 0px");
+	   img.attr("src", path+"/display?filename=" + fileList[i].FILE_ID);
+	   var pTag = $('<p class="name">' + fileList[i].FILE_NM + '</p>')
+	   var aTag = $('<button type="button" class="delete btn btn-info btn-sm" onclick="deleteFileImg(' + fileNo3 + ",'" + fileList[i].FILE_ID+"'" +');">DELETE</button>')
+	   
+	   
+	   div3.append(aTag);
+	   div3.append(pTag);
+	   
+	   
+	   div2_2.append(div3);
+	   div2.append(img);
+	   
+	   div.append(div2_2);
+	   div.append(div2);
+	   dvPreview.append(div);
+	   
+	   filesArr3.push("before");
+	   //filesArr.push(file[0]);
+	   fileNo3++;
+	   
+	   
+	   addOldFile(fileList[i].FILE_ID);
+		
+	}
+		
+}
+
+function setEdit3DFilePreview(param){
+	var dvPreview = $("#divImageMediaPreview2");
+	
+	var fileList = param.fileList;
+	
+	for(var i in fileList){
+		var date = fileList[i].FILE_ID
+		var year = date.substring(0,4);
+	    var month = date.substring(4,6);
+	    var day = date.substring(6,8);
+
+    	
+    	var dt = day +'/'+ month +'/'+ year; 
+	
+	
+		var tr = $("<tr class='filebox' id='file" + fileNo + "'></tr>");
+		var td1 = $('<td class="align-middle">' + fileList[i].FILE_NM  + '</td>')
+		var td2 = $('<td class="align-middle"> '+    dt    + '</td>')
+		var td3 = $('<td class="align-middle"><button type="button" class="delete btn btn-info btn-sm" onclick="deleteFile(' + fileNo + ",'" + fileList[i].FILE_ID+"'" +');">DELETE</button></td>')
+	
+	 	tr.append(td1);
+		tr.append(td2);
+		tr.append(td3);
+		
+		dvPreview.append(tr);
+        
+		filesArr3.push("before");
+        fileNo++;
+		
+		
+	}
+    
+	
+}
+
+
+
+function addOldFile(fileId , group){
+	var oldFileContainer = $("#oldFileContainer");
+	var inputDv = $("<input type='hidden' class='oldFile group"+group+"' id='"+fileId+"'  value='"+ fileId +"'/>");
+	oldFileContainer.append(inputDv)
+	
+}
+
+
+function deleteOldFile(fileId){
+	$("input[id='"+fileId+"']").remove()
 	
 }
 
