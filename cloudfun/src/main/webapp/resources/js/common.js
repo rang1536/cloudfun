@@ -453,8 +453,10 @@ function setEdit3DFilePreview(param){
 		
 		dvPreview.append(tr);
         
-		filesArr3.push("before");
+		filesArr.push("before");
         fileNo++;
+        
+        addOldFile(fileList[i].FILE_ID);
 		
 		
 	}
@@ -475,6 +477,22 @@ function addOldFile(fileId , group){
 function deleteOldFile(fileId){
 	$("input[id='"+fileId+"']").remove()
 	
+}
+
+function  oldFileList(){
+	//oldFileList
+	var oldFiles=$("#oldFileContainer").children();
+	var oldFileLen = oldFiles.length;
+	var oldFileList ="'";
+	
+	oldFiles.each(function(){
+		oldFileList+=$(this).val()+"','";
+	});
+	
+	
+	oldFileList+="99'";
+	
+	return oldFileList;
 }
 
 

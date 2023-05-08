@@ -61,6 +61,34 @@
 	</insert>
 	
 	
+	
+	
+	<update id="updatePost"  parameterType="map" >
+		
+		UPDATE POST 
+		 SET TITLE          =  #{title}
+			, CONTENTS       =  #{contents}
+			, TAGS           =  #{tags}
+			, AI_YN          =  #{aiYn}
+			, FUN_START_DT   =  #{funStartDt}
+			, FUN_END_DT     =  #{funEndDt}
+			, TGT_AMT        =  #{tgtAmt}
+			, OPEN_AMT       =  #{openAmt}
+			, ANO_FUN_YN     =  #{anoFunYn}
+			, ADULT_YN       =  #{adultYn}
+			, DOMAIN_TYPE    =  #{domainType}
+			, FILE_GROUP_ID  =  #{fileGroupId}
+			, USE_YN         =  #{useYn}
+			, UPDATE_DT      =  SYSDATE()
+			, UPDATE_ID      =  #{memberId}
+			, UPDATE_IP      =  '0.0.0.0'
+		WHERE 1=1
+		  AND POST_ID = #{postId}
+	
+	
+	</update>
+	
+	
 	<!-- 포스트 목록을 조회한다. -->
 	<select id="selectPostList" resultType="map" parameterType="map">
 		SELECT A.POST_ID
@@ -85,6 +113,7 @@
 		LEFT JOIN UPLOAD_FILE B
 		  ON B.POST_ID = A.POST_ID
 		 AND B.GROUP_ID = '001' /*001 썸네일 이미지.*/
+		 AND B.USE_YN = 'Y' 
 		JOIN MEMBER C
 		  ON C.MEMBER_ID = A.REGIST_ID
 		WHERE 1=1
@@ -114,6 +143,7 @@
 		LEFT JOIN UPLOAD_FILE B
 		  ON B.POST_ID = A.POST_ID
 		 AND B.GROUP_ID = '001' /*001 썸네일 이미지.*/
+		 AND B.USE_YN = 'Y' 
 		JOIN MEMBER C
 		  ON C.MEMBER_ID = A.REGIST_ID
 		WHERE 1=1
@@ -156,6 +186,7 @@
 		LEFT JOIN UPLOAD_FILE B
 		  ON B.POST_ID = A.POST_ID
 		 AND B.GROUP_ID = '001' /*001 썸네일 이미지.*/
+		 AND B.USE_YN = 'Y' 
 		JOIN MEMBER C
 		  ON C.MEMBER_ID = A.REGIST_ID
 		WHERE 1=1
@@ -382,6 +413,16 @@
 		)
 	
 	</insert>
+	
+	
+	<!-- 기존첨부파일 재정비(삭제 및 기존유지)  -->
+	<update id="updatePostOldFile" parameterType="map">
+		UPDATE UPLOAD_FILE
+		SET USE_YN = 'N'
+		WHERE 1=1
+		 AND POST_ID = #{postId}
+		 AND FILE_ID NOT IN (${oldFileList});
+	</update>
 	
 	
 

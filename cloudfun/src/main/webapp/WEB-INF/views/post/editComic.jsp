@@ -135,9 +135,10 @@ $(document).ready(function() {
 	$("#save-btn").on("click",function(e){
 		var form = $('#postFrm');
 		
-		
 		var formData = new FormData();
-		formData.append("jsonStr",JSON.stringify(Utils.getFormValue($("#postFrm"))));
+		var jsonFormData = Utils.getFormValue($("#postFrm"));
+		jsonFormData["oldFileList"] = oldFileList();
+		formData.append("jsonStr",JSON.stringify(jsonFormData));
 		
 		/* var inputFile = $("input[name='uploadFile']");
 		var files = inputFile[0].files; */
