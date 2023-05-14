@@ -368,7 +368,8 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     	objParam.put("memberId", memberId);
     	objParam.put("type", type);
     	
-
+    	String searchParam = request.getParameter("searchParam");
+    	objParam.put("searchParam", searchParam);
     	
     	
     	int limit = 10 ;

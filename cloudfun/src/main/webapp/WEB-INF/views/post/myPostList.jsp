@@ -10,8 +10,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-5 col-lg-6 text-white">
-						<h2>CREATION LIST</h2>
-						<p>...</p>
+						<h2>MY CREATION LIST</h2>
+						<!-- <p>...</p> -->
 					</div>
 				</div>
 			</div>

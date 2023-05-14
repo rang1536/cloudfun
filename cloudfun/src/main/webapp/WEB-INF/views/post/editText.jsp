@@ -11,7 +11,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-5 col-lg-6 text-white">
-						<h2>Post Edit</h2>
+						<h2>Edit</h2>
 						<p>Register content to receive sponsorship</p>
 					</div>
 				</div>

@@ -11,7 +11,7 @@
 				<div class="row">
 					<div class="col-xl-5 col-lg-6 text-white">
 						<h2>CREATION LIST</h2>
-						<p>...</p>
+						<!-- <p>...</p> -->
 					</div>
 				</div>
 			</div>
@@ -35,8 +35,10 @@
 										<div class="cata new">${item.DOMAIN_TYPE}</div>
 									</div>
 									<div class="rgi-content">
-										<h5>${item.TITLE}</h5>
+										<h5 class="pb-0 mb-0">${item.TITLE}</h5>
+										<div class="comment mb-2"> ${item.TAGS}</div>
 										<p>${item.CONTENTS2} </p>
+										
 										
 										<div class="comment mb-2">PERIOD : ${item.FUN_START_DT} ~ ${item.FUN_END_DT}</div>
 										<a href="#" class="comment">${item.NAME}</a>
@@ -76,9 +78,9 @@
 				<div class="col-lg-4 col-md-7 sidebar pt-5 pt-lg-0">
 					<!-- widget -->
 					<div class="widget-item">
-						<form class="search-widget">
-							<input type="text" placeholder="Search">
-							<button><i class="fa fa-search"></i></button>
+						<form class="search-widget"  onSubmit="return false;">
+							<input type="text" id="searchParam" placeholder="Search">
+							<button onclick="postSearch(this)"><i class="fa fa-search"></i></button>
 						</form>
 					</div>
 					<!-- widget -->
@@ -101,7 +103,7 @@
 						</div>
 					</div>
 					<!-- widget -->
-					<div class="widget-item">
+				<%-- 	<div class="widget-item">
 						<h4 class="widget-title">Top Comments</h4>
 						<div class="top-comment">
 							<div class="tc-item">
@@ -126,9 +128,9 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --%>
 					<!-- widget -->
-					<div class="widget-item">
+					<%-- <div class="widget-item">
 						<div class="feature-item set-bg" data-setbg="${path}/img/features/1.jpg">
 							<span class="cata new">new</span>
 							<div class="fi-content text-white">
@@ -149,7 +151,7 @@
 								<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p>
 							</div>
 						</div>
-					</div>
+					</div> --%>
 				</div>
 			</div>
 		</div>
@@ -170,7 +172,21 @@ function postSend(param){
 
 
 function postPage(param){
-	location.href="${path}/post/postList?pageNo="+ param
+	var url = "${path}/post/postList?pageNo="+ param
+			
+			
+	<c:if test="${not empty param.searchParam}">
+		url += "&searchParam=${param.searchParam}"
+	
+	</c:if>
+	
+	location.href=url
+}
+
+function postSearch(param){
+	var searchParam = $("#searchParam").val();
+	location.href="${path}/post/postList?searchParam="+ searchParam; 
+	
 }
 
 $(document).ready(function() {

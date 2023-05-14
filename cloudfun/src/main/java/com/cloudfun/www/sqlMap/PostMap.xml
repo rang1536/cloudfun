@@ -120,6 +120,12 @@
 		 <if test='type != null'>
 		 AND A.DOMAIN_TYPE = #{type}
  		</if>
+ 		<if test='searchParam != null'>
+		 AND (A.TAGS LIKE CONCAT('%' ,#{searchParam}, '%')
+		   OR A.TITLE  LIKE CONCAT('%' ,#{searchParam}, '%')
+		 )
+ 		</if>
+ 		
  		 <if test='regMemberId != null'>
 			
  		</if>
