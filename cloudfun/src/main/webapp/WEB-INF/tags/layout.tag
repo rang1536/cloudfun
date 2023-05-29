@@ -52,6 +52,7 @@
     <link rel="stylesheet" href='<c:url value="/css/owl.carousel.css"/>'>
     <link rel="stylesheet" href='<c:url value="/css/style.css"/>'>
     <link rel="stylesheet" href='<c:url value="/css/animate.css"/>'>
+    <link rel="stylesheet" href='<c:url value="/css/mermaid.min.css"/>'>
 </head>
 <body>
 	
@@ -76,6 +77,9 @@
     
 	<script src="${path}/resources/js/main.js"></script>
 	<script src="${path}/resources/js/bootstrap.min.js"></script>
+	
+	<script src="${path}/resources/js/gridjs.production.min.js"></script>
+	
 
     
     

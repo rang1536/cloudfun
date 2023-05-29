@@ -1,5 +1,6 @@
 package com.cloudfun.www.login.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -48,6 +49,17 @@ public class LoginService {
 		
 		
 		return memberId;
+		
+	}
+
+	public Map<String, String> selectMember(Map<String, String> obj) {
+		// TODO Auto-generated method stub
+		return loginDao.selectMember(obj);
+	}
+
+	public void saveMemberDetail(HashMap<String, String> obj) {
+//    	3-2 회원 상세 테이블 insert
+		loginDao.saveMemberDetail(obj);
 		
 	}
 	

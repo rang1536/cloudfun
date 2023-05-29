@@ -1,5 +1,6 @@
 package com.cloudfun.www.login.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,15 @@ public class LoginDao {
 		 return result;
 		 
 	 }
+
+	public Map<String, String> selectMember(Map<String, String> obj) {
+		Map<String, String> result =  sql.selectOne("login.selectMember", obj);
+		return result;
+	}
+
+	public void saveMemberDetail(HashMap<String, String> obj) {
+		sql.update("login.saveMemberDetail", obj);
+	}
 	 
 	 
 	 

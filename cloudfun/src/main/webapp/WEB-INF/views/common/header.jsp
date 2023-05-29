@@ -74,7 +74,7 @@
 				<a href="#"><fmt:message key="header.Login" /></a>  /  <a href="#"><fmt:message key="header.Register" /></a>
 			</div>
 			
-			
+				
 			
 			
 				
@@ -119,6 +119,8 @@
 				
 				<!-- JOIN -->
 				<li><a href="${path}/join"><fmt:message key="header.JOIN" /></a></li>
+				<!-- editMember -->
+				<li><a href="${path}/editMember"><fmt:message key="header.EDIT-MEMBER" /></a></li>
 				<!-- TERMS -->
 				<li><a href="${path}/terms"><fmt:message key="header.TERMS" /></a></li>
 				
@@ -127,6 +129,11 @@
 				
 				<li><a href="${path}/local/en">English</a></li>
 				<li><a href="${path}/local/ko">한국어</a></li>
+				
+				
+				
+				<li><a href="${path}/admin/member">관리자-member</a></li>
+				<li><a href="${path}/admin/adminPost">관리자-post</a></li>
 				
 				
 				<li><a href="${path}/component"><fmt:message key="header.COMPONENTS" /></a></li>

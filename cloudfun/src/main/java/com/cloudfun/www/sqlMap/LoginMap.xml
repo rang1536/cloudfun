@@ -90,6 +90,7 @@
 				, JOIN_TYPE
 				, PASSWORD
 				, BIRTH_DT
+				, NICK_NAME
 				, REGIST_DT
 				, REGIST_ID
 				, REGIST_IP
@@ -101,7 +102,8 @@
 			#{memberId}
 			,#{type}
 			, SHA2(#{password},256)
-			, #{birth}		
+			, #{birth}
+			, #{nickName}		
 			,SYSDATE()
 			,#{memberId}
 			,'0.0.0.0'
@@ -113,4 +115,54 @@
 	
 	</insert>
 
+
+	<select id="selectMember" resultType="map" parameterType="map">
+		SELECT A.MEMBER_ID
+		, A.EMAIL
+		, A.NAME
+		, IFNULL(B.BIRTH_DT,'') AS BIRTH_DT
+		, IFNULL(B.NICK_NAME,'') AS NICK_NAME
+		FROM MEMBER A
+		LEFT JOIN MEMBER_DETAIL B
+		ON A.MEMBER_ID = B.MEMBER_ID
+		WHERE 1=1
+		  AND A.MEMBER_ID = #{memberId}
+		  AND B.JOIN_TYPE =  #{type}
+	     <choose>
+		    <when test="type == 'text'">
+		      AND A.TYPE_01 = 'Y'
+		      
+		    </when>
+		    <when test="type == 'picture'">
+		      AND A.TYPE_02 = 'Y'
+		    </when>
+		    <when test="type == 'comic'">
+		      AND A.TYPE_03 = 'Y'
+		    </when>
+		    <when test="type == 'music'">
+		      AND A.TYPE_04 = 'Y'
+		    </when>
+		    <when test="type== 'model'" >
+		      AND A.TYPE_05 = 'Y'
+		    </when>
+		    <otherwise>
+		    </otherwise>  
+	  </choose>
+		   
+	</select>
+	
+	
+	
+	
+	
+	<!-- 개인정보 저장 -->
+	<update id="saveMemberDetail" parameterType="map">
+		UPDATE MEMBER_DETAIL
+		SET BIRTH_DT = #{birth}
+		, NICK_NAME = #{nickName}
+		WHERE 1=1
+		 AND MEMBER_ID = #{memberId}
+		 AND JOIN_TYPE = #{type}
+	</update>
+	
 </mapper>
