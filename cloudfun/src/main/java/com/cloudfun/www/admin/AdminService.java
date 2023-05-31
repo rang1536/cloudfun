@@ -46,4 +46,15 @@ public class AdminService {
 		adminDao.updatePostInfo(objParam);
 		
 	}
+
+
+	public List<Map<String, String>> selectAlertList(Map<String, String> objParam) {
+		return adminDao.selectAlertList(objParam);
+	}
+
+
+	public void updateAlertInfo(Map<String, String> objParam) {
+		adminDao.updateAlertInfo(objParam);
+		
+	}
 }

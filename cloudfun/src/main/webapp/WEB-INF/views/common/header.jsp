@@ -134,6 +134,7 @@
 				
 				<li><a href="${path}/admin/member">관리자-member</a></li>
 				<li><a href="${path}/admin/adminPost">관리자-post</a></li>
+				<li><a href="${path}/admin/adminReport">관리자-report</a></li>
 				
 				
 				<li><a href="${path}/component"><fmt:message key="header.COMPONENTS" /></a></li>

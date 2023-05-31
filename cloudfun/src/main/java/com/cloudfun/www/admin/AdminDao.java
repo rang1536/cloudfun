@@ -39,6 +39,16 @@ public class AdminDao {
 		
 	}
 
+	public List<Map<String, String>> selectAlertList(Map<String, String> objParam) {
+		List<Map<String, String>> result =  sql.selectList("admin.selectAlertList", objParam);
+		return result;
+	}
+
+	public void updateAlertInfo(Map<String, String> objParam) {
+		 int result =  sql.update("admin.updateAlertInfo", objParam);
+		
+	}
+
 	/*
 	 * public List<TbRcept> rceptList(String[] arr){
 		return sql.selectList("inspection.selectRceptList", arr);

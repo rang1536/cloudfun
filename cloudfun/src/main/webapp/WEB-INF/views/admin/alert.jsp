@@ -26,8 +26,21 @@
 					</div>
 	            
 	          </div>
-			</div>				
-		</div>
+			
+			
+			<div class="col-lg-4 ">
+				 <div class="input-group mb-3">
+					  <div class="input-group-prepend">
+					    <label class="input-group-text" for="inputGroupSelect01">confirmed</label>
+					  </div>
+					  <select class="custom-select" id="useYnSelect" onchange="changeType(this)">
+					    <option value="" selected>ALL</option>
+					    <option value="Y">N</option>
+					    <option value="N">Y</option>
+					  </select>
+				</div>
+          </div>
+         </div>
 		<div class="row" >
 			<div class="col-lg-12 ">
 				<div id="wrapper"></div>
@@ -49,85 +62,26 @@
 	      </div>
 	      <div class="modal-body">
 	        <form>
+	        	
 	          	<div class="row mb-1 " >
 					<div class="col-lg-6">
 						<p class="mb-0 edit-title">* POST ID</p>
 					</div>
 					<div class="col-lg-6">
 						<input type="hidden" id="POST_ID" name ="POST_ID" readonly>
-						<p id="POST_ID2" ></p>
+						<input type="hidden" id="REPORT_ID" name ="REPORT_ID" readonly>
+						<p class="btn-link" id="POST_ID2"  onclick="goPost()" ></p>
+						
 					</div>
 				</div>
 				
 				<div class="row mb-1 " >
 					<div class="col-lg-6">
-						<p class="mb-0 edit-title">* TITLE</p>
+						<p class="mb-0 edit-title">* COMMENTS</p>
 					</div>
 					<div class="col-lg-6">
 						<!-- <input type="text" id="NAME" name ="NAME" readonly> -->
-						<p id="TITLE" name ="TITLE"  ></p>
-					</div>
-				</div>
-				
-				<div class="row mb-1 " >
-					<div class="col-lg-6">
-						<p class="mb-0 edit-title">* TAGS</p>
-					</div>
-					<div class="col-lg-6">
-						<!-- <input type="text" id="EMAIL" name ="EMAIL" readonly> -->
-						<p id="TAGS" name ="TAGS"  ></p>
-					</div>
-				</div>
-				
-				
-				<div class="row mb-1 " >
-					<div class="col-lg-6">
-						<p class="mb-0 edit-title">* FUN_START_DT</p>
-					</div>
-					<div class="col-lg-6">
-						<!-- <input type="text" id="EMAIL" name ="EMAIL" readonly> -->
-						<p id="FUN_START_DT" name ="FUN_START_DT"  ></p>
-					</div>
-				</div>
-				
-				
-				<div class="row mb-1 " >
-					<div class="col-lg-6">
-						<p class="mb-0 edit-title">* FUN_END_DT</p>
-					</div>
-					<div class="col-lg-6">
-						<!-- <input type="text" id="EMAIL" name ="EMAIL" readonly> -->
-						<p id="FUN_END_DT" name ="FUN_END_DT"  ></p>
-					</div>
-				</div>
-				
-				<div class="row mb-1 " >
-					<div class="col-lg-6">
-						<p class="mb-0 edit-title">* TGT_AMT</p>
-					</div>
-					<div class="col-lg-6">
-						<!-- <input type="text" id="EMAIL" name ="EMAIL" readonly> -->
-						<p id="TGT_AMT" name ="TGT_AMT"  ></p>
-					</div>
-				</div>
-				
-				
-				<div class="row mb-1 " >
-					<div class="col-lg-6">
-						<p class="mb-0 edit-title">* OPEN_AMT</p>
-					</div>
-					<div class="col-lg-6">
-						<!-- <input type="text" id="EMAIL" name ="EMAIL" readonly> -->
-						<p id="OPEN_AMT" name ="OPEN_AMT"  ></p>
-					</div>
-				</div>
-				<div class="row mb-1 " >
-					<div class="col-lg-6">
-						<p class="mb-0 edit-title">* TYPE</p>
-					</div>
-					<div class="col-lg-6">
-						<!-- <input type="text" id="EMAIL" name ="EMAIL" readonly> -->
-						<p id="DOMAIN_TYPE" name ="DOMAIN_TYPE"  ></p>
+						<p style="white-space: pre-line;" name="COMMENTS" id="COMMENTS"></p>
 					</div>
 				</div>
 				
@@ -141,6 +95,8 @@
 						<p id="MEMBER_ID" name ="MEMBER_ID"  ></p>
 					</div>
 				</div>
+				
+				
 				<div class="row mb-1 " >
 					<div class="col-lg-6">
 						<p class="mb-0 edit-title">* NAME</p>
@@ -151,27 +107,11 @@
 					</div>
 				</div>
 				
-				<div class="row mb-1 " >
-					<div class="col-lg-6 ">
-						<p class="mb-0 edit-title">* AI_YN</p>
-					</div>
-					
-					<div class="col-lg-6">
-						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="AI_YN" id="AI_Y" value="Y" onclick="return false;">
-						  <label class="form-check-label" for="AI_Y">YES</label>
-						</div>
-						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="AI_YN" id="AI_N" value="N" onclick="return false;">
-						  <label class="form-check-label" for="AI_N">NO</label>
-						</div>
-					</div>
-				</div>
 				
 				<hr>
 				<div class="row mb-1 " >
 					<div class="col-lg-6 ">
-						<p class="mb-0 edit-title">* USE</p>
+						<p class="mb-0 edit-title">* CONFIRM</p>
 					</div>
 					
 					<div class="col-lg-6">
@@ -226,10 +166,11 @@ $(document).ready(function () {
 function getPostList(){
 	var jsonData = {
 			adminType : $('#typeSelect').find(":selected").val()
+			,useYn : $('#useYnSelect').find(":selected").val()
 	}
 	
 	$.ajax({
-		url: "${path}" + '/api/admin/getPostList',
+		url: "${path}" + '/api/admin/getAlertList',
          dataType:'json',
          data : JSON.stringify(jsonData),
          type: 'post',
@@ -262,8 +203,8 @@ function setGrid(param){
      * */ 
      
      
-	var columns = ["POST_ID", "TITLE","CONTENTS","TAGS", "AI_YN", "FUN_START_DT", "FUN_END_DT","TGT_AMT","OPEN_AMT", "DOMAIN_TYPE", "MEMBER_ID", "NAME","USE_YN"]
-	var dbColumns = ["POST_ID", "TITLE","CONTENTS2","TAGS", "AI_YN", "FUN_START_DT", "FUN_END_DT","TGT_AMT","OPEN_AMT", "DOMAIN_TYPE","MEMBER_ID", "NAME","USE_YN"]
+	var columns = ["POST_ID","COMMENTS","MEMBER_ID","NAME", "CONFIRM","KEY"]
+	var dbColumns = ["POST_ID", "COMMENTS","MEMBER_ID","NAME", "USE_YN",  "REPORT_ID"]
 	var divId = "div#wrapper"
 	
 	
@@ -314,51 +255,39 @@ function modalOpen(param){
 	console.log(param[1])
 	
 	var POST_ID          = param[1].cells[0].data;
-	var TITLE            = param[1].cells[1].data;
-	var CONTENTS2        = param[1].cells[2].data;
-	var TAGS             = param[1].cells[3].data;
-	var AI_YN            = param[1].cells[4].data;
-	var FUN_START_DT     = param[1].cells[5].data;
-	var FUN_END_DT       = param[1].cells[6].data;
-	var TGT_AMT          = param[1].cells[7].data;
-	var OPEN_AMT         = param[1].cells[8].data;
-	var DOMAIN_TYPE      = param[1].cells[9].data;
-	var MEMBER_ID        = param[1].cells[10].data;
-	var NAME             = param[1].cells[11].data;
-	var USE_YN             = param[1].cells[12].data;
-	
-
+	var COMMENTS            = param[1].cells[1].data;
+	var MEMBER_ID        = param[1].cells[2].data;
+	var NAME             = param[1].cells[3].data;
+	var USE_YN            = param[1].cells[4].data;
+	var REPORT_ID            = param[1].cells[5].data;
 	
 	$("#POST_ID").val(POST_ID)
 	$("#POST_ID2").text(POST_ID)
 	
-	$("#TITLE").text(TITLE)
-	$("#TAGS").text(TAGS)
-	$("#FUN_START_DT").text(FUN_START_DT)
-	$("#FUN_END_DT").text(FUN_END_DT)
-	$("#TGT_AMT").text(TGT_AMT)
-	$("#OPEN_AMT").text(OPEN_AMT)
-	$("#DOMAIN_TYPE").text(DOMAIN_TYPE)
+	$("#COMMENTS").text(COMMENTS)
 	$("#MEMBER_ID").text(MEMBER_ID)
 	$("#NAME").text(NAME)
+	$("#REPORT_ID").val(REPORT_ID)
 	
 	
 	$("input:radio[name='USE_YN']:radio[value="+USE_YN+"]").prop('checked', true);
-	$("input:radio[name='AI_YN']:radio[value="+AI_YN+"]").prop('checked', true);
 
 }
 
 
 function sendMemberInfo(){
+	
+	 var useYn  = $("input:radio[name='USE_YN']:checked").val() =="Y" ?  "N" : "Y"; 
+	
 	var jsonData = {
 			postId : $("#POST_ID").val()
-			, useYn : $("input:radio[name='USE_YN']:checked").val()
+			, useYn : useYn
+			, reportId : $("#REPORT_ID").val()
 	}
-	
 	
 	if (confirm("Would you like to save??") == true) {
 		$.ajax({
-	    	  url: preUrl + '/api/admin/setPostInfo',
+	    	  url: preUrl + '/api/admin/setAlertInfo',
 	          dataType:'json',
 	          data : JSON.stringify(jsonData),
 	          type: 'post',
@@ -380,6 +309,13 @@ function sendMemberInfo(){
 function changeType(){
 	getPostList();
 }	
+
+function goPost(){
+	 var postId = $("#POST_ID").val()
+	window.open(preUrl+"/post/viewText?postId=" + postId);
+	
+}
+
 
 </script>
 

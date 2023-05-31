@@ -30,7 +30,7 @@
 	        <form>
 	          	<div class="row mb-3 " >
 					<div class="col-lg-4">
-						<h5 class="mb-0 edit-title">* ID</h5>
+						<p class="mb-0 edit-title">* ID</p>
 					</div>
 					<div class="col-lg-4">
 						<input type="hidden" id="ID" name ="ID" readonly>
@@ -40,7 +40,7 @@
 				
 				<div class="row mb-3 " >
 					<div class="col-lg-4">
-						<h5 class="mb-0 edit-title">* NAME</h5>
+						<p class="mb-0 edit-title">* NAME</p>
 					</div>
 					<div class="col-lg-4">
 						<!-- <input type="text" id="NAME" name ="NAME" readonly> -->
@@ -50,7 +50,7 @@
 				
 				<div class="row mb-3 " >
 					<div class="col-lg-4">
-						<h5 class="mb-0 edit-title">* EMAIL</h5>
+						<p class="mb-0 edit-title">* EMAIL</p>
 					</div>
 					<div class="col-lg-4">
 						<!-- <input type="text" id="EMAIL" name ="EMAIL" readonly> -->
@@ -61,7 +61,7 @@
 				<hr>
 				<div class="row mb-3 " >
 				<div class="col-lg-2 ">
-					<h5 class="mb-0 edit-title">* USE</h5>
+					<p class="mb-0 edit-title">* USE</p>
 				</div>
 				
 				<div class="col-lg-4">
@@ -76,7 +76,7 @@
 				</div>
 				
 				<div class="col-lg-2 ">
-					<h5 class="mb-0 edit-title">* ADMIN</h5>
+					<p class="mb-0 edit-title">* ADMIN</p>
 				</div>
 				
 				<div class="col-lg-4">

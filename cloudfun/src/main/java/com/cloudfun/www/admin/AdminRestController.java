@@ -163,4 +163,72 @@ public class AdminRestController {
 		
 		return resultMap;
 	}
+	
+	
+	
+	@RequestMapping(value="/api/admin/getAlertList", method = RequestMethod.POST)
+	public HashMap<String, Object> getAlertList(@RequestBody HashMap<String, String> map, HttpServletRequest request){
+		
+		HttpSession session = request.getSession();
+
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		  
+		  
+		// session 정보
+		String sessionEmail = (String)session.getAttribute("email");
+		String sessionName = (String)session.getAttribute("name");
+		String sessionType = (String)session.getAttribute("type");
+		String memberId = (String)session.getAttribute("memberId");
+		  
+		String adminType = (String)map.get("adminType");
+		String useYn = (String)map.get("useYn");
+
+		// form 정보
+//		String postId = map.get("postId");
+//		String amt = map.get("amt");
+
+		Map<String, String> objParam = new HashMap<String,String>();
+		objParam.put("adminType", adminType);
+		objParam.put("useYn", useYn);
+		List<Map<String, String>> memberList =adminService.selectAlertList(objParam);
+		resultMap.put("memberList", memberList);
+		
+		return resultMap;
+	}
+	
+	
+	@RequestMapping(value="/api/admin/setAlertInfo", method = RequestMethod.POST)
+	public HashMap<String, Object> setAlertInfo(@RequestBody HashMap<String, String> map, HttpServletRequest request){
+		
+		HttpSession session = request.getSession();
+
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		  
+		  
+		// session 정보
+		String sessionEmail = (String)session.getAttribute("email");
+		String sessionName = (String)session.getAttribute("name");
+		String sessionType = (String)session.getAttribute("type");
+		
+		
+		
+		String reportId = map.get("reportId");
+		String useYn = map.get("useYn");
+		
+		
+		// form 정보
+//		String postId = map.get("postId");
+//		String amt = map.get("amt");
+
+		Map<String, String> objParam = new HashMap<String,String>();
+		
+		objParam.put("reportId", reportId);
+		objParam.put("useYn", useYn);
+		
+		adminService.updateAlertInfo(objParam);
+		
+		
+		return resultMap;
+	}
+	
 }

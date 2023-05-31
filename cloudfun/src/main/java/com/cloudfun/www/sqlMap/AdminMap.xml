@@ -104,6 +104,37 @@
 	</update>
 	
 	
+	<select id="selectAlertList" resultType="map" parameterType="map">
+	   SELECT A.POST_ID
+	        , A.REPORT_ID
+			, A.COMMENTS
+			, CASE WHEN A.USE_YN = 'Y' THEN 'N'
+			     ELSE 'Y'END 
+			 AS USE_YN
+			, B.MEMBER_ID
+			, B.NAME
+		FROM POST_REPORT A
+   		JOIN MEMBER B
+		  ON B.MEMBER_ID = A.REGIST_ID
+  		JOIN POST C
+  		  ON A.POST_ID = C.POST_ID
+		  WHERE 1=1
+	<if test='adminType != null and adminType != ""'>
+		 AND C.DOMAIN_TYPE = #{adminType}
+ 		</if>
+ 		<if test='useYn != null and useYn != ""'>
+		 AND A.USE_YN = #{useYn}
+ 		</if>
 	
+	
+	</select>
 
+	<!--  post-->
+	<update id="updateAlertInfo" parameterType="map">
+		UPDATE POST_REPORT
+		SET USE_YN = #{useYn}
+		WHERE 1=1
+		 AND REPORT_ID = #{reportId}
+	</update>
+	
 </mapper>
