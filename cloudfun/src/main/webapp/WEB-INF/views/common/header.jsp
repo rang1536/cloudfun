@@ -101,18 +101,20 @@
 				<!-- CREATION LIST -->
 				<li><a href="${path}/post/myPostList"><fmt:message key="header.MY.CREATION.LIST" /></a></li>
 				
-				
+				<%-- 
 				<!-- EDIT-TEXT -->
-				<li><a href="${path}/post/editText"><fmt:message key="header.EDIT-TEXT" /></a></li>
+				<li><a href="${path}/post/editText"><fmt:message key="header.EDIT-TEXT" /></a></li> 
+				--%>
 				<!-- EDIT-PICTURES -->
 				<li><a href="${path}/post/editPicture"><fmt:message key="header.EDIT-PICTURES" /></a></li>
+				<%-- 
 				<!-- EDIT-3D MODEL -->
 				<li><a href="${path}/post/edit3D"><fmt:message key="header.EDIT-3D.MODEL" /></a></li>
 				<!-- EDIT-MUSIC -->
 				<li><a href="${path}/post/editMusic"><fmt:message key="header.EDIT-MUSIC" /></a></li>
 				<!-- EDIT-COMIC -->
 				<li><a href="${path}/post/editComic"><fmt:message key="header.EDIT-COMIC" /></a></li>
-				
+				 --%>
 				
 				<%-- 
 				<li><a href="${path}/post/viewText?postId=1">viewText</a></li> --%>
@@ -124,12 +126,9 @@
 				<!-- TERMS -->
 				<li><a href="${path}/terms"><fmt:message key="header.TERMS" /></a></li>
 				
-				<!-- <li><a href="community.html">Forums</a></li>
-				<li><a href="contact.html">Contact</a></li> -->
 				
 				<li><a href="${path}/local/en">English</a></li>
 				<li><a href="${path}/local/ko">한국어</a></li>
-				
 				
 				
 				<li><a href="${path}/admin/member">관리자-member</a></li>
@@ -137,7 +136,9 @@
 				<li><a href="${path}/admin/adminReport">관리자-report</a></li>
 				
 				
-				<li><a href="${path}/component"><fmt:message key="header.COMPONENTS" /></a></li>
+				<%-- 
+				<li><a href="${path}/component"><fmt:message key="header.COMPONENTS" /></a></li> 
+				--%>
 			</ul>
 		</nav>
 	</div>
