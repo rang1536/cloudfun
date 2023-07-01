@@ -31,7 +31,7 @@
 					</div>
 				</div>
 				 -->
-				<div class="row">
+				<%-- <div class="row">
 					<div class="col-lg-12 mb-3">
 						<p class="text-left mb-0">Nick Name</p>
 						<input type="text" name="nickName" placeholder="Nick Name" value = '<c:out value="${nickName}"/>'  >
@@ -43,6 +43,15 @@
 						<p class="text-left mb-0">Date of brith</p>
 						<input class="datetimepicker" name="birth" id="birth" type="text"  value = '<c:out value="${birthDt}"/>'  placeholder="Date of brith" autocomplete="off">
 					</div>
+				</div> --%>
+				<div class="row">
+					<div class="col-lg-12 mb-3">
+						<p class="text-left mb-0">Nation</p>
+						<select class="custom-select" id="nation" name="nation" >
+						    <option value="" selected>Nation</option>
+						    
+						</select>
+					  </div>
 				</div>
 				
 				
@@ -74,6 +83,45 @@ $(document).ready(function () {
 	$("button[id='join-btn']").click(function () {
 		save();
 	}); 
+	
+	
+
+	var jsonData = {
+		
+	}
+	
+	$.ajax({
+		url: "${path}" + '/api/selectNation',
+          dataType:'json',
+          data : JSON.stringify(jsonData),
+          type: 'post',
+          contentType: "application/json"
+    }).done(function (res) {
+        if(res.error){
+        	alert(error);
+        	return ; 
+        }else{
+        	console.log(res)
+        	var nationCdList = res.nationCdList;
+        	
+        	for(var i = 0 ; i < nationCdList.length; i++){
+        		var objNationCd = nationCdList[i];
+        		var code = objNationCd.CODE;
+        		var codeEn = objNationCd.CODE_EN;
+        		var codeId = objNationCd.CODE_ID;
+        		var codeKr = objNationCd.CODE_KR;
+        		
+        		
+        	
+        		$("#nation").append('<option value="' + code + '">'+ codeEn+' / ' +codeKr  +'</option>');
+        		
+        		
+        	}
+        	var nationCd = "${nationCd}";
+        	$("#nation").val(nationCd).prop("selected", true);
+        }
+    });
+	
 });
 	
 

@@ -46,9 +46,9 @@
 	<div class="container">
 		<!-- logo -->
 		<div class="text-right">
-		<select class="" id="changeType" onchange="changesType(this)">
-		    <option value="text"    <c:if test="${type == 'text'}">selected </c:if> >text</option>
+		<select class="" id="changeType" onchange="changesType(this)" style="display:none">
 		    <option value="picture" <c:if test="${type == 'picture'}">selected </c:if> >picture</option>
+		    <option value="text"    <c:if test="${type == 'text'}">selected </c:if> >text</option>
 		    <option value="comic"   <c:if test="${type == 'comic'}">selected </c:if> >comic</option>
 		    <option value="music"   <c:if test="${type == 'music'}">selected </c:if> >music</option>
 		    <option value="model"   <c:if test="${type == 'model'}">selected </c:if> >model</option>

@@ -84,9 +84,9 @@ private static final Logger logger = LoggerFactory.getLogger(LoginController.cla
 	      * À½¾Ç : music
 	      * 3D Model : model
 	      * */ 
-        a.put("type", "text");
-        
         HttpSession session = request.getSession();
+        String type  = (String)session.getAttribute("type");
+        a.put("type", type);
         
         //int loginUserCnt= loginService.isLogin(a);
         String memberId =  loginService.isLogin(a);
@@ -168,12 +168,15 @@ private static final Logger logger = LoggerFactory.getLogger(LoginController.cla
     	String NAME = String.valueOf(result.get("NAME"));
     	String BIRTH_DT = String.valueOf(result.get("BIRTH_DT"));
     	String NICK_NAME = String.valueOf(result.get("NICK_NAME"));
+    	String NATION_CD = String.valueOf(result.get("NATION_CD"));
 
     	model.addAttribute("memberId", MEMBER_ID);
     	model.addAttribute("email", EMAIL);
     	model.addAttribute("name", NAME);
     	model.addAttribute("birthDt", BIRTH_DT);
     	model.addAttribute("nickName", NICK_NAME);
+    	model.addAttribute("nationCd", NATION_CD);
+    	
     	
     	
 

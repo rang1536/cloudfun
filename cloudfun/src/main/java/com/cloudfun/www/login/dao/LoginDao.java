@@ -46,6 +46,12 @@ public class LoginDao {
 	public void saveMemberDetail(HashMap<String, String> obj) {
 		sql.update("login.saveMemberDetail", obj);
 	}
+
+	public List<Map<String, String>> selectNationCd(HashMap<String, String> obj) {
+		// TODO Auto-generated method stub
+		List<Map<String, String>> result =  sql.selectList("login.selectNationCd", obj);
+		return result;
+	}
 	 
 	 
 	 

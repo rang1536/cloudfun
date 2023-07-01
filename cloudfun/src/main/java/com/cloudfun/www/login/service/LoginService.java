@@ -47,7 +47,6 @@ public class LoginService {
 		//    	3-2 회원 상세 테이블 insert
 		loginDao.insertMemberDetail(obj);
 		
-		
 		return memberId;
 		
 	}
@@ -61,6 +60,11 @@ public class LoginService {
 //    	3-2 회원 상세 테이블 insert
 		loginDao.saveMemberDetail(obj);
 		
+	}
+
+	public List<Map<String, String>> selectNationCd(HashMap<String, String> obj) {
+		// TODO Auto-generated method stub
+		return loginDao.selectNationCd(obj);
 	}
 	
 	

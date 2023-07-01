@@ -63,15 +63,15 @@
 			 , UPDATE_ID
 			 , UPDATE_IP
 		) VALUES (
-			(SELECT LPAD((COUNT(1)+1),'11','0') FROM MEMBER a)
+			(SELECT LPAD((MAX(MEMBER_ID)+1),'11','0') FROM MEMBER a)
 			, #{email}
 			, #{name}
 			,'Y'
 			,SYSDATE()
-			,(SELECT LPAD((COUNT(1)+1),'11','0') FROM MEMBER b)
+			,(SELECT LPAD((MAX(MEMBER_ID)+1),'11','0') FROM MEMBER b)
 			,'0.0.0.0'
 			,SYSDATE()
-			,(SELECT LPAD((COUNT(1)+1),'11','0') FROM MEMBER c)
+			,(SELECT LPAD((MAX(MEMBER_ID)+1),'11','0') FROM MEMBER c)
 			,'0.0.0.0'
 		)
 		ON DUPLICATE KEY UPDATE
@@ -91,6 +91,7 @@
 				, PASSWORD
 				, BIRTH_DT
 				, NICK_NAME
+				, NATION_CD
 				, REGIST_DT
 				, REGIST_ID
 				, REGIST_IP
@@ -103,7 +104,8 @@
 			,#{type}
 			, SHA2(#{password},256)
 			, #{birth}
-			, #{nickName}		
+			, #{nickName}
+			, #{nation}		
 			,SYSDATE()
 			,#{memberId}
 			,'0.0.0.0'
@@ -122,6 +124,7 @@
 		, A.NAME
 		, IFNULL(B.BIRTH_DT,'') AS BIRTH_DT
 		, IFNULL(B.NICK_NAME,'') AS NICK_NAME
+		, IFNULL(B.NATION_CD,'') AS NATION_CD
 		FROM MEMBER A
 		LEFT JOIN MEMBER_DETAIL B
 		ON A.MEMBER_ID = B.MEMBER_ID
@@ -164,5 +167,17 @@
 		 AND MEMBER_ID = #{memberId}
 		 AND JOIN_TYPE = #{type}
 	</update>
+	
+	
+	<!-- 국가 코드 조회 -->
+	<select id="selectNationCd" resultType="map"  parameterType="map">
+		SELECT CODE_ID
+			,  CODE
+			,  CODE_KR
+			, CODE_EN
+		FROM NATION_CD
+		WHERE 1=1
+		ORDER BY CODE_EN
+	</select>
 	
 </mapper>
