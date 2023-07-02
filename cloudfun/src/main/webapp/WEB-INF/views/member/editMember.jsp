@@ -8,7 +8,7 @@
 		<div class="container"  >
 			<form class="comment-form" id="frm-join" name="frm-join" >
 			
-			<h4 id="join-title">Sign Up</h4>
+			<h4 id="join-title">MY INFO</h4>
 				<br>
 				<div class="row justify-content-md-center">
 					<div class="col-lg-12 mb-3" >
@@ -23,21 +23,27 @@
 						<input type="text" name="name" placeholder="Name" value = "${name}" readonly>
 					</div>
 				</div>
-				
-			<!-- 	<div class="row">
+				<!-- 
+				<div class="row">
 					<div class="col-lg-12 mb-3">
 						<p class="text-left mb-0">Password</p>
 						<input type="password" name="password" placeholder="Password"  autocomplete="off">
+					</div>
+				</div>
+				 -->
+				<%-- <div class="row">
+					<div class="col-lg-12 mb-3">
+						<p class="text-left mb-0">Nick Name</p>
+						<input type="text" name="nickName" placeholder="Nick Name" value = '<c:out value="${nickName}"/>'  >
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="col-lg-12 mb-3">
 						<p class="text-left mb-0">Date of brith</p>
-						<input class="datetimepicker" name="birth" id="birth" type="text"  placeholder="Date of brith" autocomplete="off">
+						<input class="datetimepicker" name="birth" id="birth" type="text"  value = '<c:out value="${birthDt}"/>'  placeholder="Date of brith" autocomplete="off">
 					</div>
-				</div> -->
-				
+				</div> --%>
 				<div class="row">
 					<div class="col-lg-12 mb-3">
 						<p class="text-left mb-0">Nation</p>
@@ -47,15 +53,10 @@
 						</select>
 					  </div>
 				</div>
-
-				<p class="text-center mb-0">By creating an account,</p>
-				<p class="text-center mb-2"> you are agreeing to 00's</p>
-				<a href="${path}/terms">Terms of Service</a>
-				
 				
 				
 			</form>
-			<button class="site-btn btn-sm mt-3" id="join-btn">Join</button>
+			<button class="site-btn btn-sm mt-3" id="join-btn">Save</button>
 		</div>
 	</section>
 
@@ -80,9 +81,11 @@ $(document).ready(function () {
 
 	// btn
 	$("button[id='join-btn']").click(function () {
-		join();
+		save();
 	}); 
 	
+	
+
 	var jsonData = {
 		
 	}
@@ -109,33 +112,34 @@ $(document).ready(function () {
         		var codeKr = objNationCd.CODE_KR;
         		
         		
+        	
         		$("#nation").append('<option value="' + code + '">'+ codeEn+' / ' +codeKr  +'</option>');
         		
         		
         	}
+        	var nationCd = "${nationCd}";
+        	$("#nation").val(nationCd).prop("selected", true);
         }
     });
-	
-	
 	
 });
 	
 
 
 
-function join() {
+function save() {
 	var jsonData = Utils.getFormValue($("#frm-join"));
 		
-	/* var datatimeRegexp = /([0-9]{2}-[0-9]{2}-[0-9]{4})/;
+	var datatimeRegexp = /([0-9]{2}-[0-9]{2}-[0-9]{4})/;
 
     if ( !datatimeRegexp.test($('#birth').val()) ) {
         alert("'Date of birth' is wrong");
         return false;
     }	
-	 */
+	
 	
     $.ajax({
-    	  url: preUrl + '/api/join',
+    	  url: preUrl + '/api/saveMember',
           dataType:'json',
           data : JSON.stringify(jsonData),
           type: 'post',

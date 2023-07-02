@@ -103,6 +103,15 @@ public class PostDao {
 		List<Map<String, String>> result =  sql.selectList("post.selectRankCommentsList", objParam);
 		 return result;
 	}
+
+	public void updatePost(Map<String, String> obj) {
+		int result =  sql.insert("post.updatePost", obj);
+	}
+
+	public void updatePostOldFile(Map<String, String> obj) {
+		 int result =  sql.insert("post.updatePostOldFile", obj);
+		
+	}
 	
 	 
 

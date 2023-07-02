@@ -139,9 +139,14 @@ public class HomeController {
 	}
 =======
     
+    @RequestMapping(value = "/pay", method = RequestMethod.GET)
+	public String papalTest() {
+
+		return "payapalTest";
+	}
     
     // session type ¼³Á¤
-    @RequestMapping("/setType/{lang}")
+    @RequestMapping("/setType/{lang}") 
     public String setType(@PathVariable String lang
     		, HttpServletRequest request) throws IOException {
     	// todo

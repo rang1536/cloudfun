@@ -193,7 +193,7 @@ result
 							</c:forEach>
 							
 							
-							<li>
+							<%-- <li>
 								<div class="comment">
 									<div class="comment-avator set-bg" data-setbg="${path}/img/authors/2.jpg"></div>
 									<div class="comment-content">
@@ -202,7 +202,7 @@ result
 										<a href="" class="reply">Reply</a>
 									</div>
 								</div>
-							</li>
+							</li> --%>
 						</ul>
 					</div>
 					

@@ -11,7 +11,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-5 col-lg-6 text-white">
-						<h2>Post Edit</h2>
+						<h2>Edit</h2>
 						<p>Register content to receive sponsorship</p>
 					</div>
 				</div>
@@ -132,8 +132,12 @@ $(document).ready(function() {
 		var form = $('#postFrm');
 		
 		
+		var form = $('#postFrm');
+		
 		var formData = new FormData();
-		formData.append("jsonStr",JSON.stringify(Utils.getFormValue($("#postFrm"))));
+		var jsonFormData = Utils.getFormValue($("#postFrm"));
+		jsonFormData["oldFileList"] = oldFileList();
+		formData.append("jsonStr",JSON.stringify(jsonFormData));
 		
 		/* var inputFile = $("input[name='uploadFile']");
 		var files = inputFile[0].files; */
@@ -310,9 +314,9 @@ $(document).ready(function() {
 	        }else{
 	        	console.log(res)
 	        	
-	        	setPreviewImg(res.result.THUMBNAIL_NM);
+	        	setPreviewImg(res);
 	        	setCommonInfo(res);
-	        	setTextFile(res.fileList[0].FILE_NM);
+	        	setTextFile(res);
 	        }
 	    });
 		
@@ -380,11 +384,14 @@ function validation(obj){
 }
 
 /* 첨부파일 삭제 */
-function deleteFile(num) {
+function deleteFile(num,oldFileId) {
     document.querySelector("#file" + num).remove();
     filesArr[num].is_delete = true;
+    if(oldFileId){
+    	deleteOldFile(oldFileId);	
+    }
+    
 }
-
 
 
 // 첨부파일 미리보기

@@ -102,6 +102,38 @@ ol {
 	background-size: contain;
 	background-position: top center;
 	
+	
+	
+}
+
+.set-bg-main{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+}
+
+.set-bg-right {
+	background-repeat: no-repeat;
+	/* background-size: cover; */
+	background-size: contain;
+	background-position: top right 10%;
+	min-height:350px;
+}
+
+
+.main-text{
+	color: #fff;
+    font-weight: 400;
+    font-size: 60px;
+    padding-top: 100px;
+    position: relative;
+	
+	
+}
+
+.main-span{
+	color: #ffb320;
+	
 }
 
 .spad {

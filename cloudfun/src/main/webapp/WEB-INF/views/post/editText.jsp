@@ -11,7 +11,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-5 col-lg-6 text-white">
-						<h2>Post Edit</h2>
+						<h2>Edit</h2>
 						<p>Register content to receive sponsorship</p>
 					</div>
 				</div>
@@ -106,10 +106,10 @@ $(document).ready(function() {
 	$("#save-btn").on("click",function(e){
 		var form = $('#postFrm');
 		
-		
 		var formData = new FormData();
-		
-		formData.append("jsonStr",JSON.stringify(Utils.getFormValue($("#postFrm"))));
+		var jsonFormData = Utils.getFormValue($("#postFrm"));
+		jsonFormData["oldFileList"] = oldFileList();
+		formData.append("jsonStr",JSON.stringify(jsonFormData));
 		
 		
 		var inputFile = $("input[name='uploadFile']");
@@ -214,9 +214,9 @@ $(document).ready(function() {
 	        }else{
 	        	console.log(res)
 	        	
-	        	setPreviewImg(res.result.THUMBNAIL_NM);
+	        	setPreviewImg(res);
 	        	setCommonInfo(res);
-	        	setTextFile(res.fileList[0].FILE_NM);
+	        	setTextFile(res);
 	        }
 	    });
 		

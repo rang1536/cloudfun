@@ -62,16 +62,16 @@ public class UtilFile {
 	private FileDao fileDao;
 	
 	/*
-	//�떎以묓뙆�씪�뾽濡쒕뱶
+	//占쎈��餓λ���占쎌�わ옙毓썸에��諭�
 	public List<TbFile> multiUploadFile(List<MultipartFile> fileList){
 		List<TbFile> uploadFileList = new ArrayList<TbFile>();
-		//�샇�뒪�똿
+		//占쎌��占쎈�わ옙��
 		String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
 
-		//濡쒖뺄
+		//嚥≪��類�
 		//String rootPath = "C:\\git\\abnext\\abnext\\src\\main\\webapp\\resources\\files\\";
 
-		//�쉶�궗 �꽌踰�
+		//占쎌�띰옙沅� 占쎄�甕곤옙
 		//String rootPath = "F:\\sh86\\resources\\files\\";
 
 		if (fileList.size() > 0){
@@ -84,24 +84,24 @@ public class UtilFile {
 	}
 	*/
 
-	//�떒�씪�뙆�씪 �뾽濡쒕뱶
+	//占쎈��占쎌�わ옙��占쎌�� 占쎈씜嚥≪��諭�
 /*
 	public TbFile singleUploadFile(MultipartFile file){
-		//�샇�뒪�똿
+		//占쎌��占쎈�わ옙��
 		//String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
 		//String rootPath = "http:///sh86.kr/resources/files/"+classNum+"/";
 
-		//�샇�뒪�똿
+		//占쎌��占쎈�わ옙��
 		String rootPath = "/home/hosting_users/avinext/tomcat/webapps/files/";
 
-		//濡쒖뺄
+		//嚥≪��類�
 		//String rootPath = "C:\\git\\abnext\\abnext\\src\\main\\webapp\\resources\\files\\";
 
 		return uploadFile(file, rootPath);
 
 	}*/
 
-	// 硫��떚�뙆�듃 �뙆�씪 > �뙆�씪 �삎�떇�쑝濡� 蹂��솚 (�븞��.)
+	// 筌�占쏙옙��占쎈��占쎈�� 占쎈��占쎌�� > 占쎈��占쎌�� 占쎌��占쎈��占쎌��嚥∽옙 癰�占쏙옙�� (占쎈�占쏙옙.)
 	/*public File convert(MultipartFile multipartFile) throws IOException {
 	    File file= new File(multipartFile.getOriginalFilename());
 	    file.createNewFile();
@@ -156,11 +156,11 @@ public class UtilFile {
 			uploadFile.put("useYn", param.get("useYn"));
 			
 			
-			// 파일업로드 이력 저장.
+			 // 파일정보 업로드.
 			fileDao.insertFile(uploadFile);
 			
 			
-			// 이미지 파일인 경우 썸네일 생성
+			// 이미지파일의 경우 썸네일 생성
             if(multipartFile.getContentType().startsWith("image") == true){
             	String thumbnailSaveName = formatedNow + uuid2 + fileExtension; //DB
             	thumbnailSaveName = thumbnailSaveName.replace("-", "");
@@ -233,21 +233,21 @@ public class UtilFile {
 	
 
 
-		/* �씠誘몄� �뾽濡쒕뱶�슜. �슜�웾�븬異� 諛� jpg蹂댁젙 濡쒖쭅 �룷�븿
+		/* 占쎌��沃�紐�占� 占쎈씜嚥≪��諭띰옙��. 占쎌��占쎌�억옙釉х�곤옙 獄�占� jpg癰����� 嚥≪��彛� 占쎈７占쎈맙
 		byte[] imgBytes = null;
 		try {
 			imgBytes = multipartFile.getBytes();
 			BufferedInputStream bufferedIS = new BufferedInputStream(new ByteArrayInputStream(imgBytes));
 
-			 Thumbnails �궗�슜�떆 �씠誘몄� �깋�긽�씠 蹂��븯�뒗 臾몄젣媛� �깮源�.
+			 Thumbnails 占쎄�占쎌��占쎈�� 占쎌��沃�紐�占� 占쎄�占쎄맒占쎌�� 癰�占쏙옙釉�占쎈�� �얜��ｅ�占� 占쎄문繹�占�.
 			 * BufferedImage bi = Thumbnails.of(file).scale(1).asBufferedImage();
 
 			int orientation = correctOrientation(bufferedIS);
 
-			BufferedInputStream bis = new BufferedInputStream(new ByteArrayInputStream(imgBytes)); //�깉濡� �깮�꽦�빐以섏빞 bufferedImage媛� �꼸�씠 �븘�땲�떎.
+			BufferedInputStream bis = new BufferedInputStream(new ByteArrayInputStream(imgBytes)); //占쎄�嚥∽옙 占쎄문占쎄쉐占쎈�餓μ��鍮� bufferedImage揶�占� 占쎄섯占쎌�� 占쎈�占쎈�뀐옙��.
 			BufferedImage bi = rotateImageForMobile(bis, orientation);
 
-			//遺꾪솉諛곌꼍 �깋�긽 �썝�깋�긽�쑝濡� 蹂댁젙
+			//�브쑵��獄�怨�瑗� 占쎄�占쎄맒 占쎌��占쎄�占쎄맒占쎌��嚥∽옙 癰�����
 			int w = bi.getWidth();
 			int h = bi.getHeight();
 			BufferedImage biNew = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
@@ -294,7 +294,7 @@ public class UtilFile {
 	        uploadFile.setFilePath(rootPath);
 	        uploadFile.setFileNewNm(fileName);*/
 			
-			// 파일업로드 이력 저장.
+			// ���쇱��濡��� �대�� ����.
 			
 			
 			
@@ -306,7 +306,7 @@ public class UtilFile {
 		return uploadFile;
 	}
 	/*
-	//�뙆�씪 �궘�젣
+	//占쎈��占쎌�� 占쎄�占쎌��
 	public boolean deleteImage(String path){
 		File destFile = new File(path);
 		boolean result = destFile.delete();
@@ -321,7 +321,7 @@ public class UtilFile {
 	    if(metadata != null) {
 	        // Get the current orientation of the image
             Directory directory = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
-            System.out.println("�뵒�젆�넗由� : "+directory);
+            System.out.println("占쎈�占쎌��占쎈���깍옙 : "+directory);
             if(directory != null) {
             	orientation = directory.getInt(ExifIFD0Directory.TAG_ORIENTATION);
                 System.out.println("orientation : "+orientation);
@@ -333,13 +333,13 @@ public class UtilFile {
 
 	public BufferedImage rotateImageForMobile(InputStream is,int orientation) throws IOException {
         BufferedImage bi = ImageIO. read(is);
-         if(orientation == 6){ //�젙�쐞移�
+         if(orientation == 6){ //占쎌��占쎌��燁삼옙
                 return rotateImage(bi, 90);
-        } else if (orientation == 1){ //�쇊履쎌쑝濡� �닞���쓣�븣
+        } else if (orientation == 1){ //占쎌��筌�����嚥∽옙 占쎈��占쏙옙占쎌�ｏ옙釉�
                 return bi;
-        } else if (orientation == 3){//�삤瑜몄そ�쑝濡� �닞���쓣�븣
+        } else if (orientation == 3){//占쎌�ㅷ��紐���占쎌��嚥∽옙 占쎈��占쏙옙占쎌�ｏ옙釉�
                 return rotateImage(bi, 180);
-        } else if (orientation == 8){//180�룄
+        } else if (orientation == 8){//180占쎈�
                 return rotateImage(bi, 270);
         } else{
                 return bi;

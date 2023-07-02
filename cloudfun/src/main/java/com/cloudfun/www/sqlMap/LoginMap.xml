@@ -63,15 +63,15 @@
 			 , UPDATE_ID
 			 , UPDATE_IP
 		) VALUES (
-			(SELECT LPAD((COUNT(1)+1),'11','0') FROM MEMBER a)
+			(SELECT LPAD((MAX(MEMBER_ID)+1),'11','0') FROM MEMBER a)
 			, #{email}
 			, #{name}
 			,'Y'
 			,SYSDATE()
-			,(SELECT LPAD((COUNT(1)+1),'11','0') FROM MEMBER b)
+			,(SELECT LPAD((MAX(MEMBER_ID)+1),'11','0') FROM MEMBER b)
 			,'0.0.0.0'
 			,SYSDATE()
-			,(SELECT LPAD((COUNT(1)+1),'11','0') FROM MEMBER c)
+			,(SELECT LPAD((MAX(MEMBER_ID)+1),'11','0') FROM MEMBER c)
 			,'0.0.0.0'
 		)
 		ON DUPLICATE KEY UPDATE
@@ -90,6 +90,8 @@
 				, JOIN_TYPE
 				, PASSWORD
 				, BIRTH_DT
+				, NICK_NAME
+				, NATION_CD
 				, REGIST_DT
 				, REGIST_ID
 				, REGIST_IP
@@ -101,7 +103,9 @@
 			#{memberId}
 			,#{type}
 			, SHA2(#{password},256)
-			, #{birth}		
+			, #{birth}
+			, #{nickName}
+			, #{nation}		
 			,SYSDATE()
 			,#{memberId}
 			,'0.0.0.0'
@@ -113,4 +117,67 @@
 	
 	</insert>
 
+
+	<select id="selectMember" resultType="map" parameterType="map">
+		SELECT A.MEMBER_ID
+		, A.EMAIL
+		, A.NAME
+		, IFNULL(B.BIRTH_DT,'') AS BIRTH_DT
+		, IFNULL(B.NICK_NAME,'') AS NICK_NAME
+		, IFNULL(B.NATION_CD,'') AS NATION_CD
+		FROM MEMBER A
+		LEFT JOIN MEMBER_DETAIL B
+		ON A.MEMBER_ID = B.MEMBER_ID
+		WHERE 1=1
+		  AND A.MEMBER_ID = #{memberId}
+		  AND B.JOIN_TYPE =  #{type}
+	     <choose>
+		    <when test="type == 'text'">
+		      AND A.TYPE_01 = 'Y'
+		      
+		    </when>
+		    <when test="type == 'picture'">
+		      AND A.TYPE_02 = 'Y'
+		    </when>
+		    <when test="type == 'comic'">
+		      AND A.TYPE_03 = 'Y'
+		    </when>
+		    <when test="type == 'music'">
+		      AND A.TYPE_04 = 'Y'
+		    </when>
+		    <when test="type== 'model'" >
+		      AND A.TYPE_05 = 'Y'
+		    </when>
+		    <otherwise>
+		    </otherwise>  
+	  </choose>
+		   
+	</select>
+	
+	
+	
+	
+	
+	<!-- 개인정보 저장 -->
+	<update id="saveMemberDetail" parameterType="map">
+		UPDATE MEMBER_DETAIL
+		SET BIRTH_DT = #{birth}
+		, NICK_NAME = #{nickName}
+		WHERE 1=1
+		 AND MEMBER_ID = #{memberId}
+		 AND JOIN_TYPE = #{type}
+	</update>
+	
+	
+	<!-- 국가 코드 조회 -->
+	<select id="selectNationCd" resultType="map"  parameterType="map">
+		SELECT CODE_ID
+			,  CODE
+			,  CODE_KR
+			, CODE_EN
+		FROM NATION_CD
+		WHERE 1=1
+		ORDER BY CODE_EN
+	</select>
+	
 </mapper>

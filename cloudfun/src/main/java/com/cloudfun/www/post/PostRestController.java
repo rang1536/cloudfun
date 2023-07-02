@@ -102,18 +102,31 @@ public class PostRestController {
 		obj.put("memberId",(String)session.getAttribute("memberId"));
 		obj.put("domainType",(String)session.getAttribute("type"));
 		
+		String postId  = (String) obj.get("postId");
+		Boolean isNew = false;
+		
 		// 신규 post번호 생성
-		String postId = postService.selectPostId(obj);
+		if(postId.isEmpty()){
+			postId = postService.selectPostId(obj);
+			isNew = true;
+		}
 		
 		obj.put("postId",postId);
 		
 		
 		// 파일 업로드 선행후 파일 ID 저장.
 		HashMap<String, String> resultMap = new HashMap<String, String>();
-		
-		
-		
 		HashMap<String, String> param = new HashMap<String, String>();
+		
+		
+		// 이전파일 update
+		
+		// 신규가 아닌경우 기존 첨부파일 초기화.
+		if(!isNew) {
+			String oldFileList = (String) obj.get("oldFileList");
+			obj.put("oldFileList", oldFileList);
+			postService.updatePostOldFile(obj);
+		}
 
 		/*file group id 
 		 * 001 : 메인화면 썸네일 이미지.
@@ -139,7 +152,15 @@ public class PostRestController {
 		}
 		
 		obj.put("postId",postId);
-		postService.insertPost(obj);
+		
+		// 신규가 아닌경우 기존 첨부파일 초기화.
+		if(isNew) {
+			// 신규 post 등록
+			postService.insertPost(obj);
+		}else {
+			// post update
+			postService.updatePost(obj);
+		}
 		
 		
 		//result set

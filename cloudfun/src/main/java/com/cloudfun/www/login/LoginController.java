@@ -84,9 +84,9 @@ private static final Logger logger = LoggerFactory.getLogger(LoginController.cla
 	      * À½¾Ç : music
 	      * 3D Model : model
 	      * */ 
-        a.put("type", "text");
-        
         HttpSession session = request.getSession();
+        String type  = (String)session.getAttribute("type");
+        a.put("type", type);
         
         //int loginUserCnt= loginService.isLogin(a);
         String memberId =  loginService.isLogin(a);
@@ -130,6 +130,58 @@ private static final Logger logger = LoggerFactory.getLogger(LoginController.cla
 
 		//return "home";
 		return "member/join";
+	}
+	
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/editMember", method = RequestMethod.GET)
+	public String editMember(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		String email = (String)session.getAttribute("email");
+    	String name = (String)session.getAttribute("name");
+
+    	String memberId = (String)session.getAttribute("memberId");
+    	String type = (String)session.getAttribute("type");
+    	
+    	if(memberId == null ) {
+    		//return "home";
+    		return "mainPage";
+    	}
+    	
+    	
+    	Map<String, String> obj = new HashMap<String,String>();
+    	obj.put("memberId", memberId);
+    	obj.put("type", type);
+    	Map<String, String> result = loginService.selectMember(obj);
+    	
+    	if(result==null) {
+    		//return "home";
+    		return "mainPage";
+    	}
+    	
+    	String MEMBER_ID = String.valueOf(result.get("MEMBER_ID"));
+    	String EMAIL = String.valueOf(result.get("EMAIL"));
+    	String NAME = String.valueOf(result.get("NAME"));
+    	String BIRTH_DT = String.valueOf(result.get("BIRTH_DT"));
+    	String NICK_NAME = String.valueOf(result.get("NICK_NAME"));
+    	String NATION_CD = String.valueOf(result.get("NATION_CD"));
+
+    	model.addAttribute("memberId", MEMBER_ID);
+    	model.addAttribute("email", EMAIL);
+    	model.addAttribute("name", NAME);
+    	model.addAttribute("birthDt", BIRTH_DT);
+    	model.addAttribute("nickName", NICK_NAME);
+    	model.addAttribute("nationCd", NATION_CD);
+    	
+    	
+    	
+
+		//return "home";
+		return "member/editMember";
 	}
 	
 	

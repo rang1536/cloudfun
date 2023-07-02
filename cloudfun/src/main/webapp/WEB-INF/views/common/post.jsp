@@ -3,6 +3,10 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
+<input type="hidden" id="postId" name="postId" value="${param.postId}"/>
+
+<div id="oldFileContainer" style="display:none"> 
+</div>
 
 <div class="row mb-3" >
 	<div class="col-lg-1">

@@ -87,6 +87,7 @@ public class LoginRestController {
 		String name = map.get("name");
 		String password = map.get("password");
 		String birth = map.get("birth");
+		String nation = map.get("nation");
 		
 		  
 		
@@ -118,6 +119,7 @@ public class LoginRestController {
 		
 		objParam.put("password", password);
 		objParam.put("birth", birth);
+		objParam.put("nation", nation);
 		  
 		String memberId =  loginService.isLogin(objParam);
 		
@@ -145,9 +147,63 @@ public class LoginRestController {
     }
 	
 	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value="/api/saveMember", method = RequestMethod.POST)
+	public HashMap<String, String> saveMember(@RequestBody HashMap<String, String> map, HttpServletRequest request){
+		
+		HttpSession session = request.getSession();
+
+		HashMap<String, String> resultMap = new HashMap<String, String>();
+		HashMap<String,String> obj = new HashMap<String, String>();
+		//resultMap.put("test", "testValue");
+		  
+		  
+		// session 정보
+		String memberId = (String)session.getAttribute("memberId");
+		String type = (String)session.getAttribute("type");
+		  
+		// form 정보
+		String email = map.get("email");
+		String name = map.get("name");
+		String nickName = map.get("nickName");
+		String password = map.get("password");
+		String birth = map.get("birth");
+		
+		obj.put("nickName", nickName);
+		obj.put("birth", birth);
+		
+		obj.put("memberId", memberId);
+		obj.put("type", type);
+		
+		
+		loginService.saveMemberDetail(obj);
+		
+		return resultMap;
+
+    }
 	
 	
-	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value="/api/selectNation", method = RequestMethod.POST)
+	public HashMap<String, Object> selectNation(@RequestBody HashMap<String, String> map, HttpServletRequest request){
+		
+		HttpSession session = request.getSession();
+
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		HashMap<String,String> obj = new HashMap<String, String>();
+		  
+		
+		List<Map<String, String>> nationCdList = loginService.selectNationCd(obj);
+		resultMap.put("nationCdList", nationCdList);
+		
+		
+		return resultMap;
+
+    }
 	
 	
 }

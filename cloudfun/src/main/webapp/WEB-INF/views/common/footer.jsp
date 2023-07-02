@@ -19,7 +19,7 @@
 						<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6">
+				<%-- <div class="col-lg-4 col-md-6">
 					<div class="footer-widget mb-5 mb-md-0">
 						<h4 class="fw-title">Latest Posts</h4>
 						<div class="latest-blog">
@@ -84,7 +84,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --%>
 			</div>
 		</div>
 	</section>
@@ -94,13 +94,13 @@
 	<!-- Footer section -->
 	<footer class="footer-section">
 		<div class="container">
-			<ul class="footer-menu">
+			<!-- <ul class="footer-menu">
 				<li><a href="index.html">Home</a></li>
 				<li><a href="review.html">Games</a></li>
 				<li><a href="categories.html">Blog</a></li>
 				<li><a href="community.html">Forums</a></li>
 				<li><a href="contact.html">Contact</a></li>
-			</ul>
+			</ul> -->
 			<p class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

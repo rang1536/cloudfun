@@ -83,6 +83,18 @@ public class PostService {
 		return postDao.selectRankCommentsList(objParam);
 	}
 
+	public void updatePost(Map<String, String> obj) {
+		// // post 등록
+ 		postDao.updatePost(obj);
+		
+	}
+
+	public void updatePostOldFile(Map<String, String> obj) {
+		// // post 등록
+ 		postDao.updatePostOldFile(obj);
+		
+	}
+
 	
 	
 	
