@@ -51,13 +51,7 @@ public class HomeController {
 
 		// todo
         HttpSession session = request.getSession();
-<<<<<<< HEAD
-		session.setAttribute("type", "text");
 
-=======
-		//session.setAttribute("type", "text");
-		
->>>>>>> branch 'master' of https://github.com/rang1536/cloudfun.git
 		if(session.getAttribute("localCountry") == null ) {
 			session.setAttribute("localCountry", request.getLocale().getCountry()); // KR
 		}
@@ -129,23 +123,14 @@ public class HomeController {
 		String referer = request.getHeader("Referer"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
 		return "redirect:"+ referer;
     }
-<<<<<<< HEAD
-
 
     @RequestMapping(value = "/pay", method = RequestMethod.GET)
 	public String papalTest() {
 
 		return "payapalTest";
 	}
-=======
     
-    @RequestMapping(value = "/pay", method = RequestMethod.GET)
-	public String papalTest() {
-
-		return "payapalTest";
-	}
-    
-    // session type ¼³Á¤
+    // session type ï¿½ï¿½ï¿½ï¿½
     @RequestMapping("/setType/{lang}") 
     public String setType(@PathVariable String lang
     		, HttpServletRequest request) throws IOException {
@@ -153,9 +138,8 @@ public class HomeController {
         HttpSession session = request.getSession();
 		session.setAttribute("type", lang);
     	
-		String referer = request.getHeader("Referer"); // Çì´õ¿¡¼­ ÀÌÀü ÆäÀÌÁö¸¦ ÀÐ´Â´Ù.
+		String referer = request.getHeader("Referer"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
 		return "redirect:"+ "/";
     }
     
->>>>>>> branch 'master' of https://github.com/rang1536/cloudfun.git
 }
