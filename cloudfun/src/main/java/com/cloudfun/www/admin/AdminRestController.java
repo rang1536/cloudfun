@@ -44,14 +44,14 @@ public class AdminRestController {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		  
 		  
-		// session Á¤º¸
+		// session ì •ë³´
 		String sessionEmail = (String)session.getAttribute("email");
 		String sessionName = (String)session.getAttribute("name");
 		String sessionType = (String)session.getAttribute("type");
 		String memberId = (String)session.getAttribute("memberId");
 		  
 		
-		// form Á¤º¸
+		// form ì •ë³´
 //		String postId = map.get("postId");
 //		String amt = map.get("amt");
 
@@ -71,7 +71,7 @@ public class AdminRestController {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		  
 		  
-		// session Á¤º¸
+		// session ì •ë³´
 		String sessionEmail = (String)session.getAttribute("email");
 		String sessionName = (String)session.getAttribute("name");
 		String sessionType = (String)session.getAttribute("type");
@@ -83,7 +83,7 @@ public class AdminRestController {
 		String adminYn = map.get("adminYn");
 		
 		
-		// form Á¤º¸
+		// form ì •ë³´
 //		String postId = map.get("postId");
 //		String amt = map.get("amt");
 
@@ -109,7 +109,7 @@ public class AdminRestController {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		  
 		  
-		// session Á¤º¸
+		// session ì •ë³´
 		String sessionEmail = (String)session.getAttribute("email");
 		String sessionName = (String)session.getAttribute("name");
 		String sessionType = (String)session.getAttribute("type");
@@ -117,7 +117,7 @@ public class AdminRestController {
 		  
 		String adminType = (String)map.get("adminType");
 
-		// form Á¤º¸
+		// form ì •ë³´
 //		String postId = map.get("postId");
 //		String amt = map.get("amt");
 
@@ -138,7 +138,7 @@ public class AdminRestController {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		  
 		  
-		// session Á¤º¸
+		// session ì •ë³´
 		String sessionEmail = (String)session.getAttribute("email");
 		String sessionName = (String)session.getAttribute("name");
 		String sessionType = (String)session.getAttribute("type");
@@ -149,7 +149,7 @@ public class AdminRestController {
 		String useYn = map.get("useYn");
 		
 		
-		// form Á¤º¸
+		// form ì •ë³´
 //		String postId = map.get("postId");
 //		String amt = map.get("amt");
 
@@ -174,7 +174,7 @@ public class AdminRestController {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		  
 		  
-		// session Á¤º¸
+		// session ì •ë³´
 		String sessionEmail = (String)session.getAttribute("email");
 		String sessionName = (String)session.getAttribute("name");
 		String sessionType = (String)session.getAttribute("type");
@@ -183,7 +183,7 @@ public class AdminRestController {
 		String adminType = (String)map.get("adminType");
 		String useYn = (String)map.get("useYn");
 
-		// form Á¤º¸
+		// form ì •ë³´
 //		String postId = map.get("postId");
 //		String amt = map.get("amt");
 
@@ -205,7 +205,7 @@ public class AdminRestController {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		  
 		  
-		// session Á¤º¸
+		// session ì •ë³´
 		String sessionEmail = (String)session.getAttribute("email");
 		String sessionName = (String)session.getAttribute("name");
 		String sessionType = (String)session.getAttribute("type");
@@ -216,7 +216,7 @@ public class AdminRestController {
 		String useYn = map.get("useYn");
 		
 		
-		// form Á¤º¸
+		// form ì •ë³´
 //		String postId = map.get("postId");
 //		String amt = map.get("amt");
 

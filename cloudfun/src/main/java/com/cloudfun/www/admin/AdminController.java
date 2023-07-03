@@ -25,7 +25,7 @@ public class AdminController {
 	private AdminService adminService;
 	
 	/**
-	 * member °ü¸®ÀÚ ÆäÀÌÁö.
+	 * member ê´€ë¦¬ì í˜ì´ì§€.
 	 */
 	@RequestMapping(value = "/admin/member", method = RequestMethod.GET)
 	public String member(Model model, HttpServletRequest request) {
@@ -42,7 +42,7 @@ public class AdminController {
     	Map<String, String> objParam = new HashMap<String,String>();
     	objParam.put("memberId", memberId);
 
-    	/// °ü¸®ÀÚ ±ÇÇÑ Ã¼Å©
+    	/// ê´€ë¦¬ì ê¶Œí•œ ì²´í¬
     	Map<String, String> resultPaging = adminService.getAdminYn(objParam);
     	
     	String adminYn = resultPaging.get("ADMIN_YN");
@@ -58,7 +58,7 @@ public class AdminController {
 	
 	
 	/**
-	 * member °ü¸®ÀÚ ÆäÀÌÁö.
+	 * member ê´€ë¦¬ì í˜ì´ì§€.
 	 */
 	@RequestMapping(value = "/admin/adminPost", method = RequestMethod.GET)
 	public String adminPost(Model model, HttpServletRequest request) {
@@ -75,7 +75,7 @@ public class AdminController {
     	Map<String, String> objParam = new HashMap<String,String>();
     	objParam.put("memberId", memberId);
 
-    	/// °ü¸®ÀÚ ±ÇÇÑ Ã¼Å©
+    	/// ê´€ë¦¬ì ê¶Œí•œ ì²´í¬
     	Map<String, String> resultPaging = adminService.getAdminYn(objParam);
     	
     	String adminYn = resultPaging.get("ADMIN_YN");
@@ -90,7 +90,7 @@ public class AdminController {
 	}
 
 	/**
-	 * report½Å°í °ü¸®ÀÚ ÆäÀÌÁö.
+	 * reportì‹ ê³  ê´€ë¦¬ì í˜ì´ì§€.
 	 */
 	@RequestMapping(value = "/admin/adminReport", method = RequestMethod.GET)
 	public String adminReport(Model model, HttpServletRequest request) {
@@ -107,7 +107,7 @@ public class AdminController {
     	Map<String, String> objParam = new HashMap<String,String>();
     	objParam.put("memberId", memberId);
 
-    	/// °ü¸®ÀÚ ±ÇÇÑ Ã¼Å©
+    	/// ê´€ë¦¬ì ê¶Œí•œ ì²´í¬
     	Map<String, String> resultPaging = adminService.getAdminYn(objParam);
     	
     	String adminYn = resultPaging.get("ADMIN_YN");

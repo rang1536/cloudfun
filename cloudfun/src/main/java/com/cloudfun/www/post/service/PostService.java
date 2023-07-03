@@ -18,27 +18,27 @@ public class PostService {
 	
 	public void insertPost(Map<String, String> obj) {
 		
-		// post µî·Ï
+		// post ë“±ë¡
  		postDao.insertPost(obj);
 	}
 	
 	public String selectPostId(Map<String, String> obj) {
 		
-		// post µî·Ï
+		// post ë“±ë¡
 		return postDao.selectPostId(obj);
 	}
 	
 	
 	public List<Map<String, String>> selectPostList(Map<String, String> obj) {
 		
-		// post µî·Ï
+		// post ë“±ë¡
 		return postDao.selectPostList(obj);
 	}
 	
 	
 	public Map<String, String> selectPost(Map<String, String> obj) {
 		
-		// post Á¶È¸
+		// post ì¡°íšŒ
 		return postDao.selectPost(obj);
 	}
 
@@ -48,13 +48,13 @@ public class PostService {
 	}
 
 	public void setSponsership(Map<String, String> obj) {
-		// Sponsership µî·Ï
+		// Sponsership ë“±ë¡
 		postDao.insertSponsership(obj);
 		
 	}
 
 	public Map<String, String> selectMemberSponAmt(Map<String, String> objParam) {
-		// member postÀÇ amtÁ¶È¸
+		// member postì˜ amtì¡°íšŒ
 		return postDao.selectMemberSponAmt(objParam);
 	}
 
@@ -84,13 +84,13 @@ public class PostService {
 	}
 
 	public void updatePost(Map<String, String> obj) {
-		// // post µî·Ï
+		// // post ë“±ë¡
  		postDao.updatePost(obj);
 		
 	}
 
 	public void updatePostOldFile(Map<String, String> obj) {
-		// // post µî·Ï
+		// // post ë“±ë¡
  		postDao.updatePostOldFile(obj);
 		
 	}
@@ -113,21 +113,21 @@ public class PostService {
 		
 	}
 	
-	// È¸¿ø°¡ÀÔ
+	// íšŒì›ê°€ì…
 	public String join(Map<String, String> obj) {
 		
 		
-		//	 	3. È¸¿øÀÌ ¾Æ´Ñ°æ¿ì È¸¿ø°¡ÀÔ..
-		//	 	3-1 È¸¿øÅ×ÀÌºí merge
+		//	 	3. íšŒì›ì´ ì•„ë‹Œê²½ìš° íšŒì›ê°€ì…..
+		//	 	3-1 íšŒì›í…Œì´ë¸” merge
 		loginDao.mergeMember(obj);
 
-		//	 	3-2 È¸¿øÅ×ÀÌºí Á¶È¸
-		// È¸¿øid Ã¤¹ø 
+		//	 	3-2 íšŒì›í…Œì´ë¸” ì¡°íšŒ
+		// íšŒì›id ì±„ë²ˆ 
 		String memberId = isLogin(obj);
 		obj.put("memberId", memberId);
 		
 		
-		//    	3-2 È¸¿ø »ó¼¼ Å×ÀÌºí insert
+		//    	3-2 íšŒì› ìƒì„¸ í…Œì´ë¸” insert
 		loginDao.insertMemberDetail(obj);
 		
 		

@@ -20,7 +20,7 @@ public class LoginDao {
 		 return result;
 	}
 	 
-	 // »ç¿ëÀÚ Á¤º¸ merge : »çÀÌÆ®º°·Î Å¸ÀÔÀ» ¾÷µ¥ÀÌÆ® ÇÏ°í ÃÖÃÊ°¡ÀÔ½Ã insertÇÑ´Ù.
+	 // ì‚¬ìš©ì ì •ë³´ merge : ì‚¬ì´íŠ¸ë³„ë¡œ íƒ€ì…ì„ ì—…ë°ì´íŠ¸ í•˜ê³  ìµœì´ˆê°€ì…ì‹œ insertí•œë‹¤.
 	 // PARAM  : type, email, name, 
 	 public int mergeMember(Map<String,String> obj) {
 		 
@@ -29,7 +29,7 @@ public class LoginDao {
 		 
 	 }
 	 
-	 // »ó¼¼Á¤º¸(ºñ¹Ğ¹øÈ£ + ÇÁ·ÎÇÊ)Àº »çÀÌÆ®¸¶´Ù °³º°·Î °ü¸®ÇÑ´Ù.
+	 // ìƒì„¸ì •ë³´(ë¹„ë°€ë²ˆí˜¸ + í”„ë¡œí•„)ì€ ì‚¬ì´íŠ¸ë§ˆë‹¤ ê°œë³„ë¡œ ê´€ë¦¬í•œë‹¤.
 	 // PARAM : memberId, type, password, birth
 	 public int insertMemberDetail(Map<String,String> obj) {
 		 

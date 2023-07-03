@@ -30,21 +30,21 @@ public class LoginService {
 		
 	}
 	
-	// È¸¿ø°¡ÀÔ
+	// íšŒì›ê°€ì…
 	public String join(Map<String, String> obj) {
 		
 		
-		//	 	3. È¸¿øÀÌ ¾Æ´Ñ°æ¿ì È¸¿ø°¡ÀÔ..
-		//	 	3-1 È¸¿øÅ×ÀÌºí merge
+		//	 	3. íšŒì›ì´ ì•„ë‹Œê²½ìš° íšŒì›ê°€ì…..
+		//	 	3-1 íšŒì›í…Œì´ë¸” merge
 		loginDao.mergeMember(obj);
 
-		//	 	3-2 È¸¿øÅ×ÀÌºí Á¶È¸
-		// È¸¿øid Ã¤¹ø 
+		//	 	3-2 íšŒì›í…Œì´ë¸” ì¡°íšŒ
+		// íšŒì›id ì±„ë²ˆ 
 		String memberId = isLogin(obj);
 		obj.put("memberId", memberId);
 		
 		
-		//    	3-2 È¸¿ø »ó¼¼ Å×ÀÌºí insert
+		//    	3-2 íšŒì› ìƒì„¸ í…Œì´ë¸” insert
 		loginDao.insertMemberDetail(obj);
 		
 		return memberId;
@@ -57,7 +57,7 @@ public class LoginService {
 	}
 
 	public void saveMemberDetail(HashMap<String, String> obj) {
-//    	3-2 È¸¿ø »ó¼¼ Å×ÀÌºí insert
+//    	3-2 íšŒì› ìƒì„¸ í…Œì´ë¸” insert
 		loginDao.saveMemberDetail(obj);
 		
 	}

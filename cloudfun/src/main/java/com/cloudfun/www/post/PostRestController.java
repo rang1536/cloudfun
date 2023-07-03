@@ -58,7 +58,7 @@ public class PostRestController {
 	
 	
 	/**
-	 * example: component.jsp¿¡¼­ »ç¿ë.
+	 * example: component.jspì—ì„œ ì‚¬ìš©.
 	 */
 	@RequestMapping(value="/api/post", method = RequestMethod.POST)
 	public HashMap<String, String> joinr(@RequestPart("uploadFile") MultipartFile[] uploadFile
@@ -98,14 +98,14 @@ public class PostRestController {
 		ObjectMapper objectMapper = new ObjectMapper();
 		Map<String,String> obj = objectMapper.readValue(jsonStr, Map.class);
 		
-		// insert, update memberId »ç¿ë
+		// insert, update memberId ì‚¬ìš©
 		obj.put("memberId",(String)session.getAttribute("memberId"));
 		obj.put("domainType",(String)session.getAttribute("type"));
 		
 		String postId  = (String) obj.get("postId");
 		Boolean isNew = false;
 		
-		// ½Å±Ô post¹øÈ£ »ı¼º
+		// ì‹ ê·œ postë²ˆí˜¸ ìƒì„±
 		if(postId.isEmpty()){
 			postId = postService.selectPostId(obj);
 			isNew = true;
@@ -114,14 +114,14 @@ public class PostRestController {
 		obj.put("postId",postId);
 		
 		
-		// ÆÄÀÏ ¾÷·Îµå ¼±ÇàÈÄ ÆÄÀÏ ID ÀúÀå.
+		// íŒŒì¼ ì—…ë¡œë“œ ì„ í–‰í›„ íŒŒì¼ ID ì €ì¥.
 		HashMap<String, String> resultMap = new HashMap<String, String>();
 		HashMap<String, String> param = new HashMap<String, String>();
 		
 		
-		// ÀÌÀüÆÄÀÏ update
+		// ì´ì „íŒŒì¼ update
 		
-		// ½Å±Ô°¡ ¾Æ´Ñ°æ¿ì ±âÁ¸ Ã·ºÎÆÄÀÏ ÃÊ±âÈ­.
+		// ì‹ ê·œê°€ ì•„ë‹Œê²½ìš° ê¸°ì¡´ ì²¨ë¶€íŒŒì¼ ì´ˆê¸°í™”.
 		if(!isNew) {
 			String oldFileList = (String) obj.get("oldFileList");
 			obj.put("oldFileList", oldFileList);
@@ -129,9 +129,9 @@ public class PostRestController {
 		}
 
 		/*file group id 
-		 * 001 : ¸ŞÀÎÈ­¸é ½æ³×ÀÏ ÀÌ¹ÌÁö.
-		 * 002 : ÄÁÅÙÃ÷ÆÄÀÏ
-		 * 003 : ¼³¸íÀÌ¹ÌÁö (3d¿¡¼­ »ç¿ë)
+		 * 001 : ë©”ì¸í™”ë©´ ì¸ë„¤ì¼ ì´ë¯¸ì§€.
+		 * 002 : ì»¨í…ì¸ íŒŒì¼
+		 * 003 : ì„¤ëª…ì´ë¯¸ì§€ (3dì—ì„œ ì‚¬ìš©)
 		 * */
 		obj.put("groupId","003");
 		for(MultipartFile multipartFile : desImg) {
@@ -153,9 +153,9 @@ public class PostRestController {
 		
 		obj.put("postId",postId);
 		
-		// ½Å±Ô°¡ ¾Æ´Ñ°æ¿ì ±âÁ¸ Ã·ºÎÆÄÀÏ ÃÊ±âÈ­.
+		// ì‹ ê·œê°€ ì•„ë‹Œê²½ìš° ê¸°ì¡´ ì²¨ë¶€íŒŒì¼ ì´ˆê¸°í™”.
 		if(isNew) {
-			// ½Å±Ô post µî·Ï
+			// ì‹ ê·œ post ë“±ë¡
 			postService.insertPost(obj);
 		}else {
 			// post update
@@ -245,7 +245,7 @@ public class PostRestController {
 	}*/
 	
 	
-	// ÈÄ¿ø ±İ¾× ÁöºÒ
+	// í›„ì› ê¸ˆì•¡ ì§€ë¶ˆ
 	// /api/sponsorship
 	/**
 	 * 
@@ -258,19 +258,19 @@ public class PostRestController {
 		HashMap<String, String> resultMap = new HashMap<String, String>();
 		  
 		  
-		// session Á¤º¸
+		// session ì •ë³´
 		String sessionEmail = (String)session.getAttribute("email");
 		String sessionName = (String)session.getAttribute("name");
 		String sessionType = (String)session.getAttribute("type");
 		String memberId = (String)session.getAttribute("memberId");
 		  
 		
-		// form Á¤º¸
+		// form ì •ë³´
 		String postId = map.get("postId");
 		String amt = map.get("amt");
 		
 		  
-		// 1. ÈÄ¿øÅ×ÀÌºí¿¡ ÀúÀå
+		// 1. í›„ì›í…Œì´ë¸”ì— ì €ì¥
 		Map<String, String> objParam = new HashMap<String,String>();
 		objParam.put("amt", amt);
 		objParam.put("postId", postId);
@@ -287,7 +287,7 @@ public class PostRestController {
 	
 	
 	
-	// ÈÄ¿ø ±İ¾× ÁöºÒ
+	// í›„ì› ê¸ˆì•¡ ì§€ë¶ˆ
 		// /api/sponsorship
 		/**
 		 * 
@@ -300,19 +300,19 @@ public class PostRestController {
 			HashMap<String, String> resultMap = new HashMap<String, String>();
 			  
 			  
-			// session Á¤º¸
+			// session ì •ë³´
 			String sessionEmail = (String)session.getAttribute("email");
 			String sessionName = (String)session.getAttribute("name");
 			String sessionType = (String)session.getAttribute("type");
 			String memberId = (String)session.getAttribute("memberId");
 			  
 			
-			// form Á¤º¸
+			// form ì •ë³´
 			String postId = map.get("postId");
 			String sponMessage = map.get("sponMessage");
 			
 			  
-			// 1. ÈÄ¿øÅ×ÀÌºí¿¡ ÀúÀå
+			// 1. í›„ì›í…Œì´ë¸”ì— ì €ì¥
 			Map<String, String> objParam = new HashMap<String,String>();
 			objParam.put("sponMessage", sponMessage);
 			objParam.put("postId", postId);
@@ -328,7 +328,7 @@ public class PostRestController {
 		}
 		
 		
-		// °ü¸®ÀÚ¿¡°Ô ½Å°í
+		// ê´€ë¦¬ìì—ê²Œ ì‹ ê³ 
 		@RequestMapping(value="/api/alertMessage", method = RequestMethod.POST)
 		public HashMap<String, String> alertMessage(@RequestBody HashMap<String, String> map, HttpServletRequest request){
 			
@@ -337,19 +337,19 @@ public class PostRestController {
 			HashMap<String, String> resultMap = new HashMap<String, String>();
 			  
 			  
-			// session Á¤º¸
+			// session ì •ë³´
 			String sessionEmail = (String)session.getAttribute("email");
 			String sessionName = (String)session.getAttribute("name");
 			String sessionType = (String)session.getAttribute("type");
 			String memberId = (String)session.getAttribute("memberId");
 			  
 			
-			// form Á¤º¸
+			// form ì •ë³´
 			String postId = map.get("postId");
 			String alertMessage = map.get("alertMessage");
 			
 			  
-			// 1. ÈÄ¿øÅ×ÀÌºí¿¡ ÀúÀå
+			// 1. í›„ì›í…Œì´ë¸”ì— ì €ì¥
 			Map<String, String> objParam = new HashMap<String,String>();
 			objParam.put("alertMessage", alertMessage);
 			objParam.put("postId", postId);
@@ -366,7 +366,7 @@ public class PostRestController {
 		
 		
 		
-		// ÆíÁı½Ã ÀÌÀüµ¥ÀÌÅÍ ºÒ·¯¿À±â.
+		// í¸ì§‘ì‹œ ì´ì „ë°ì´í„° ë¶ˆëŸ¬ì˜¤ê¸°.
 		@RequestMapping(value="/api/post/getPostData", method = RequestMethod.POST)
 		public HashMap<String, Object> getPostData(@RequestBody HashMap<String, String> map, HttpServletRequest request){
 			
@@ -388,13 +388,13 @@ public class PostRestController {
 	    	resultMap.put("name", name);
 	    	
 			objParam.put("postId", postId);
-			objParam.put("groupId", "002");  // 001 ¸ŞÀÎ,½æ³×ÀÏ  2.Ã·ºÎÆÄÀÏ.
+			objParam.put("groupId", "002");  // 001 ë©”ì¸,ì¸ë„¤ì¼  2.ì²¨ë¶€íŒŒì¼.
 			
 			Map<String, String> result = postService.selectPost(objParam);
 			List<Map<String, String>> fileList = postService.selectPostFileList(objParam);
 			
 			
-			objParam.put("groupId", "003");  // 001 ¸ŞÀÎ,½æ³×ÀÏ  2.Ã·ºÎÆÄÀÏ.
+			objParam.put("groupId", "003");  // 001 ë©”ì¸,ì¸ë„¤ì¼  2.ì²¨ë¶€íŒŒì¼.
 			List<Map<String, String>> fileList3 = postService.selectPostFileList(objParam);
 	    	//
 			resultMap.put("result", result);
@@ -409,12 +409,12 @@ public class PostRestController {
 	    	Map<String, String> resultSponAmt = postService.selectMemberSponAmt(objParam);
 	    	resultMap.put("resultSponAmt", resultSponAmt);
 	    	
-	    	// ÈÄ¿ø ¼øÀ§ ¸ñ·Ï
+	    	// í›„ì› ìˆœìœ„ ëª©ë¡
 	    	List<Map<String, String>> resultRankSpon = postService.selectRankSponAmtList(objParam);
 	    	resultMap.put("resultRankSpon", resultRankSpon);
 	    	
 	    	
-	    	// ÈÄ¿øÄÚ¸àÆ® ¸ñ·Ï
+	    	// í›„ì›ì½”ë©˜íŠ¸ ëª©ë¡
 	    	List<Map<String, String>> resultRankComments = postService.selectRankCommentsList(objParam);
 	    	resultMap.put("resultRankComments", resultRankComments);
 			

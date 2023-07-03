@@ -8,25 +8,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Post{
 	
-	private String postId       ;   // °Ô½Ã¹°ÄÚµå   
-	private String title        ;   // Á¦¸ñ   
-	private String contents      ;   // ³»¿ë   
-	private String tags          ;   // ÅÂ±×   
-	private String aiYn         ;   // AI Á¦ÀÛ¿©ºÎ   
-	private String funStartDt    ;   // ÈÄ¿ø½ÃÀÛÀÏs   
-	private String funEndDt    ;   // ÈÄ¿øÁ¾·áÀÏ   
-	private String tgtAmt       ;   // ¸ñÇ¥±İ¾×   
-	private String openAmt      ;   // ¿­¶÷°øÁ¦°øÈÄ¿ø±İ¾×   
-	private String anoFunYn    ;   // ÀÍ¸íÈÄ¿ø¼ö½Å¿©ºÎ   
-	private String adultYn      ;   // ¼ºÀÎ¹°ÁöÁ¤   
-	private String domainType   ;   // À¯Çü   
-	private String fileGroupId ;   // ÆÄÀÏ±×·ìID   
+	private String postId       ;   // ê²Œì‹œë¬¼ì½”ë“œ   
+	private String title        ;   // ì œëª©   
+	private String contents      ;   // ë‚´ìš©   
+	private String tags          ;   // íƒœê·¸   
+	private String aiYn         ;   // AI ì œì‘ì—¬ë¶€   
+	private String funStartDt    ;   // í›„ì›ì‹œì‘ì¼s   
+	private String funEndDt    ;   // í›„ì›ì¢…ë£Œì¼   
+	private String tgtAmt       ;   // ëª©í‘œê¸ˆì•¡   
+	private String openAmt      ;   // ì—´ëŒê³µì œê³µí›„ì›ê¸ˆì•¡   
+	private String anoFunYn    ;   // ìµëª…í›„ì›ìˆ˜ì‹ ì—¬ë¶€   
+	private String adultYn      ;   // ì„±ì¸ë¬¼ì§€ì •   
+	private String domainType   ;   // ìœ í˜•   
+	private String fileGroupId ;   // íŒŒì¼ê·¸ë£¹ID   
 	
-	private String useYn        ;   // »ç¿ë¿©ºÎ   
-	private Date registDt       ; // µî·ÏÀÏ½Ã 
-	private String registId    ;   // µî·ÏÀÚ   
-	private String registIp     ;   // µî·ÏIP   
-	private Date updateDt       ; // ¼öÁ¤ÀÏ½Ã 
-	private String updateId     ;   // ¼öÁ¤ÀÚ   
-	private String updateIp     ;   // ¼öÁ¤IP   
+	private String useYn        ;   // ì‚¬ìš©ì—¬ë¶€   
+	private Date registDt       ; // ë“±ë¡ì¼ì‹œ 
+	private String registId    ;   // ë“±ë¡ì   
+	private String registIp     ;   // ë“±ë¡IP   
+	private Date updateDt       ; // ìˆ˜ì •ì¼ì‹œ 
+	private String updateId     ;   // ìˆ˜ì •ì   
+	private String updateIp     ;   // ìˆ˜ì •IP   
 }

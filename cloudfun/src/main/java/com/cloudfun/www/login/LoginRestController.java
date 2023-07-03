@@ -45,14 +45,14 @@ public class LoginRestController {
 	
 	
 	/**
-	 * ·Î±×¾Æ¿ôÃ³¸® ¼¼¼Ç ÃÊ±âÈ­.
+	 * ë¡œê·¸ì•„ì›ƒì²˜ë¦¬ ì„¸ì…˜ ì´ˆê¸°í™”.
 	 */
 	@RequestMapping(value="/api/logout", method = RequestMethod.POST)
 	public String logout(HttpServletRequest request){
 		
 		HttpSession  session = request.getSession();
 		
-		// typeÀº ¹ö¸®Áö¾ÊÀ½.
+		// typeì€ ë²„ë¦¬ì§€ì•ŠìŒ.
 		String type = (String)session.getAttribute("type");
 		
 		session.invalidate();
@@ -77,12 +77,12 @@ public class LoginRestController {
 		//resultMap.put("test", "testValue");
 		  
 		  
-		// session Á¤º¸
+		// session ì •ë³´
 		String sessionEmail = (String)session.getAttribute("email");
 		String sessionName = (String)session.getAttribute("name");
 		String sessionType = (String)session.getAttribute("type");
 		  
-		// form Á¤º¸
+		// form ì •ë³´
 		String email = map.get("email");
 		String name = map.get("name");
 		String password = map.get("password");
@@ -91,7 +91,7 @@ public class LoginRestController {
 		
 		  
 		
-		// ±¸±Û·Î±×ÀÎ Á¤º¸¿Í ´Ù¸£¸é return
+		// êµ¬ê¸€ë¡œê·¸ì¸ ì •ë³´ì™€ ë‹¤ë¥´ë©´ return
 		if(!sessionEmail.equals(email)) {
 			resultMap.put("error", "error");
 			return resultMap;
@@ -102,17 +102,17 @@ public class LoginRestController {
 		}
 		
 		  
-		// 1. È¸¿øÀÎÁö È®ÀÎÇÑ´Ù.(À¯Çü È®ÀÎ.)
+		// 1. íšŒì›ì¸ì§€ í™•ì¸í•œë‹¤.(ìœ í˜• í™•ì¸.)
 		Map<String, String> objParam = new HashMap<String,String>();
 		objParam.put("email", email);
 		objParam.put("name", name);
 		  
-		// µµ¸ŞÀÎ¿¡´Ù¶ó Å¸ÀÔ±¸ºĞ.(±Û/±×¸²/¸¸È­/À½¾Ç/3D Model 5°³)
+		// ë„ë©”ì¸ì—ë‹¤ë¼ íƒ€ì…êµ¬ë¶„.(ê¸€/ê·¸ë¦¼/ë§Œí™”/ìŒì•…/3D Model 5ê°œ)
 		/*
-		 * ±Û : text
-		 * ±×¸² : picture
-		 * ¸¸È­ : comic
-		 * À½¾Ç : music
+		 * ê¸€ : text
+		 * ê·¸ë¦¼ : picture
+		 * ë§Œí™” : comic
+		 * ìŒì•… : music
 		 * 3D Model : model
 		* */ 
 		objParam.put("type", sessionType);
@@ -125,17 +125,17 @@ public class LoginRestController {
 		
 		
 		if(memberId !=null) {
-			// ÀÌ¹ÌÈ¸¿øÀÓ. ·Î±×ÀÎ µÇ¾ú¾î¾ßÇÑ´Ù.
-//		 	2. È¸¿øÀÎ°æ¿ì ¸ŞÀÎ ÆäÀÌÁö ÀÌµ¿
+			// ì´ë¯¸íšŒì›ì„. ë¡œê·¸ì¸ ë˜ì—ˆì–´ì•¼í•œë‹¤.
+//		 	2. íšŒì›ì¸ê²½ìš° ë©”ì¸ í˜ì´ì§€ ì´ë™
 			resultMap.put("url", "/");
 			session.setAttribute("memberId", memberId);
 			return resultMap;
 		  		
 		}else{
 			
-			// 	3. È¸¿øÀÌ ¾Æ´Ñ°æ¿ì È¸¿ø°¡ÀÔ..
-			//	 	3-1 È¸¿øÅ×ÀÌºí merge
-			//    	3-2 È¸¿ø »ó¼¼ Å×ÀÌºí insert
+			// 	3. íšŒì›ì´ ì•„ë‹Œê²½ìš° íšŒì›ê°€ì…..
+			//	 	3-1 íšŒì›í…Œì´ë¸” merge
+			//    	3-2 íšŒì› ìƒì„¸ í…Œì´ë¸” insert
 			memberId = loginService.join(objParam);
 			session.setAttribute("memberId", memberId);
 			
@@ -160,11 +160,11 @@ public class LoginRestController {
 		//resultMap.put("test", "testValue");
 		  
 		  
-		// session Á¤º¸
+		// session ì •ë³´
 		String memberId = (String)session.getAttribute("memberId");
 		String type = (String)session.getAttribute("type");
 		  
-		// form Á¤º¸
+		// form ì •ë³´
 		String email = map.get("email");
 		String name = map.get("name");
 		String nickName = map.get("nickName");

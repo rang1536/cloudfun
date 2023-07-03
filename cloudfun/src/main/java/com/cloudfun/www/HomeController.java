@@ -91,28 +91,28 @@ public class HomeController {
 		return "terms";
 	}
 
-	// ���� �ٿ�ε� ó��
+	// 
     @RequestMapping("/fileDownload/{file}")
     public void fileDownload(@PathVariable String file,
                              HttpServletResponse response) throws IOException {
 
     	file = "60c1a4205d2545b6862a1649c2785c7c.docx";
         File f = new File(filePath, file);
-        // file �ٿ�ε� ����
+        // file 다운로드 테스트
         response.setContentType("application/download");
         response.setContentLength((int)f.length());
         file="testNM.docx";
         response.setHeader("Content-disposition", "attachment;filename=\"" + file + "\"");
-        // response ��ü�� ���ؼ� �����κ��� ���� �ٿ�ε�
+        // response
         OutputStream os = response.getOutputStream();
-        // ���� �Է� ��ü ����
+       
         FileInputStream fis = new FileInputStream(f);
         FileCopyUtils.copy(fis, os);
         fis.close();
         os.close();
     }
 
-    // �ٱ��� session ó��
+    // 지역변경 다국어처리
     @RequestMapping("/local/{lang}")
     public String localLang(@PathVariable String lang
     		, HttpServletRequest request) throws IOException {
@@ -120,7 +120,7 @@ public class HomeController {
         HttpSession session = request.getSession();
 		session.setAttribute("localCountry", lang);
 
-		String referer = request.getHeader("Referer"); // ������� ���� �������� �д´�.
+		String referer = request.getHeader("Referer"); // 
 		return "redirect:"+ referer;
     }
 
@@ -130,7 +130,7 @@ public class HomeController {
 		return "payapalTest";
 	}
     
-    // session type ����
+    // 타입변경 
     @RequestMapping("/setType/{lang}") 
     public String setType(@PathVariable String lang
     		, HttpServletRequest request) throws IOException {
@@ -138,7 +138,7 @@ public class HomeController {
         HttpSession session = request.getSession();
 		session.setAttribute("type", lang);
     	
-		String referer = request.getHeader("Referer"); // ������� ���� �������� �д´�.
+		String referer = request.getHeader("Referer"); //
 		return "redirect:"+ "/";
     }
     

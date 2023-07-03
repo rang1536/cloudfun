@@ -13,13 +13,13 @@ public class FileDao {
 	@Autowired
 	private SqlSessionTemplate sql;
  
-	 // ÆÄÀÏÁ¤º¸ ¾÷·Îµå.
+	 // íŒŒì¼ì •ë³´ ì—…ë¡œë“œ.
 	 public int insertFile(Map<String,String> obj) {
 		 int result =  sql.insert("com.insertFile", obj);
 		 return result;
 	 }
 	 
-	 // ÆÄÀÏÁ¤º¸ ¾÷·Îµå.
+	 // íŒŒì¼ì •ë³´ ì—…ë¡œë“œ.
 	 public int updateThumbnail(Map<String,String> obj) {
 		 int result =  sql.update("com.updateThumbnail", obj);
 		 return result;

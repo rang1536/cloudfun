@@ -5,16 +5,16 @@ import lombok.Data;
 @Data
 @Builder
 public class GoogleRequest {
-    private String clientId;    // ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÇ Å¬¶óÀÌ¾ğÆ® ID
-    private String redirectUri; // Google ·Î±×ÀÎ ÈÄ redirect À§Ä¡
-    private String clientSecret;    // Å¬¶óÀÌ¾ğÆ® º¸¾È ºñ¹Ğ
-    private String responseType;    // Google OAuth 2.0 ¿£µåÆ÷ÀÎÆ®°¡ ÀÎÁõ ÄÚµå¸¦ ¹İÈ¯ÇÏ´ÂÁö ¿©ºÎ
-    private String scope;   // OAuth µ¿ÀÇ¹üÀ§
+    private String clientId;    // ì• í”Œë¦¬ì¼€ì´ì…˜ì˜ í´ë¼ì´ì–¸íŠ¸ ID
+    private String redirectUri; // Google ë¡œê·¸ì¸ í›„ redirect ìœ„ì¹˜
+    private String clientSecret;    // í´ë¼ì´ì–¸íŠ¸ ë³´ì•ˆ ë¹„ë°€
+    private String responseType;    // Google OAuth 2.0 ì—”ë“œí¬ì¸íŠ¸ê°€ ì¸ì¦ ì½”ë“œë¥¼ ë°˜í™˜í•˜ëŠ”ì§€ ì—¬ë¶€
+    private String scope;   // OAuth ë™ì˜ë²”ìœ„
     private String code;
-    private String accessType;  // »ç¿ëÀÚ°¡ ºê¶ó¿ìÀú¿¡ ¾øÀ» ¶§ ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÌ ¾×¼¼½º ÅäÅ«À» »õ·Î °íÄ¥ ¼ö ÀÖ´ÂÁö ¿©ºÎ
+    private String accessType;  // ì‚¬ìš©ìê°€ ë¸Œë¼ìš°ì €ì— ì—†ì„ ë•Œ ì• í”Œë¦¬ì¼€ì´ì…˜ì´ ì•¡ì„¸ìŠ¤ í† í°ì„ ìƒˆë¡œ ê³ ì¹  ìˆ˜ ìˆëŠ”ì§€ ì—¬ë¶€
     private String grantType;
     private String state;
-    private String includeGrantedScopes;    // ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÌ ÄÁÅØ½ºÆ®¿¡¼­ Ãß°¡ ¹üÀ§¿¡ ´ëÇÑ ¾×¼¼½º¸¦ ¿äÃ»ÇÏ±â À§ÇØ Ãß°¡ ±ÇÇÑ ºÎ¿©¸¦ »ç¿ë
-    private String loginHint;   // ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÌ ÀÎÁõÇÏ·Á´Â »ç¿ëÀÚ¸¦ ¾Ë°í ÀÖ´Â °æ¿ì ÀÌ ¸Å°³º¯¼ö¸¦ »ç¿ëÇÏ¿© Google ÀÎÁõ ¼­¹ö¿¡ ÈùÆ®¸¦ Á¦°ø
-    private String prompt;  // default: Ã³À½À¸·Î ¾×¼¼½º¸¦ ¿äÃ»ÇÒ ¶§¸¸ »ç¿ëÀÚ¿¡°Ô ¸Ş½ÃÁö°¡ Ç¥½Ã
+    private String includeGrantedScopes;    // ì• í”Œë¦¬ì¼€ì´ì…˜ì´ ì»¨í…ìŠ¤íŠ¸ì—ì„œ ì¶”ê°€ ë²”ìœ„ì— ëŒ€í•œ ì•¡ì„¸ìŠ¤ë¥¼ ìš”ì²­í•˜ê¸° ìœ„í•´ ì¶”ê°€ ê¶Œí•œ ë¶€ì—¬ë¥¼ ì‚¬ìš©
+    private String loginHint;   // ì• í”Œë¦¬ì¼€ì´ì…˜ì´ ì¸ì¦í•˜ë ¤ëŠ” ì‚¬ìš©ìë¥¼ ì•Œê³  ìˆëŠ” ê²½ìš° ì´ ë§¤ê°œë³€ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ Google ì¸ì¦ ì„œë²„ì— íŒíŠ¸ë¥¼ ì œê³µ
+    private String prompt;  // default: ì²˜ìŒìœ¼ë¡œ ì•¡ì„¸ìŠ¤ë¥¼ ìš”ì²­í•  ë•Œë§Œ ì‚¬ìš©ìì—ê²Œ ë©”ì‹œì§€ê°€ í‘œì‹œ
 }

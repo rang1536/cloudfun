@@ -19,7 +19,7 @@ public class PostDao {
 		 return result;
 	}
 	 
-	 // »ç¿ëÀÚ Á¤º¸ merge : »çÀÌÆ®º°·Î Å¸ÀÔÀ» ¾÷µ¥ÀÌÆ® ÇÏ°í ÃÖÃÊ°¡ÀÔ½Ã insertÇÑ´Ù.
+	 // ì‚¬ìš©ì ì •ë³´ merge : ì‚¬ì´íŠ¸ë³„ë¡œ íƒ€ì…ì„ ì—…ë°ì´íŠ¸ í•˜ê³  ìµœì´ˆê°€ì…ì‹œ insertí•œë‹¤.
 	 // PARAM  : type, email, name, 
 	 public int mergeMember(Map<String,String> obj) {
 		 
@@ -30,7 +30,7 @@ public class PostDao {
 	 */
 
 	
-	 // Æ÷½ºÆ® ½Å±Ô ¾ÆÀÌµğ¸¦ ¾ò´Â´Ù.
+	 // í¬ìŠ¤íŠ¸ ì‹ ê·œ ì•„ì´ë””ë¥¼ ì–»ëŠ”ë‹¤.
 	 public String selectPostId(Map<String,String> obj) {
 		 
 		 String postId=  sql.selectOne("post.selectPostId");
@@ -38,7 +38,7 @@ public class PostDao {
 		 
 	 }
 	 
-	 // ½Å±Ô °Ô½Ã¹°À» µî·ÏÇÑ´Ù.
+	 // ì‹ ê·œ ê²Œì‹œë¬¼ì„ ë“±ë¡í•œë‹¤.
 	 public int insertPost(Map<String,String> obj) {
 		 
 		 int result =  sql.insert("post.insertPost", obj);
@@ -49,7 +49,7 @@ public class PostDao {
 	 
 	 
 	 
-	// °Ô½Ã¹° ¸ñ·Ï Á¶È¸
+	// ê²Œì‹œë¬¼ ëª©ë¡ ì¡°íšŒ
 	 public List<Map<String,String>> selectPostList(Map<String,String> obj){
 		 
 		 List<Map<String, String>> result =  sql.selectList("post.selectPostList", obj);
@@ -57,7 +57,7 @@ public class PostDao {
 	}
 	 
 	
-	// °Ô½Ã¹° Á¶È¸(1°Ç, È­¸éÁ¶È¸½Ã»ç¿ë)
+	// ê²Œì‹œë¬¼ ì¡°íšŒ(1ê±´, í™”ë©´ì¡°íšŒì‹œì‚¬ìš©)
 	 public Map<String,String> selectPost(Map<String,String> obj){
 		 
 		 Map<String, String> result =  sql.selectOne("post.selectPost", obj);

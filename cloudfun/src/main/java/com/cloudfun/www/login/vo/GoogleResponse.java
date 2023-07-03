@@ -6,10 +6,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class GoogleResponse {
-    private String access_token; // ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÌ Google API ¿äÃ»À» ½ÂÀÎÇÏ±â À§ÇØ º¸³»´Â ÅäÅ«
-    private String expires_in;   // Access TokenÀÇ ³²Àº ¼ö¸í
-    private String refresh_token;    // »õ ¾×¼¼½º ÅäÅ«À» ¾ò´Â µ¥ »ç¿ëÇÒ ¼ö ÀÖ´Â ÅäÅ«
+    private String access_token; // ì• í”Œë¦¬ì¼€ì´ì…˜ì´ Google API ìš”ì²­ì„ ìŠ¹ì¸í•˜ê¸° ìœ„í•´ ë³´ë‚´ëŠ” í† í°
+    private String expires_in;   // Access Tokenì˜ ë‚¨ì€ ìˆ˜ëª…
+    private String refresh_token;    // ìƒˆ ì•¡ì„¸ìŠ¤ í† í°ì„ ì–»ëŠ” ë° ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” í† í°
     private String scope;
-    private String token_type;   // ¹İÈ¯µÈ ÅäÅ« À¯Çü(Bearer °íÁ¤)
+    private String token_type;   // ë°˜í™˜ëœ í† í° ìœ í˜•(Bearer ê³ ì •)
     private String id_token;
 }

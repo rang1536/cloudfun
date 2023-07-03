@@ -41,7 +41,7 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
 	private PostService postService;
 
 	/**
-	 * post Á¶È¸ ÆäÀÌÁö.
+	 * post ì¡°íšŒ í˜ì´ì§€.
 	 */
 	@RequestMapping(value = "/post", method = RequestMethod.GET)
 	public String post(Model model, HttpServletRequest request) {
@@ -203,13 +203,13 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     	
     	
 		objParam.put("postId", postId);
-		objParam.put("groupId", "002");  // 001 ¸ŞÀÎ,½æ³×ÀÏ  2.Ã·ºÎÆÄÀÏ.
+		objParam.put("groupId", "002");  // 001 ë©”ì¸,ì¸ë„¤ì¼  2.ì²¨ë¶€íŒŒì¼.
 		
 		Map<String, String> result = postService.selectPost(objParam);
 		List<Map<String, String>> fileList = postService.selectPostFileList(objParam);
 		
 		
-		objParam.put("groupId", "003");  // 001 ¸ŞÀÎ,½æ³×ÀÏ  2.Ã·ºÎÆÄÀÏ.
+		objParam.put("groupId", "003");  // 001 ë©”ì¸,ì¸ë„¤ì¼  2.ì²¨ë¶€íŒŒì¼.
 		List<Map<String, String>> fileList3 = postService.selectPostFileList(objParam);
     	//
 		model.addAttribute("result", result);
@@ -228,12 +228,12 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     	Map<String, String> resultSponAmt = postService.selectMemberSponAmt(objParam);
     	model.addAttribute("resultSponAmt", resultSponAmt);
     	
-    	// ÈÄ¿ø ¼øÀ§ ¸ñ·Ï
+    	// í›„ì› ìˆœìœ„ ëª©ë¡
     	List<Map<String, String>> resultRankSpon = postService.selectRankSponAmtList(objParam);
     	model.addAttribute("resultRankSpon", resultRankSpon);
     	
     	
-    	// ÈÄ¿øÄÚ¸àÆ® ¸ñ·Ï
+    	// í›„ì›ì½”ë©˜íŠ¸ ëª©ë¡
     	List<Map<String, String>> resultRankComments = postService.selectRankCommentsList(objParam);
     	model.addAttribute("resultRankComments", resultRankComments);
     		
@@ -403,7 +403,7 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     	
 //    	int nowPage  = Integer.valueOf(resultPaging.get("NOW_PAGE").toString());
 //    	int LastPage = Integer.valueOf(resultPaging.get("LAST_PAGE").toString());
-    	int tmpLastPage = nowPage+4; // ¸¶Áö¸· ÆäÀÌÁö  1~5 ÀÎ¿ì 5ÀÓ.6~10ÀÎ°æ¿ì 10 
+    	int tmpLastPage = nowPage+4; // ë§ˆì§€ë§‰ í˜ì´ì§€  1~5 ì¸ìš° 5ì„.6~10ì¸ê²½ìš° 10 
     	
     	String arrowYN = "Y";
     	
@@ -412,22 +412,22 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     		arrowYN = "N";
     	}
     	
-    	List<Integer> pageList = new ArrayList<>();
+    	List<Integer> pageList = new ArrayList<Integer>();
     	for(int i = nowPage ; i <=tmpLastPage ; i++ ) {
     		pageList.add(i);
     	}
     	
     	    	
     	
-    	// ´ÙÀ½ÆäÀÌÁö ¿©ºÎ
+    	// ë‹¤ìŒí˜ì´ì§€ ì—¬ë¶€
     	model.addAttribute("arrowYN", arrowYN);
-    	// ÇöÀçÆäÀÌÁö
+    	// í˜„ì¬í˜ì´ì§€
     	model.addAttribute("pageNo", pageNo);
-    	// ÆäÀÌÁö¸®½ºÆ® 
+    	// í˜ì´ì§€ë¦¬ìŠ¤íŠ¸ 
     	model.addAttribute("pageList", pageList);
     	
-    	model.addAttribute("arrowNextPage", tmpLastPage+1); // 10ÀÎ°æ¿ì ´ÙÀ½ÆäÀÌÁö´Â 11ÀÌ¹Ç·Î +1
-    	model.addAttribute("arrowBeforePage", tmpLastPage-5);  // 10  ÀÎ°æ¿ì 5¿©¾ßÇÏ¹Ç·Î -5
+    	model.addAttribute("arrowNextPage", tmpLastPage+1); // 10ì¸ê²½ìš° ë‹¤ìŒí˜ì´ì§€ëŠ” 11ì´ë¯€ë¡œ +1
+    	model.addAttribute("arrowBeforePage", tmpLastPage-5);  // 10  ì¸ê²½ìš° 5ì—¬ì•¼í•˜ë¯€ë¡œ -5
     	
     	
     	
@@ -448,7 +448,7 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
 	
 	
 	
-	// ³ªÀÇ Ã¢ÀÛ¹° ¸ñ·Ï
+	// ë‚˜ì˜ ì°½ì‘ë¬¼ ëª©ë¡
 	//myPostList
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -511,7 +511,7 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     	
 //    	int nowPage  = Integer.valueOf(resultPaging.get("NOW_PAGE").toString());
 //    	int LastPage = Integer.valueOf(resultPaging.get("LAST_PAGE").toString());
-    	int tmpLastPage = nowPage+4; // ¸¶Áö¸· ÆäÀÌÁö  1~5 ÀÎ¿ì 5ÀÓ.6~10ÀÎ°æ¿ì 10 
+    	int tmpLastPage = nowPage+4; // ë§ˆì§€ë§‰ í˜ì´ì§€  1~5 ì¸ìš° 5ì„.6~10ì¸ê²½ìš° 10 
     	
     	String arrowYN = "Y";
     	
@@ -520,22 +520,22 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     		arrowYN = "N";
     	}
     	
-    	List<Integer> pageList = new ArrayList<>();
+    	List<Integer> pageList = new ArrayList<Integer>();
     	for(int i = nowPage ; i <=tmpLastPage ; i++ ) {
     		pageList.add(i);
     	}
     	
     	    	
     	
-    	// ´ÙÀ½ÆäÀÌÁö ¿©ºÎ
+    	// ë‹¤ìŒí˜ì´ì§€ ì—¬ë¶€
     	model.addAttribute("arrowYN", arrowYN);
-    	// ÇöÀçÆäÀÌÁö
+    	// í˜„ì¬í˜ì´ì§€
     	model.addAttribute("pageNo", pageNo);
-    	// ÆäÀÌÁö¸®½ºÆ® 
+    	// í˜ì´ì§€ë¦¬ìŠ¤íŠ¸ 
     	model.addAttribute("pageList", pageList);
     	
-    	model.addAttribute("arrowNextPage", tmpLastPage+1); // 10ÀÎ°æ¿ì ´ÙÀ½ÆäÀÌÁö´Â 11ÀÌ¹Ç·Î +1
-    	model.addAttribute("arrowBeforePage", tmpLastPage-5);  // 10  ÀÎ°æ¿ì 5¿©¾ßÇÏ¹Ç·Î -5
+    	model.addAttribute("arrowNextPage", tmpLastPage+1); // 10ì¸ê²½ìš° ë‹¤ìŒí˜ì´ì§€ëŠ” 11ì´ë¯€ë¡œ +1
+    	model.addAttribute("arrowBeforePage", tmpLastPage-5);  // 10  ì¸ê²½ìš° 5ì—¬ì•¼í•˜ë¯€ë¡œ -5
     	
     	
     	/*
@@ -580,14 +580,14 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     	objParam.put("memberId", memberId);
     	
     	Map<String, String> result = postService.selectPost(objParam);
-    	String postType = result.get("DOMAIN_TYPE");
+    	String postType =result.get("DOMAIN_TYPE");
     	
     	// postType 
     	/*
-    	  * ±Û : text
-	      * ±×¸² : picture
-	      * ¸¸È­ : comic
-	      * À½¾Ç : music
+    	  * ê¸€ : text
+	      * ê·¸ë¦¼ : picture
+	      * ë§Œí™” : comic
+	      * ìŒì•… : music
           * 3D Model : model
     	 * */
     	String url = request.getContextPath();
@@ -611,8 +611,8 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
     	}
     	
 //    	
-//    	model.addAttribute("arrowNextPage", tmpLastPage+1); // 10ÀÎ°æ¿ì ´ÙÀ½ÆäÀÌÁö´Â 11ÀÌ¹Ç·Î +1
-//    	model.addAttribute("arrowBeforePage", tmpLastPage-5);  // 10  ÀÎ°æ¿ì 5¿©¾ßÇÏ¹Ç·Î -5
+//    	model.addAttribute("arrowNextPage", tmpLastPage+1); // 10ì¸ê²½ìš° ë‹¤ìŒí˜ì´ì§€ëŠ” 11ì´ë¯€ë¡œ +1
+//    	model.addAttribute("arrowBeforePage", tmpLastPage-5);  // 10  ì¸ê²½ìš° 5ì—¬ì•¼í•˜ë¯€ë¡œ -5
 
 		//return "home";
 		return "redirect: "+url;

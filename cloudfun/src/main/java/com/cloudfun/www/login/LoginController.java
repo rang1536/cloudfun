@@ -43,7 +43,7 @@ private static final Logger logger = LoggerFactory.getLogger(LoginController.cla
 	private LoginService loginService;
 
 	
-	// »ç¿ëÀÚ ±¸±Û ·Î±×ÀÎÈÄ redirectµÇ´Â controller 
+	// ì‚¬ìš©ì êµ¬ê¸€ ë¡œê·¸ì¸í›„ redirectë˜ëŠ” controller 
 	@RequestMapping(value="/api/v1/oauth2/google", method = RequestMethod.GET)
     public String loginGoogle(@RequestParam(value = "code") String authCode, HttpServletRequest request
     		,  RedirectAttributes model ){
@@ -68,20 +68,20 @@ private static final Logger logger = LoggerFactory.getLogger(LoginController.cla
         String name=resultEntity2.getBody().getName();
         
         
-        // ±âÁ¸ ·Î±×ÀÎ Á¤º¸°¡ ÀÖ´ÂÁö È®ÀÎ.
+        // ê¸°ì¡´ ë¡œê·¸ì¸ ì •ë³´ê°€ ìˆëŠ”ì§€ í™•ì¸.
         
-        // ±âÁ¸ ÀÌ¸ŞÀÏÀÌ ÀÖ´Â°æ¿ì ·Î±×ÀÎÃ³¸® 
+        // ê¸°ì¡´ ì´ë©”ì¼ì´ ìˆëŠ”ê²½ìš° ë¡œê·¸ì¸ì²˜ë¦¬ 
         
         Map<String, String> a = new HashMap<String,String>();
         a.put("email", email);
         a.put("name", name);
         
-        // µµ¸ŞÀÎ¿¡´Ù¶ó Å¸ÀÔ±¸ºĞ.(±Û/±×¸²/¸¸È­/À½¾Ç/3D Model 5°³)
+        // ë„ë©”ì¸ì—ë‹¤ë¼ íƒ€ì…êµ¬ë¶„.(ê¸€/ê·¸ë¦¼/ë§Œí™”/ìŒì•…/3D Model 5ê°œ)
 	     /*
-	      * ±Û : text
-	      * ±×¸² : picture
-	      * ¸¸È­ : comic
-	      * À½¾Ç : music
+	      * ê¸€ : text
+	      * ê·¸ë¦¼ : picture
+	      * ë§Œí™” : comic
+	      * ìŒì•… : music
 	      * 3D Model : model
 	      * */ 
         HttpSession session = request.getSession();
@@ -91,14 +91,14 @@ private static final Logger logger = LoggerFactory.getLogger(LoginController.cla
         //int loginUserCnt= loginService.isLogin(a);
         String memberId =  loginService.isLogin(a);
         if(memberId !=null) {
-        	// ¹Ù·Î ·Î±×ÀÎ ¤¡¤¡
-        	// ¼¼¼ÇÁ¤º¸Ãß°¡.
+        	// ë°”ë¡œ ë¡œê·¸ì¸ ã„±ã„±
+        	// ì„¸ì…˜ì •ë³´ì¶”ê°€.
         	session.setAttribute("email", email);
         	session.setAttribute("name", name);
         	session.setAttribute("memberId", memberId);
         		
         }else{
-        	//È¸¿ø°¡ÀÔ È­¸éÀ¸·Î ÀÌµ¿
+        	//íšŒì›ê°€ì… í™”ë©´ìœ¼ë¡œ ì´ë™
         	session.setAttribute("email", email);
         	session.setAttribute("name", name);
         	
@@ -106,7 +106,7 @@ private static final Logger logger = LoggerFactory.getLogger(LoginController.cla
             model.addFlashAttribute("name", name );
 
         	returnUrl = "redirect:/join";
-        	// È¸¿ø°¡ÀÔ ¹× ÇÁ·ÎÇÊÀÔ·Â È­¸éÀ¸·Î ÀÌµ¿.
+        	// íšŒì›ê°€ì… ë° í”„ë¡œí•„ì…ë ¥ í™”ë©´ìœ¼ë¡œ ì´ë™.
         }
         
         return returnUrl;
