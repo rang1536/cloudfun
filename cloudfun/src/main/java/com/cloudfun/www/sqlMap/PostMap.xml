@@ -430,6 +430,24 @@
 		 AND FILE_ID NOT IN (${oldFileList});
 	</update>
 	
-	
+	<!-- 창작자 정보 입력여부 확인. -->
+	<select id="selectCreaterYn" resultType="map" parameterType="map">
+		SELECT CASE WHEN COUNT(1) > 0 THEN 'Y'
+			ELSE 'N' END AS RESULT 
+		FROM MEMBER A
+		LEFT JOIN MEMBER_DETAIL B
+		  ON A.MEMBER_ID = B.MEMBER_ID
+		LEFT JOIN UPLOAD_FILE C
+		  ON C.GROUP_ID = B.JOIN_TYPE
+		 AND C.POST_ID = A.MEMBER_ID
+		 AND C.USE_YN = 'Y'
+		WHERE 1=1
+		  AND ACCOUNT_NM  IS NOT NULL 
+		  AND ACCOUNT_NO  IS NOT NULL
+		  AND PASSPORT_NO IS NOT NULL
+		  AND C.FILE_NM   IS NOT NULL
+		  AND A.MEMBER_ID =  #{memberId}
+		  AND B.JOIN_TYPE =  #{type}
+	</select>
 
 </mapper>

@@ -120,4 +120,43 @@ public class AdminController {
 		//return "home";
 		return "/admin/alert";
 	}
+	
+	
+	
+	/**
+	 * 관리자 권한 로그인.
+	 */
+	@RequestMapping(value = "/admin/adminLogin/temp", method = RequestMethod.GET)
+	public String adminLogin(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		// admin 권한추가
+		session.setAttribute("email", "admin");
+    	session.setAttribute("name", "admin");
+    	session.setAttribute("memberId", "00000000000");
+    	session.setAttribute("adminYn", "Y");
+		
+    	String memberId = (String)session.getAttribute("memberId");
+    	
+    	if(memberId == null ) {
+    		//return "home";
+    		return "mainPage";
+    	}
+    	
+    	Map<String, String> objParam = new HashMap<String,String>();
+    	objParam.put("memberId", memberId);
+
+    	/// 관리자 권한 체크
+    	Map<String, String> resultPaging = adminService.getAdminYn(objParam);
+    	
+    	String adminYn = resultPaging.get("ADMIN_YN");
+    	if(adminYn!=null && !adminYn.equals("Y")) {
+    		//return "home";
+    		return "mainPage";
+    	}
+
+
+		//return "home";
+		return "/admin/alert";
+	}
 }

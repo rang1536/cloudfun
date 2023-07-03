@@ -66,6 +66,12 @@ public class LoginService {
 		// TODO Auto-generated method stub
 		return loginDao.selectNationCd(obj);
 	}
+
+	public void updateOldFile(HashMap<String, String> obj) {
+		// // post 등록
+		loginDao.updateOldFile(obj);
+		
+	}
 	
 	
 

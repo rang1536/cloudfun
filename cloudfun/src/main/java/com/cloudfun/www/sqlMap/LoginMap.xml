@@ -92,6 +92,9 @@
 				, BIRTH_DT
 				, NICK_NAME
 				, NATION_CD
+				, ACCOUNT_NM
+				, ACCOUNT_NO
+				, PASSPORT_NO
 				, REGIST_DT
 				, REGIST_ID
 				, REGIST_IP
@@ -106,6 +109,12 @@
 			, #{birth}
 			, #{nickName}
 			, #{nation}		
+			
+			, #{accountNm}
+			, #{accountNo}
+			, #{passportNo}
+			
+			
 			,SYSDATE()
 			,#{memberId}
 			,'0.0.0.0'
@@ -125,9 +134,18 @@
 		, IFNULL(B.BIRTH_DT,'') AS BIRTH_DT
 		, IFNULL(B.NICK_NAME,'') AS NICK_NAME
 		, IFNULL(B.NATION_CD,'') AS NATION_CD
+		, IFNULL(B.ACCOUNT_NM,'') AS ACCOUNT_NM
+		, IFNULL(B.ACCOUNT_NO,'') AS ACCOUNT_NO
+		, IFNULL(B.PASSPORT_NO,'') AS PASSPORT_NO
+		, IFNULL(C.FILE_NM,'') AS FILE_NM
+		
 		FROM MEMBER A
 		LEFT JOIN MEMBER_DETAIL B
 		ON A.MEMBER_ID = B.MEMBER_ID
+		LEFT JOIN UPLOAD_FILE C
+		ON C.GROUP_ID = B.JOIN_TYPE
+		AND C.POST_ID = A.MEMBER_ID
+		AND C.USE_YN = 'Y'
 		WHERE 1=1
 		  AND A.MEMBER_ID = #{memberId}
 		  AND B.JOIN_TYPE =  #{type}
@@ -163,6 +181,10 @@
 		UPDATE MEMBER_DETAIL
 		SET BIRTH_DT = #{birth}
 		, NICK_NAME = #{nickName}
+		, NATION_CD = #{nation}
+		, ACCOUNT_NM = #{accountNm}
+		, ACCOUNT_NO = #{accountNo}
+		, PASSPORT_NO = #{passportNo}
 		WHERE 1=1
 		 AND MEMBER_ID = #{memberId}
 		 AND JOIN_TYPE = #{type}
@@ -179,5 +201,16 @@
 		WHERE 1=1
 		ORDER BY CODE_EN
 	</select>
+	
+	
+		<!-- 기존첨부파일 재정비(삭제 및 기존유지)  -->
+	<update id="updateOldFile" parameterType="map">
+		UPDATE UPLOAD_FILE
+		SET USE_YN = 'N'
+		WHERE 1=1
+		 AND POST_ID = #{postId}
+		 AND GROUP_ID = #{groupId}
+	</update>
+	
 	
 </mapper>

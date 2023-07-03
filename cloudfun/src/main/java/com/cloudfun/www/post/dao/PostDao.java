@@ -112,6 +112,11 @@ public class PostDao {
 		 int result =  sql.insert("post.updatePostOldFile", obj);
 		
 	}
+
+	public Map<String, String> selectCreaterYn(Map<String, String> obj) {
+		Map<String, String> result =  sql.selectOne("post.selectCreaterYn", obj);
+		return result;
+	}
 	
 	 
 

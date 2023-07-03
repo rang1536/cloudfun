@@ -14,8 +14,8 @@
 			<!-- <div class="hs-item set-bg" data-setbg="img/slider-1.jpg" style="background-image: url(&quot;img/slider-1.jpg&quot;);"> -->
 				<div class="hs-text">
 					<div class="container">
-						<h2>The Best <span>Games</span> Out There</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada <br> lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. <br>Suspendisse cursus faucibus finibus.</p>
+						<h2>The Best <span>creators</span> Out There</h2>
+						<p>Web services that can be sponsored by sponsors to help creators post and complete their creative processes</p>
 						<a href="#" class="site-btn">Read More</a>
 					</div>
 				</div>
@@ -80,15 +80,12 @@
 	<!-- Recent game section  -->
 	<section class="recent-game-section spad set-bg" data-setbg="">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-5 ">
+			<div class="row" style="height:700px">
+				<div class="col-lg-5 align-self-center">
 					<img class="set-bg-right" src="${path}/img/new/ranbow.png">
-					
-					
 				</div>
 				<div class="col-lg-2"></div>
-				<div class="col-lg-5 align-self-center">
-					
+				<div class="col-lg-5 align-self-center pl-5">
 					<h2>Pay at least<br/><span class="main-span"> 3% </span>commission.</h2>
 				</div> 
 			
@@ -223,3 +220,14 @@
 	
 	
 </t:layout>
+
+<script>
+
+
+$(document).ready(function () {
+	if("${param.login}"=="Y"){
+		loginWithGoogle();
+	}
+
+})
+</script>

@@ -286,7 +286,7 @@ ol {
 	background: #131313;
 	clear: both;
 	overflow: hidden;
-	padding: 18px 0;
+	padding: 30px 0;
 	border-bottom: 1px solid #ffb320;
 }
 
@@ -310,7 +310,7 @@ ol {
 }
 
 .main-menu {
-	float: right;
+	/* float: right; */
 	margin-right: 170px;
 }
 
@@ -342,6 +342,7 @@ ol {
 
 .nav-switch {
 	display: none;
+	margin-top: 10px;
 }
 
 /*------------------
@@ -1487,6 +1488,9 @@ ol {
 	.page-info-section .pi-content h2 {
 		font-size: 50px;
 	}
+	
+	
+
 }
 
 /* Medium Mobile :480px. */
@@ -1651,7 +1655,7 @@ ol {
 ------------------------*/
 .join-page .container{
 	text-align:center;
-	width:350px;
+	max-width:1000px;
 	
 }
 
@@ -1759,4 +1763,16 @@ ol {
 
 .btn-w-auto{
 	min-width:100% !important; 
+}
+
+
+.previewFileNm {
+	word-wrap: break-word;
+}
+
+.lang-select{
+	position: absolute;
+	color:white;
+	right: 20px;
+	top:0;
 }

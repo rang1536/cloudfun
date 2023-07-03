@@ -6,7 +6,7 @@
 
 	<!-- 포스트 후원금 조회 -->
 	<select id="getAdminYn" resultType="map" parameterType="map">
-		SELECT  ADMIN_YN
+		SELECT  IFNULL(ADMIN_YN,'N')  AS ADMIN_YN
 		FROM MEMBER
 		WHERE 1=1
 		  AND MEMBER_ID = #{memberId}

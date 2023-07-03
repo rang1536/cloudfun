@@ -252,7 +252,7 @@ $(document).ready(function() {
 				                var img = $("<img />");
 				                img.attr("style","max-height:150px;padding: 0px");
 				                img.attr("src", e.target.result);
-				                var pTag = $('<p class="name">' + fileName + '</p>')
+				                var pTag = $('<p class="name previewFileNm">' + fileName + '</p>')
 				                var aTag = $('<button type="button" class="delete btn btn-info btn-sm" onclick="deleteFile(' + fileNo + ');">DELETE</button>')
 				                
 				                
@@ -413,7 +413,7 @@ function setEditPicturePreview(){
 	                var img = $("<img />");
 	                img.attr("style","max-height:150px;padding: 0px");
 	                img.attr("src", e.target.result);
-	                var pTag = $('<p class="name">' + fileName + '</p>')
+	                var pTag = $('<p class="name previewFileNm">' + fileName + '</p>')
 	                var aTag = $('<button type="button" class="delete btn btn-info btn-sm" onclick="deleteFile(' + fileNo + ');">DELETE</button>')
 	                
 	                
@@ -435,6 +435,6 @@ function setEditPicturePreview(){
             reader.readAsDataURL(file[0]);         
 	
 	
-}
+}})}
 </script>
 

@@ -182,7 +182,7 @@ result
 							<c:forEach var="item" items="${resultRankComments}" >
 								<li>
 									<div class="comment">
-										<div class="comment-avator set-bg" data-setbg="${path}/img/authors/1.jpg"></div>
+										<div class="comment-avator set-bg" data-setbg="${path}/img/authors/1.png"></div>
 										<div class="comment-content">
 											<h5>${item.NAME}<span>${item.DATE_NM}</span></h5>
 											<p style="white-space: pre-line;">${item.COMMENTS}</p>
@@ -311,7 +311,7 @@ result
 						
 							<c:forEach var="item" items="${resultRankSpon}" >
 								<div class="tc-item">
-									<div class="tc-thumb set-bg" data-setbg="${path}/img/authors/1.jpg"></div>
+									<div class="tc-thumb set-bg" data-setbg="${path}/img/authors/1.png"></div>
 									<div class="tc-content">
 										<div class="tc-date">${item.SUM_AMT}$</div>
 										<p>${item.NAME}</p>

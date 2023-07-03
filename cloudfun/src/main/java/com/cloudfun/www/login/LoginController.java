@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cloudfun.www.admin.AdminService;
 import com.cloudfun.www.login.service.LoginService;
 import com.cloudfun.www.login.vo.GoogleInfResponse;
 import com.cloudfun.www.login.vo.GoogleRequest;
@@ -42,6 +43,8 @@ private static final Logger logger = LoggerFactory.getLogger(LoginController.cla
 	@Autowired
 	private LoginService loginService;
 
+	@Autowired
+	private AdminService adminService;
 	
 	// 사용자 구글 로그인후 redirect되는 controller 
 	@RequestMapping(value="/api/v1/oauth2/google", method = RequestMethod.GET)
@@ -96,6 +99,13 @@ private static final Logger logger = LoggerFactory.getLogger(LoginController.cla
         	session.setAttribute("email", email);
         	session.setAttribute("name", name);
         	session.setAttribute("memberId", memberId);
+        	
+        	/// 관리자 권한 체크
+        	a.put("memberId", memberId);
+        	Map<String, String> resultPaging = adminService.getAdminYn(a);
+        	String adminYn = resultPaging.get("ADMIN_YN");
+        	session.setAttribute("adminYn", adminYn);
+        	
         		
         }else{
         	//회원가입 화면으로 이동
@@ -169,13 +179,38 @@ private static final Logger logger = LoggerFactory.getLogger(LoginController.cla
     	String BIRTH_DT = String.valueOf(result.get("BIRTH_DT"));
     	String NICK_NAME = String.valueOf(result.get("NICK_NAME"));
     	String NATION_CD = String.valueOf(result.get("NATION_CD"));
+    	
+    	String ACCOUNT_NM = String.valueOf(result.get("ACCOUNT_NM"));
+    	String ACCOUNT_NO = String.valueOf(result.get("ACCOUNT_NO"));
+    	String PASSPORT_NO = String.valueOf(result.get("PASSPORT_NO"));
+    	String FILE_NM = String.valueOf(result.get("FILE_NM"));
+    	
+    	String errorCd = request.getParameter("errorCd");
+    	if(errorCd == null ) {errorCd="";}
+    	String errorMsg = "";
+    	switch(errorCd) {
+		  	  case "1":
+		  		errorMsg = "Enter creator's required information";
 
+		  	    break;
+		  	 
+		  	  default:
+    	}
+    	
     	model.addAttribute("memberId", MEMBER_ID);
     	model.addAttribute("email", EMAIL);
     	model.addAttribute("name", NAME);
     	model.addAttribute("birthDt", BIRTH_DT);
     	model.addAttribute("nickName", NICK_NAME);
     	model.addAttribute("nationCd", NATION_CD);
+    	model.addAttribute("accountNm", ACCOUNT_NM);
+    	model.addAttribute("accountNo", ACCOUNT_NO);
+    	model.addAttribute("passportNo", PASSPORT_NO);
+    	model.addAttribute("fileNm", FILE_NM);
+    	
+    	model.addAttribute("errorMsg", errorMsg);
+    	
+    	
     	
     	
     	

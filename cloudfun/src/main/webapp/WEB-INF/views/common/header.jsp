@@ -30,7 +30,7 @@
 	
 	// type
 	if(session.getAttribute("type")==null){
-		session.setAttribute("type","text");
+		session.setAttribute("type","picture");
 	}
 	
 	pageContext.setAttribute("type",session.getAttribute("type"));
@@ -43,7 +43,10 @@
 
 <!-- Header section -->
 <header class="header-section">
-	<div class="container">
+	<div class="text-right lang-select" >
+				<a style="color:white;" href="${path}/local/en">English</a>  /  <a style="color:white;" href="${path}/local/ko">한국어</a>
+	</div>
+	<div class="container" style="padding:top:20px;">
 		<!-- logo -->
 		<div class="text-right">
 		<select class="" id="changeType" onchange="changesType(this)" style="display:none">
@@ -54,10 +57,7 @@
 		    <option value="model"   <c:if test="${type == 'model'}">selected </c:if> >model</option>
 		</select>
 		</div>
-		<div class="text-right" style="color:white;">
-				<a style="color:white;" href="${path}/local/en">English</a>  /  <a style="color:white;" href="${path}/local/ko">한국어</a>
-				
-		</div>
+		
 		
 		<a class="site-logo" href="${path}/">
 			<img src="${path}/img/new/logo2.png" alt="">
@@ -66,11 +66,11 @@
 		
 		
 		   <% if(session.getAttribute("memberId")!= null){ %>
-		    <div class="user-panel mt-3" onclick="logout();">
+		    <div class="user-panel" onclick="logout();">
 				<a href="#"><fmt:message key="header.Logout" /></a>
 			</div>
 		   <%}else{%>
-		    <div class="user-panel mt-3" onclick="loginWithGoogle();">
+		    <div class="user-panel" onclick="loginWithGoogle();">
 				<a href="#"><fmt:message key="header.Login" /></a>  /  <a href="#"><fmt:message key="header.Register" /></a>
 			</div>
 			
@@ -93,10 +93,13 @@
 		<nav class="main-menu">
 			<ul>
 				<!-- HOME -->
-				<li><a href="${path}/"><fmt:message key="header.HOME" /></a></li>
+				<%-- <li><a href="${path}/"><fmt:message key="header.HOME" /></a></li> --%>
 				
 				<!-- CREATION LIST -->
 				<li><a href="${path}/post/postList"><fmt:message key="header.CREATION.LIST" /></a></li>
+				
+				<!-- EDIT-PICTURES -->
+				<li><a href="${path}/post/editPicture"><fmt:message key="header.EDIT-CREATION" /></a></li>
 				
 				<!-- CREATION LIST -->
 				<li><a href="${path}/post/myPostList"><fmt:message key="header.MY.CREATION.LIST" /></a></li>
@@ -105,8 +108,7 @@
 				<!-- EDIT-TEXT -->
 				<li><a href="${path}/post/editText"><fmt:message key="header.EDIT-TEXT" /></a></li> 
 				--%>
-				<!-- EDIT-PICTURES -->
-				<li><a href="${path}/post/editPicture"><fmt:message key="header.EDIT-PICTURES" /></a></li>
+				
 				<%-- 
 				<!-- EDIT-3D MODEL -->
 				<li><a href="${path}/post/edit3D"><fmt:message key="header.EDIT-3D.MODEL" /></a></li>
@@ -120,20 +122,28 @@
 				<li><a href="${path}/post/viewText?postId=1">viewText</a></li> --%>
 				
 				<!-- JOIN -->
-				<li><a href="${path}/join"><fmt:message key="header.JOIN" /></a></li>
+				<%-- <li><a href="${path}/join"><fmt:message key="header.JOIN" /></a></li> --%>
 				<!-- editMember -->
 				<li><a href="${path}/editMember"><fmt:message key="header.EDIT-MEMBER" /></a></li>
 				<!-- TERMS -->
 				<li><a href="${path}/terms"><fmt:message key="header.TERMS" /></a></li>
 				
 				
-				<li><a href="${path}/local/en">English</a></li>
-				<li><a href="${path}/local/ko">한국어</a></li>
+				<%-- <li><a href="${path}/local/en">English</a></li>
+				<li><a href="${path}/local/ko">한국어</a></li> --%>
 				
+				<% if(session.getAttribute("adminYn") != null 
+				   && session.getAttribute("adminYn").equals("Y"))
+				   { 
+				%>
+			    	<li><a href="${path}/admin/member">(관리자)사용자</a></li>
+					<li><a href="${path}/admin/adminPost">(관리자)게시물</a></li>
+					<li><a href="${path}/admin/adminReport">(관리자)신고</a></li>
+			   <%}else{%>
+				   	
+					
+			    <%} %>
 				
-				<li><a href="${path}/admin/member">관리자-member</a></li>
-				<li><a href="${path}/admin/adminPost">관리자-post</a></li>
-				<li><a href="${path}/admin/adminReport">관리자-report</a></li>
 				
 				
 				<%-- 

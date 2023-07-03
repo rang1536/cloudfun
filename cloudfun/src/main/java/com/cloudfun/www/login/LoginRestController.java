@@ -1,5 +1,6 @@
 package com.cloudfun.www.login;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,9 +14,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudfun.www.login.service.LoginService;
+import com.cloudfun.www.util.UtilFile;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class LoginRestController {
@@ -29,6 +37,9 @@ public class LoginRestController {
 	 
 	@Autowired
 	private LoginService loginService;
+	
+	@Autowired
+	private UtilFile utilFile;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -150,7 +161,7 @@ public class LoginRestController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value="/api/saveMember", method = RequestMethod.POST)
+	/*@RequestMapping(value="/api/saveMember", method = RequestMethod.POST)
 	public HashMap<String, String> saveMember(@RequestBody HashMap<String, String> map, HttpServletRequest request){
 		
 		HttpSession session = request.getSession();
@@ -180,6 +191,70 @@ public class LoginRestController {
 		
 		loginService.saveMemberDetail(obj);
 		
+		return resultMap;
+
+    }
+	*/
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value="/api/saveMember", method = RequestMethod.POST)
+	public HashMap<String, String> saveMember(
+			//@RequestPart("uploadFile") MultipartFile[] uploadFile
+			//, @RequestPart("mainImg") MultipartFile[] mainImg
+			@RequestPart(value="passPortFile", required = false) MultipartFile[] desImg
+			, @RequestParam("jsonStr") String jsonStr
+			,  HttpServletRequest request) throws JsonParseException, JsonMappingException, IOException{
+		
+		//json to map
+		ObjectMapper objectMapper = new ObjectMapper();
+		Map<String,String> map = objectMapper.readValue(jsonStr, Map.class);
+		
+		
+		HttpSession session = request.getSession();
+
+		HashMap<String, String> resultMap = new HashMap<String, String>();
+		HashMap<String,String> obj = new HashMap<String, String>();
+		//resultMap.put("test", "testValue");
+		
+		  
+		// session 정보
+		String memberId = (String)session.getAttribute("memberId");
+		String type = (String)session.getAttribute("type");
+		  
+		// form 정보
+		String email = map.get("email");
+		String name = map.get("name");
+		String nation = map.get("nation");
+		String accountNm = map.get("accountNm");
+		String accountNo = map.get("accountNo");
+		String passportNo = map.get("passportNo");
+		
+		
+		obj.put("memberId", memberId);
+		obj.put("type", type);
+		obj.put("nation", nation);
+		obj.put("accountNm", accountNm);
+		obj.put("accountNo", accountNo);
+		obj.put("passportNo", passportNo);
+		
+		if(desImg.length > 0) {
+			// 파일 업로드
+			obj.put("postId",memberId);
+			obj.put("groupId",type);
+			// 1. 기존파일 삭제
+			loginService.updateOldFile(obj);
+			// 2. 파일 insert
+			for(MultipartFile multipartFile : desImg) {
+				utilFile.uploadFile(multipartFile,obj) ;
+			}
+		}
+		
+		loginService.saveMemberDetail(obj);
+		
+		
+		resultMap.put("url", "/");
 		return resultMap;
 
     }

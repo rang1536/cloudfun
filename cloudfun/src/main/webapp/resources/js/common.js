@@ -251,7 +251,7 @@ function readUrl(input) {
 			let imgData = e.target.result;
 			let imgName = input.files[0].name;
 			input.setAttribute("data-title", imgName);
-			console.log(e.target.result);
+			//console.log(e.target.result);
 		}
 		reader.readAsDataURL(input.files[0]);
 	}
@@ -358,7 +358,7 @@ function setEditPicturePreview(param){
      var img = $("<img />");
      img.attr("style","max-height:150px;padding: 0px");
      img.attr("src", path+"/display?filename=" + fileList[i].FILE_ID);
-     var pTag = $('<p class="name">' + fileList[i].FILE_NM + '</p>')
+     var pTag = $('<p class="name previewFileNm">' + fileList[i].FILE_NM + '</p>')
      var aTag = $('<button type="button" class="delete btn btn-info btn-sm" onclick="deleteFile(' + fileNo + ",'" + fileList[i].FILE_ID+"'" +');">DELETE</button>')
      
      
@@ -401,7 +401,7 @@ function setEdit3DImgPreview(param){
 	   var img = $("<img />");
 	   img.attr("style","max-height:150px;padding: 0px");
 	   img.attr("src", path+"/display?filename=" + fileList[i].FILE_ID);
-	   var pTag = $('<p class="name">' + fileList[i].FILE_NM + '</p>')
+	   var pTag = $('<p class="name previewFileNm">' + fileList[i].FILE_NM + '</p>')
 	   var aTag = $('<button type="button" class="delete btn btn-info btn-sm" onclick="deleteFileImg(' + fileNo3 + ",'" + fileList[i].FILE_ID+"'" +');">DELETE</button>')
 	   
 	   

@@ -55,7 +55,7 @@
 					</div>
 					<div class="col-lg-6">
 						<input type="hidden" id="POST_ID" name ="POST_ID" readonly>
-						<p id="POST_ID2" ></p>
+						<p class="btn-link" id="POST_ID2"  onclick="goPost()" ></p>
 					</div>
 				</div>
 				
@@ -380,6 +380,13 @@ function sendMemberInfo(){
 function changeType(){
 	getPostList();
 }	
+
+function goPost(){
+	 var postId = $("#POST_ID").val()
+	window.open(preUrl+"/post/viewText?postId=" + postId);
+	
+}
+
 
 </script>
 

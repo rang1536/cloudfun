@@ -52,6 +52,10 @@ public class LoginDao {
 		List<Map<String, String>> result =  sql.selectList("login.selectNationCd", obj);
 		return result;
 	}
+
+	public void updateOldFile(HashMap<String, String> obj) {
+		 int result =  sql.insert("login.updateOldFile", obj);
+	}
 	 
 	 
 	 

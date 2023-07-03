@@ -96,8 +96,31 @@ private static final Logger logger = LoggerFactory.getLogger(PostController.clas
 		String email = (String)session.getAttribute("email");
     	String name = (String)session.getAttribute("name");
     	String memberId = (String)session.getAttribute("memberId");
+    	String type = (String)session.getAttribute("type");
+    	
+    	
+    	// 창작자 검증.(공통처리)
+    	// 1. 관리자의 경우 예외처리
+    	String adminYn = (String)session.getAttribute("adminYn");
+    	String result = "Y";
+    	if(adminYn == null) {
+    		result = "N";
+    		model.addAttribute("login","Y");
+    		return "redirect:/";
+    		
+    	} else if(!adminYn.equals("Y")) {
+    	// 2. 내정보의 여권번호, 은행 미입력, 파일 미등록시 내정보로이동    		
+    		result = postService.selectCreaterYn(memberId,type);
+    		
+    	}
     	
 
+		if(result.equals("N")) {
+			model.addAttribute("errorCd","1");
+			return "redirect:/editMember";
+		}
+    		
+    	
     	model.addAttribute("email", email);
     	model.addAttribute("name", name);
 

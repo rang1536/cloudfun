@@ -1,5 +1,6 @@
 package com.cloudfun.www.post.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -93,6 +94,16 @@ public class PostService {
 		// // post 등록
  		postDao.updatePostOldFile(obj);
 		
+	}
+
+	public String selectCreaterYn(String memberId,String type) {
+		// TODO Auto-generated method stub
+		Map<String, String> obj = new HashMap<String,String>();
+    	obj.put("memberId", memberId);
+    	obj.put("type", type);
+		Map<String, String> result =  postDao.selectCreaterYn(obj);
+		
+		return result.get("RESULT"); 
 	}
 
 	
