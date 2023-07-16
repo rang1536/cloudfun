@@ -63,7 +63,10 @@
 			<img src="${path}/img/new/logo2.png" alt="">
 		</a>
 		
-		
+		<!-- responsive -->
+		<div class="nav-switch">
+			<i class="fa fa-bars"></i>
+		</div>		
 		
 		   <% if(session.getAttribute("memberId")!= null){ %>
 		    <div class="user-panel" onclick="logout();">
@@ -85,10 +88,7 @@
 		
 		
 		
-		<!-- responsive -->
-		<div class="nav-switch">
-			<i class="fa fa-bars"></i>
-		</div>
+
 		<!-- site menu -->
 		<nav class="main-menu">
 			<ul>
